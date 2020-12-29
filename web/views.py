@@ -9,8 +9,10 @@ def home(request):
 
     t = get_template('index.html')
 
-    html = t.render({
-        'cameras' : Camera.objects.all().order_by('-createdAt').order_by('-price'),
-        })
+    html = t.render(
+        {
+            'cameras' : Camera.objects.all().order_by('-createdAt').order_by('-price')
+        },
+        request)
 
     return HttpResponse(html)

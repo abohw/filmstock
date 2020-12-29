@@ -12,24 +12,26 @@ from datetime import datetime
 def clean_price(param):
     return param.strip().replace('$', '').replace(',','')
 
-class HunterPipeline:
+class FilmstockPipeline:
     def process_item(self, item, spider):
 
         if Camera.objects.filter(url__exact=item['url']).count() == 0:
 
-            Camera.objects.create(
-                name = item['name'],
-                url = item['url'],
-                source = item['source'],
-                price = clean_price(item['price']),
-                createdAt = datetime.now().strftime('%Y-%m-%d'),
-                lastSeen = datetime.now().strftime('%Y-%m-%d'),
-            )
+            if 'dslr' not in item['name'].lower() and 'digital' not in item['name'].lower():
+
+                Camera.objects.create(
+                    name = item['name'],
+                    url = item['url'],
+                    source = item['source'],
+                    price = clean_price(item['price']),
+                    createdAt = datetime.now().strftime('%Y-%m-%d'),
+                    lastSeen = datetime.now().strftime('%Y-%m-%d'),
+                )
 
         else:
             camera = Camera.objects.get(url__exact=item['url'])
-            camera['lastSeen'] = datetime.now().strftime('%Y-%m-%d')
-            camera['new'] = False
+            camera.lastSeen = datetime.now().strftime('%Y-%m-%d')
+            camera.new = False
 
             camera.save()
 

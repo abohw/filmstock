@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>{% block title %}Virtual Camera Hunter{% endblock %}</title>
+
+    <style>
+      body {
+        background-color: #fdfdfd;
+      }
+    </style>
+  </head>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #fdfdfd;">
+      <div class="container-md">
+        <a class="navbar-brand" href="/" style="color: #17c0eb;"><i class="fas fa-map-marked-alt fa-2x"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/" style="color: #4b4b4b; font-size: 18px;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/people" style="color: #4b4b4b; font-size: 18px;">Cameras</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/photos/places" style="color: #4b4b4b; font-size: 18px;">Film</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav justify-content-end">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href=" " style="color: #4b4b4b; font-size: 18px;">Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}" style="color: #4b4b4b; font-size: 18px;">Sign out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}" style="color: #4b4b4b; font-size: 18px;">Log in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'signup' %}" style="color: #4b4b4b; font-size: 18px;">Sign up</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-md">
+
+      {% block content %}
+      {% endblock %}
+
+    </div>
+
+    <nav class="navbar navbar-light" style="background-color: #fdfdfd;">
+      <div class="container-md justify-content-end">
+        <span class="navbar-text">
+          © 2020 Alex Bowman. All rights reserved.
+        </span>
+      </div>
+    </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  </body>
+</html>

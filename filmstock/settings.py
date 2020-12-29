@@ -15,10 +15,10 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'vch.settings'
 import django
 django.setup()
 
-BOT_NAME = 'hunter'
+BOT_NAME = 'filmstock'
 
-SPIDER_MODULES = ['hunter.spiders']
-NEWSPIDER_MODULE = 'hunter.spiders'
+SPIDER_MODULES = ['filmstock.spiders']
+NEWSPIDER_MODULE = 'filmstock.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -71,7 +71,7 @@ DOWNLOAD_DELAY = 3
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'hunter.pipelines.HunterPipeline': 100,
+    'filmstock.pipelines.FilmstockPipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
