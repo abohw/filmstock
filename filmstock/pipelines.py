@@ -7,7 +7,7 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from web.models import Camera
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 def clean_price(param):
     return param.strip().replace('$', '').replace(',','')
@@ -31,7 +31,7 @@ class FilmstockPipeline:
         else:
             camera = Camera.objects.get(url__exact=item['url'])
 
-            if camera.lastSeen < datetime.now().strftime('%Y-%m-%d'):
+            if camera.lastSeen <= (date.today() - timedelta(days=1)):
                 camera.new = False
 
             camera.lastSeen = datetime.now().strftime('%Y-%m-%d')
