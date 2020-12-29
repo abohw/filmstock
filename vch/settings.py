@@ -28,7 +28,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'virtual-camera-hunter.herokuapp.com',
     '.filmstock.app',
 ]
 
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'hunters',
     'web',
 ]

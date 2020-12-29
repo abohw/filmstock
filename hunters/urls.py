@@ -18,4 +18,5 @@ from hunters import views
 
 urlpatterns = [
     path('users/new', views.newUser, name='signup'),
+    path('users/settings', views.userSettings, name='settings'),
 ]

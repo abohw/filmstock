@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Cameras{% endblock %}
+
+{% block content %}
+
+  {% if user.is_authenticated and user.is_approved %}
+
+    <div class="row justify-content-evenly">
+
+      <div class="col-2 me-auto order-first" style="margin-top:10px;">
+
+        <form action="" method="get">
+          {{ cameras.form.as_p }}
+          <input type="submit" />
+        </form>
+
+      </div>
+
+      <div class="col">
+
+        <table class="table">
+
+          <thead>
+            <th scope="col">&nbsp;</th>
+            <th scope="col" width="60%">Camera</th>
+            <th scope="col">Price</th>
+            <th scope="col">Source</th>
+            <th scope="col">Added</th>
+          </thead>
+
+          <tbody>
+
+          {% for camera in cameras.qs %}
+
+            <tr>
+              <th scope="row">
+                {% if camera.new == True %}
+                 <i style="color: #FC427B;" class="fas fa-camera-retro"></i>
+                {% else %}
+                 <i style="color: #CAD3C8;" class="fas fa-camera-retro"></i>
+                {% endif %}
+              </th>
+              <td><a href="{{ camera.url }}" target="_blank">{{ camera.name }}</a></td>
+              <td>${{ camera.price }}</td>
+              <td>
+                {% if camera.source == 'precision' %}
+                  Precision Camera
+                {% elif camera.source == 'bh' %}
+                  B&H
+                {% elif camera.source == 'austin_camera' %}
+                  Austin Camera
+                {% elif camera.source == 'keh' %}
+                  KEH Camera
+                {% else %}
+                  {{ camera.source }}
+                {% endif %}
+              </td>
+              <td>
+                {{ camera.createdAt }}
+              </td>
+            </tr>
+
+          {% endfor %}
+
+          </tbody>
+        </table>
+
+        </div>
+
+    </div>
+
+  {% endif %}
+
+{% endblock %}

@@ -17,3 +17,7 @@ def newUser(request):
         f = CustomUserCreationForm()
 
     return render(request, 'registration/signup.html', {'form': f})
+
+def userSettings(request):
+
+    return render(request, 'index.html')

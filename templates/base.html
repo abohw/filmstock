@@ -25,7 +25,7 @@
 
     <header>
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: #fdfdfd;">
-      <div class="container-md">
+      <div class="container-lg">
         <a class="navbar-brand" href="/" style="color: #17c0eb;"><strong>Filmstock</strong></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -36,16 +36,16 @@
               <a class="nav-link" href="/" style="color: #4b4b4b; font-size: 18px;">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=" " style="color: #4b4b4b; font-size: 18px;">Cameras</a>
+              <a class="nav-link" href="{% url 'cameras' %}" style="color: #4b4b4b; font-size: 18px;">Cameras</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=" " style="color: #4b4b4b; font-size: 18px;">Film</a>
+              <a class="nav-link" href="{% url 'film' %}" style="color: #4b4b4b; font-size: 18px;">Film</a>
             </li>
           </ul>
           <ul class="navbar-nav justify-content-end">
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href=" " style="color: #4b4b4b; font-size: 18px;">Settings</a>
+              <a class="nav-link" href="{% url 'settings' %}" style="color: #4b4b4b; font-size: 18px;">Settings</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}" style="color: #4b4b4b; font-size: 18px;">Sign out</a>
@@ -64,9 +64,15 @@
     </nav>
   </header>
 
-  <main class="flex-shrink-0">
+  <main>
 
-    <div class="container-md">
+    <div class="container-lg">
+
+      {% if user.is_authenticated and user.is_approved == False %}
+      <div class="alert alert-info" role="alert">
+        Your account is still in review. Check back later.
+      </div>
+      {% endif %}
 
       {% block content %}
       {% endblock %}
@@ -76,7 +82,7 @@
   </main>
 
   <footer class="footer mt-auto py-3">
-    <div class="container">
+    <div class="container-lg">
       <span class="text-muted">© 2020 Filmstock. All rights reserved.</span>
     </div>
   </footer>
