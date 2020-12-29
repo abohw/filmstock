@@ -10,7 +10,7 @@ from web.models import Camera
 from datetime import datetime
 
 def clean_price(param):
-    return param.strip().replace('$', '')
+    return param.strip().replace('$', '').replace(',','')
 
 class HunterPipeline:
     def process_item(self, item, spider):

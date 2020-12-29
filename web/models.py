@@ -6,7 +6,7 @@ class Camera(models.Model):
     name = models.CharField(max_length=255)
     source = models.CharField(max_length=255)
     url = models.CharField(max_length=255)
-    price = models.DecimalField(decimal_places=2, max_digits=6)
+    price = models.DecimalField(decimal_places=2, max_digits=7)
     createdAt = models.DateField(default=None, blank=True, null=True)
     lastSeen = models.DateField(default=None, blank=True, null=True)
     new = models.BooleanField(default=True)
