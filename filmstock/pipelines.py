@@ -30,8 +30,11 @@ class FilmstockPipeline:
 
         else:
             camera = Camera.objects.get(url__exact=item['url'])
+
+            if camera.lastSeen < datetime.now().strftime('%Y-%m-%d'):
+                camera.new = False
+
             camera.lastSeen = datetime.now().strftime('%Y-%m-%d')
-            camera.new = False
 
             camera.save()
 
