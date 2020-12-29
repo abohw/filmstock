@@ -23,8 +23,7 @@ from web.models import Camera
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-#    path('cameras/', views.cameras, name='cameras'),
-    re_path(r'^cameras$', views.cameraFilterView, name='cameras'),
+    re_path(r'^cameras$', views.cameras, name='cameras'),
     path('film/', views.film, name='film'),
     path('users/', include('hunters.urls')),
     path('users/', include('django.contrib.auth.urls')),

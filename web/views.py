@@ -13,23 +13,11 @@ def home(request):
 
     return HttpResponse(html)
 
-def cameraFilterView(request):
-
-    f = CameraFilter(request.GET, queryset=Camera.objects.all())
-    return render(request, 'cameras.html', {'cameras': f})
-
 
 def cameras(request):
 
-    t = get_template('cameras.html')
-
-    html = t.render(
-        {
-            'cameras' : Camera.objects.all().order_by('-createdAt').order_by('-price')
-        },
-        request)
-
-    return HttpResponse(html)
+    f = CameraFilter(request.GET, queryset=Camera.objects.all().order_by('-createdAt').order_by('-price'))
+    return render(request, 'cameras.html', {'cameras': f})
 
 
 def film(request):
