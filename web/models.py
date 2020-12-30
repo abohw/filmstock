@@ -36,7 +36,6 @@ class CameraFilter(django_filters.FilterSet):
 
     new = django_filters.ChoiceFilter(label='Date added:', choices=(
         (True, 'Last 7 days'),
-        (True + False, 'Show all'),
     ))
 
     sort = django_filters.OrderingFilter(
@@ -48,21 +47,11 @@ class CameraFilter(django_filters.FilterSet):
             ('-source', 'Source (Z to A)'),
             ('-createdAt', 'Recently added'),
         ),
-        fields=(
-            ('price', 'price'),
-            ('source', 'source'),
-            ('new', 'new'),
-        ),
-        field_labels={
-            'price': 'Price',
-            'source': 'Source',
-            'new': 'Recently added',
-        }
     )
 
     class Meta:
         model = Camera
-        fields = ['name', 'price', 'source',]
+        fields = ['name', 'price', 'source', 'new',]
 
 class savedSearch(models.Model):
     hunter = models.ForeignKey(Hunter, blank=True, on_delete=models.CASCADE, related_name='searches')
