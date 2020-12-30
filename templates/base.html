@@ -4,6 +4,14 @@
   <head>
     <title>Filmstock · {% block title %}{% endblock %}</title>
 
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <meta property="og:title" content="Filmstock">
+    <meta property="og:description" content="A vintage camera hunting app.">
+    <meta property="og:url" content="https://filmstock.app">
+
     <style>
       body {
         background-color: #fdfdfd;
@@ -42,20 +50,24 @@
               <a class="nav-link" href="{% url 'film' %}" style="color: #4b4b4b; font-size: 18px;">Film</a>
             </li>
           </ul>
-          <ul class="navbar-nav justify-content-end">
+          <ul class="navbar-nav d-grid gap-2 d-md-flex justify-content-end">
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'settings' %}" style="color: #4b4b4b; font-size: 18px;">Settings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}" style="color: #4b4b4b; font-size: 18px;">Sign out</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user.email }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+                <!-- <li><hr class="dropdown-divider"></li> -->
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+              </ul>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}" style="color: #4b4b4b; font-size: 18px;">Log in</a>
+              <a class="btn btn-primary me-md-2" href="{% url 'login' %}" role="button">Log in</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'signup' %}" style="color: #4b4b4b; font-size: 18px;">Sign up</a>
+              <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign up</a>
             </li>
             {% endif %}
           </ul>

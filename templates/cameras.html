@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Cameras{% endblock %}
 
@@ -11,9 +12,13 @@
       <div class="col-2 me-auto order-first" style="margin-top:10px;">
 
         <form action="" method="get">
-          {{ cameras.form.as_p }}
-          <input type="submit" />
+          {{ cameras.form|crispy }}
+          <div class="d-grid gap-2">
+            <input class="btn btn-primary btn-sm" type="submit" value="Submit">
+          </div>
         </form>
+
+        <a href="/save?{{ request.GET.urlencode }}">test</a>
 
       </div>
 
