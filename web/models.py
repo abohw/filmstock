@@ -7,6 +7,7 @@ import django_filters
 class Camera(models.Model):
     name = models.CharField(max_length=255)
     source = models.CharField(max_length=255)
+    store = models.CharField(max_length=255, blank=True, default=None, null=True)
     url = models.CharField(max_length=255)
     price = models.DecimalField(decimal_places=2, max_digits=7)
     createdAt = models.DateField(default=None, blank=True, null=True)
@@ -33,6 +34,7 @@ class CameraFilter(django_filters.FilterSet):
         ('precision', 'Precision Camera'),
         ('austin_camera', 'Austin Camera'),
         ('keh', 'KEH Camera'),
+        ('etsy', 'Etsy'),
     ))
 
     class Meta:

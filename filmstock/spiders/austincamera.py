@@ -13,6 +13,7 @@ class austinCameraSpider(scrapy.Spider):
             'url': 'https://austincamera.com%s' % (camera.css('a::attr(href)').get()),
             'price': camera.css('span.price-item::text').get(),
             'source': 'austin_camera',
+            'store': '',
             }
 
         next_page = response.css('ul.pagination li a::attr(href)').getall()

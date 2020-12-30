@@ -13,9 +13,10 @@ class kehCameraSpider(scrapy.Spider):
             'url': camera.css('a.product-item-link::attr(href)').get(),
             'price': camera.css('span.price::text').get(),
             'source': 'keh',
+            'store': '',
             }
 
         next_page = response.css('a[id=load-more-product-link]::attr(href)').get()
-        
+
         if next_page is not None:
             yield scrapy.Request(response.urljoin(next_page), callback=self.parse)

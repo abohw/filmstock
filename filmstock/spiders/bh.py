@@ -16,6 +16,7 @@ class bhCameraSpider(scrapy.Spider):
             'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
             'price': camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(),
             'source': 'bh',
+            'store': '',
             }
 
 #        next_page = response.css('ul.pagination li a::attr(href)').getall()

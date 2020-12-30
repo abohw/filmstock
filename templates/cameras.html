@@ -52,6 +52,8 @@
                   Austin Camera
                 {% elif camera.source == 'keh' %}
                   KEH Camera
+                {% elif camera.source == 'etsy' %}
+                  Etsy ({{ camera.store }})
                 {% else %}
                   {{ camera.source }}
                 {% endif %}
