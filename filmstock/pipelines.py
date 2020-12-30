@@ -36,7 +36,7 @@ class FilmstockPipeline:
         else:
             camera = Camera.objects.get(url__exact=item['url'])
 
-            if camera.lastSeen <= (date.today() - timedelta(days=7)):
+            if camera.createdAt <= (date.today() - timedelta(days=7)):
                 print("updated, no longer new")
                 camera.new = False
 
