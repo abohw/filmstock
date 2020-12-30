@@ -11,6 +11,21 @@
 
       <div class="col-2 me-auto order-first" style="margin-top:10px;">
 
+        {% if user.searches.all %}
+          <div class="dropdown">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Saved searches
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              {% for search in user.searches.all %}
+              <li><a class="dropdown-item" href="/cameras?{{ search.url }}">{{ search.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <p></p>
+
         <form action="" method="get">
           {{ cameras.form|crispy }}
           <div class="d-grid gap-2">
@@ -18,7 +33,11 @@
           </div>
         </form>
 
-        <a href="/save?{{ request.GET.urlencode }}">test</a>
+        <p></p>
+
+        <div class="d-grid gap-2">
+          <a class="btn btn-secondary btn-sm" href="/save?{{ request.GET.urlencode }}" role="button">Save this search</a>
+        </div>
 
       </div>
 

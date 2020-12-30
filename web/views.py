@@ -38,7 +38,7 @@ def saveSearch(request):
             newSearch.hunter = request.user
             newSearch.save()
 
-            return HttpResponseRedirect(reverse_lazy('cameras') + '?' + form['url'])
+            return HttpResponseRedirect(reverse_lazy('cameras') + '?' + newSearch.url)
 
         else: raise Http404
 
@@ -54,4 +54,4 @@ def saveSearch(request):
         }
         form = savedSearchForm(initial=data)
 
-    return render(request, 'save-search.html', {'form': form})
+    return render(request, 'save-search.html', {'save': form})

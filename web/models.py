@@ -34,9 +34,9 @@ class CameraFilter(django_filters.FilterSet):
         ('etsy', 'Etsy'),
     ))
 
-    new = django_filters.ChoiceFilter(label='Freshness:', choices=(
-        (True, 'Fresh Only'),
-        (True + False, 'Show All'),
+    new = django_filters.ChoiceFilter(label='Date added:', choices=(
+        (True, 'Last 7 days'),
+        (True + False, 'Show all'),
     ))
 
     sort = django_filters.OrderingFilter(
@@ -46,7 +46,7 @@ class CameraFilter(django_filters.FilterSet):
             ('price', 'Price (Low to High)'),
             ('source', 'Source (A to Z)'),
             ('-source', 'Source (Z to A)'),
-            ('new', 'Freshest'),
+            ('-createdAt', 'Recently added'),
         ),
         fields=(
             ('price', 'price'),
@@ -56,16 +56,16 @@ class CameraFilter(django_filters.FilterSet):
         field_labels={
             'price': 'Price',
             'source': 'Source',
-            'new': 'Freshness',
+            'new': 'Recently added',
         }
     )
 
     class Meta:
         model = Camera
-        fields = ['name', 'price', 'source', 'new',]
+        fields = ['name', 'price', 'source',]
 
 class savedSearch(models.Model):
-    hunter = models.ForeignKey(Hunter, on_delete=models.CASCADE, related_name='searches')
+    hunter = models.ForeignKey(Hunter, blank=True, on_delete=models.CASCADE, related_name='searches')
     name = models.CharField(max_length=255, blank=True, default=None, null=True)
     terms = models.CharField(max_length=255, blank=True, default=None, null=True)
     source = models.CharField(max_length=255, blank=True, default=None, null=True)
