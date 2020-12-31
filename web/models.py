@@ -11,8 +11,8 @@ class Camera(models.Model):
     store = models.CharField(max_length=255, blank=True, default=None, null=True)
     url = models.CharField(max_length=255)
     price = models.DecimalField(decimal_places=2, max_digits=7)
-    createdAt = models.DateField(default=None, blank=True, null=True)
-    lastSeen = models.DateField(default=None, blank=True, null=True)
+    createdAt = models.DateTimeField(default=None, blank=True, null=True)
+    lastSeen = models.DateTimeField(default=None, blank=True, null=True)
     new = models.BooleanField(default=True)
 
     class Meta:
@@ -35,7 +35,7 @@ class CameraFilter(django_filters.FilterSet):
     ))
 
     new = django_filters.ChoiceFilter(label='Date added:', choices=(
-        (True, 'Last 7 days'),
+        (True, 'Last 3 days'),
     ))
 
     sort = django_filters.OrderingFilter(
@@ -63,6 +63,7 @@ class savedSearch(models.Model):
     new = models.BooleanField(blank=True, default=False, null=True)
     sort = models.CharField(max_length=255, blank=True, default=None, null=True)
     url = models.CharField(max_length=255, blank=True, default=None, null=True)
+    is_subscribed = models.BooleanField(blank=True, default=False, null=True)
 
     def __str__(self):
         return "%s" % (self.name)

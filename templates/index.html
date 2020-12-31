@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 
+  <div class="container-lg">
+
     <div class="row justify-content-around align-items-center" style="margin-top:25px;">
-      <div class="col-7">
+      <div class="col">
 
         <h1>Welcome to Filmstock.</h1>
 
@@ -18,9 +21,11 @@
         <p>To get started, <a href="{% url 'signup' %}">create an account</a>.</p>
 
       </div>
-      <div class="col-md-auto">
-        <img src="https://loremflickr.com/400/400" class="img-fluid">
+      <div class="col-md-4">
+        <img src="{% static 'img/home.png' %}" class="img-fluid" alt="Filmstock" style="max-height: 400px">
       </div>
     </div>
+
+  </div>
 
 {% endblock %}

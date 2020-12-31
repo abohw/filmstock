@@ -7,7 +7,8 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from web.models import Camera
-from datetime import datetime, date, timedelta
+from django.utils import timezone
+import pytz
 
 def clean_price(param):
     return param.strip().replace('$', '').replace(',','')
@@ -27,8 +28,8 @@ class FilmstockPipeline:
                         source = item['source'],
                         store = item['store'],
                         price = price,
-                        createdAt = datetime.now().strftime('%Y-%m-%d'),
-                        lastSeen = datetime.now().strftime('%Y-%m-%d'),
+                        createdAt = timezone.now(),
+                        lastSeen = timezone.now(),
                     )
 
                     print("new camera added")
@@ -36,13 +37,13 @@ class FilmstockPipeline:
         else:
             camera = Camera.objects.get(url__exact=item['url'])
 
-            if camera.createdAt <= (date.today() - timedelta(days=7)):
+            if camera.createdAt <= (timezone.now() - timezone.timedelta(days=3)):
                 print("updated, no longer new")
                 camera.new = False
 
             else: print("updated, still new")
 
-            camera.lastSeen = datetime.now().strftime('%Y-%m-%d')
+            camera.lastSeen = timezone.now()
 
             camera.save()
 

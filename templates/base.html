@@ -5,11 +5,18 @@
     <title>Filmstock · {% block title %}{% endblock %}</title>
 
     {% load static %}
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="icon" href="{% static 'img/favicon-32.png' %}" sizes="32x32">
+    <link rel="icon" href="{% static 'img/favicon-128.png' %}" sizes="128x128">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon-152.png' %}" sizes="152x152">
+    <link rel="icon" href="{% static 'img/favicon-157.png' %}" sizes="157x157">
+    <link rel="apple-touch-icon" href="{% static 'img/favicon-180.png' %}" sizes="180x180">
+    <link rel="icon" href="{% static 'img/favicon-192.png' %}" sizes="192x192">
+    <link rel="shortcut icon" href="{% static 'img/favicon-196.png' %}" sizes="196x196">
 
     <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
     <meta property="og:title" content="Filmstock">
     <meta property="og:description" content="A vintage camera hunting app.">
+    <meta property="og:image" content="{% static 'img/home-og.png' %}">
     <meta property="og:url" content="https://filmstock.app">
 
     <style>
