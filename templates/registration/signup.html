@@ -5,6 +5,12 @@
 
 {% block content %}
 
+  {% if request.GET.from == 'savesearch' %}
+    <div class="alert alert-info" role="alert">
+      You need to sign up to save a search.
+    </div>
+  {% endif %}
+
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
