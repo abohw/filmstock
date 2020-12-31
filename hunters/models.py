@@ -32,11 +32,13 @@ class Hunter(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+
     is_active = models.BooleanField(default=True)
     is_subscribed = models.BooleanField(default=True)
-    is_approved = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=True)
     
+    is_admin = models.BooleanField(default=False)
+
     objects = HunterManager()
 
     USERNAME_FIELD = 'email'

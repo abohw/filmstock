@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body bgcolor="#fdfdfd" style="font-family: 'Helvetica Neue','Helvetica',sans-serif; font-size: 16px;">
+        <h1 style="color: #2C3A47; letter-spacing: 1.05px;">Filmstock</h1>
+        <p></p>
+        <p>We found {{ cameras.count }} new camera(s) for your saved search.</p>
+        <p></p>
+        <div>
+          <table>
+            <tr>
+              <th align="left">Camera</th>
+              <th align="left">Price</th>
+            </tr>
+            {% for camera in cameras %}
+            <tr>
+                <td align="left"><a href="{{ camera.url }}">{{ camera.name }}</a></td>
+                <td align="left">${{ camera.price }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <p></p>
+        <p style="font-size: 12px; color: #7f8c8d;">If you're no longer enjoying these emails, you can disable this alert in your <a href="https://filmstock.app{% url 'settings' %}">Settings</a>.</p>
+        <p></p>
+        <p style="font-size: 12px; color: #7f8c8d;">© 2020 Filmstock. All rights reserved.</p>
+    </body>
+</html>

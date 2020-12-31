@@ -1,6 +1,7 @@
 from django.core.management import BaseCommand
 from django.conf import settings
-from datetime import date, timedelta
+from django.utils import timezone
+import pytz
 from django.core import mail
 from hunters.models import Hunter
 from web.models import Camera
@@ -12,7 +13,7 @@ class Command(BaseCommand):
 
     def sourceCameras(self, search):
 
-        cameras = Camera.objects.filter(createdAt__range=[date.today() - timedelta(days=1), date.today()])
+        cameras = Camera.objects.filter(createdAt__range=[timezone.now() - timezone.timedelta(hours=1), timezone.now()])
 
         if search.terms:
             cameras = cameras.filter(name__icontains=search.terms)
@@ -54,26 +55,32 @@ class Command(BaseCommand):
 
                     cameras = self.sourceCameras(search)
 
-                    html_message = loader.render_to_string(
-                        'email-alerts.html',
-                        {
-                            'name': search.name,
-                            'cameras': cameras,
-                        }
-                    )
+                    if cameras:
 
-                    message = ''
-                    for camera in cameras:
-                        message += '%s (%s)\n%s\n\n' % (camera.name, camera.price, camera.url)
+                        html_message = loader.render_to_string(
+                            'emails/new-camera.html',
+                            {
+                                'name': search.name,
+                                'cameras': cameras,
+                            }
+                        )
 
-                    mail.send_mail(
-                        'Yo, you got new cameras for %s' % (search.name),
-                        'Hello.\n\n%s\n\nYour best friend,\nFilmstock' % (message),
-                        'alerts@filmstock.app',
-                        [hunter.email],
-                        fail_silently=True,
-                        connection=connection,
-                        html_message=html_message,
-                    )
+                        message = ''
+                        for camera in cameras:
+                            message += '%s (%s)\n%s\n\n' % (camera.name, camera.price, camera.url)
+
+                        mail.send_mail(
+                            '%s: %s new camera(s)' % (search.name, cameras.count()),
+                            'Filmstock\n\n%s' % (message),
+                            'Filmstock <alerts@filmstock.app>',
+                            [hunter.email],
+                            fail_silently=True,
+                            connection=connection,
+                            html_message=html_message,
+                        )
+
+                        print('%s new cameras for %s, email sent to %s' % (cameras.count(), search.name, hunter.email))
+
+                    else: print('no new cameras for %s, no email sent to %s' % (search.name, hunter.email))
 
         connection.close()
