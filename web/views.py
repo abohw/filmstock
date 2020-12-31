@@ -20,12 +20,8 @@ def home(request):
 def cameras(request):
 
     f = CameraFilter(request.GET, queryset=Camera.objects.all().order_by('-createdAt').order_by('-price'))
-    return render(request, 'cameras.html', {'cameras': f,})
+    return render(request, 'cameras.html', {'cameras': f, 'total': Camera.objects.all().count(), })
 
-
-def film(request):
-
-    return cameras(request)
 
 @login_required
 def saveSearch(request):
@@ -55,3 +51,46 @@ def saveSearch(request):
         form = savedSearchForm(initial=data)
 
     return render(request, 'save-search.html', {'save': form})
+
+
+@login_required
+def deleteSearch(request, id):
+
+    try:
+        request.user.searches.get(id__exact=id).delete()
+        return HttpResponseRedirect(reverse_lazy('settings'))
+
+    except:
+        raise Http404
+
+
+@login_required
+def unsubscribeSearch(request, id):
+
+    try:
+        search = request.user.searches.get(id__exact=id)
+        search.is_subscribed = False
+        search.save()
+
+        return HttpResponseRedirect(reverse_lazy('settings'))
+
+    except:
+        raise Http404
+
+
+@login_required
+def subscribeSearch(request, id):
+
+    try:
+        search = request.user.searches.get(id__exact=id)
+        search.is_subscribed = True
+        search.save()
+
+        return HttpResponseRedirect(reverse_lazy('settings'))
+
+    except:
+        raise Http404
+
+def help(request):
+
+    return render(request, 'help-faq.html')

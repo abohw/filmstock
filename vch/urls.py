@@ -23,9 +23,12 @@ from web.models import Camera
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    re_path(r'^cameras/save$', views.saveSearch, name='save-search'),
+    path('help/', views.help, name='help'),
+    re_path(r'^cameras/save/new$', views.saveSearch, name='save-search'),
+    path('cameras/save/delete/<int:id>', views.deleteSearch, name='delete-search'),
+    path('cameras/save/unsubscribe/<int:id>', views.unsubscribeSearch, name='unsubscribe-search'),
+    path('cameras/save/subscribe/<int:id>', views.subscribeSearch, name='subscribe-search'),
     re_path(r'^cameras$', views.cameras, name='cameras'),
-    path('film/', views.film, name='film'),
     path('users/', include('hunters.urls')),
     path('users/', include('django.contrib.auth.urls')),
 ]

@@ -15,7 +15,7 @@
             </tr>
             {% for camera in cameras %}
             <tr>
-                <td align="left"><a href="{{ camera.url }}">{{ camera.name }}</a></td>
+                <td align="left"><a href="{{ camera.url }}">{{ camera.name|truncatechars:100 }}</a></td>
                 <td align="left">${{ camera.price }}</td>
             </tr>
             {% endfor %}

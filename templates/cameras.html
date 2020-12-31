@@ -16,7 +16,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {% for search in user.searches.all %}
-              <li><a class="dropdown-item" href="/cameras?{{ search.url }}">{{ search.name }}</a></li>
+              <li><a class="dropdown-item" href="{% url 'cameras' %}?{{ search.url }}">{{ search.name|truncatechars:20 }}</a></li>
               {% endfor %}
             </ul>
           </div>
@@ -36,7 +36,15 @@
         <p></p>
 
         <div class="d-grid gap-2">
-          <a class="btn btn-secondary btn-sm" href="/cameras/save?{{ request.GET.urlencode }}" role="button">Save this search</a>
+          <a class="btn btn-secondary btn-sm" href="{% url 'save-search' %}?{{ request.GET.urlencode }}" role="button">Save this search</a>
+        </div>
+
+        {% elif user.is_authenticated == False %}
+
+        <p></p>
+
+        <div class="d-grid gap-2">
+          <a class="btn btn-secondary btn-sm" href="{% url 'signup' %}" role="button">Save this search</a>
         </div>
 
         {% endif %}
@@ -69,7 +77,7 @@
                  <i style="color: #CAD3C8;" class="fas fa-camera-retro"></i>
                 {% endif %}
               </th>
-              <td><a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name }}</a></td>
+              <td><a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name|truncatechars:100 }}</a></td>
               <td>${{ camera.price }}</td>
               <td class="text-break">
                 {% if camera.source == 'precision' %}
@@ -95,6 +103,10 @@
 
           </tbody>
         </table>
+
+        <p class="text-end">
+          {{ cameras.qs.count }} cameras in results ({{ total }} available)
+        </p>
 
         </div>
 

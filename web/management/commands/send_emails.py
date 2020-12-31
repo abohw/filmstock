@@ -21,7 +21,7 @@ class Command(BaseCommand):
         if search.new:
             cameras = cameras.filter(new=search.new)
 
-        if search.source:
+        if search.source and search.source != '[]':
             source = search.source
             source = source.replace('\'','').replace('[','').replace(']','').replace(',','')
             source = source.split(' ')
@@ -57,8 +57,12 @@ class Command(BaseCommand):
                 for search in searches:
 
                     cameras = self.sourceCameras(search)
+                    name = search.name
 
                     if cameras:
+
+                        if len(name) > 24:
+                            name = name[0:25] + '...'
 
                         html_message = loader.render_to_string(
                             'emails/new-camera.html',
@@ -73,17 +77,17 @@ class Command(BaseCommand):
                             message += '%s (%s)\n%s\n\n' % (camera.name, camera.price, camera.url)
 
                         mail.send_mail(
-                            '%s: %s new camera(s)' % (search.name, cameras.count()),
+                            '%s: %s new camera(s)' % (name, cameras.count()),
                             'Filmstock\n\n%s' % (message),
-                            'Filmstock <alerts@filmstock.app>',
+                            'Filmstock <alerts@mail.filmstock.app>',
                             [hunter.email],
                             fail_silently=True,
                             connection=connection,
                             html_message=html_message,
                         )
 
-                        print('%s new cameras for %s, email sent to %s' % (cameras.count(), search.name, hunter.email))
+                        print('%s new cameras for %s, email sent to %s' % (cameras.count(), name, hunter.email))
 
-                    else: print('no new cameras for %s, no email sent to %s' % (search.name, hunter.email))
+                    else: print('no new cameras for %s, no email sent to %s' % (name, hunter.email))
 
         connection.close()

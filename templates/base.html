@@ -34,7 +34,6 @@
       }
     </style>
 
-    <meta name="robots" content="noindex, nofollow" />
     <link rel="canonical" href="https://filmstock.app/" />
   </head>
 
@@ -58,9 +57,6 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'cameras' %}?new=True" style="color: #535c68; font-size: 18px;">Cameras</a>
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="{% url 'film' %}" style="color: #535c68; font-size: 18px;">Film</a>
-            </li> -->
           </ul>
           <ul class="navbar-nav d-grid gap-2 d-md-flex justify-content-end">
             {% if user.is_authenticated %}
@@ -69,8 +65,9 @@
                 {{ user.email }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'help' %}">Help</a></li>
+                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
-                <!-- <li><hr class="dropdown-divider"></li> -->
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
               </ul>
             </li>
@@ -107,7 +104,10 @@
 
   <footer class="footer mt-auto py-3">
     <div class="container-fluid">
-      <span class="text-muted">© 2020 Filmstock. All rights reserved.</span>
+      <span class="text-muted">© 2020 Filmstock. All rights reserved. &emsp;
+        <a href="{% url 'help' %}" style="color: #6c757d; text-decoration: none;">Help</a> &emsp;
+        <a href="mailto:alex@filmstock.app" style="color: #6c757d; text-decoration: none;">Contact Us</a>
+      </span>
     </div>
   </footer>
 

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+  <div class="container-lg" style="margin-top:10px;">
+
+        <h1>Settings</h1>
+
+        <h3 style="margin-top: 25px;">Saved searches</h3>
+
+        <p></p>
+
+        {% if searches %}
+
+          {% for search in searches %}
+
+            <p><b>{{ search.name|truncatechars:20 }}</b> &emsp;
+              {% if search.is_subscribed == True %}
+              <a href="/cameras/save/unsubscribe/{{ search.id }}">Unsubscribe</a> &emsp;
+              {% else %}
+              <a href="/cameras/save/subscribe/{{ search.id }}">Subscribe</a> &emsp;
+              {% endif %}
+              <a href="/cameras/save/delete/{{ search.id }}">Delete</a></p>
+
+            <p></p>
+
+          {% endfor %}
+
+        {% else %}
+
+          <p>You have no saved searches.</p>
+
+        {% endif %}
+
+        <h3 style="margin-top: 25px;">Account settings</h3>
+        <p></p>
+        <p><a href="{% url 'password_change' %}">Change password</a></p>
+        <p>To delete your account, please contact <a href="mailto:hi@filmstock.app">support</a>.</p>
+
+  </div>
+
+{% endblock %}

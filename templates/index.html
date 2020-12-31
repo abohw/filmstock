@@ -14,15 +14,23 @@
 
         <p></p>
 
-        <p>Cupcake ipsum dolor sit amet danish sweet topping sesame snaps. Cake candy canes bear claw gummi bears wafer cake candy candy jelly. Icing halvah danish bonbon donut pastry.</p>
-        <p>Icing sweet roll lemon drops pastry cake lemon drops jelly. Gummi bears brownie halvah chocolate bar chocolate. Pudding gummi bears candy canes fruitcake.</p>
-        <p>Marshmallow pastry apple pie oat cake macaroon danish croissant donut. Jelly soufflé fruitcake gingerbread sweet roll apple pie macaroon. Tiramisu soufflé tiramisu croissant muffin lollipop cheesecake biscuit icing.</p>
-        <p>Filmstock is currently in private alpha.</p>
-        <p>To get started, <a href="{% url 'signup' %}">create an account</a>.</p>
+        <p>Filmstock checks the inventory of <b>used film cameras</b> from around the US.</p>
+
+        <p>Find the elusive camera you've been longing after:
+          <ul>
+            <li>Create and save customized searches</li>
+            <li>Check current inventory</li>
+            <li>Be alerted as soon as new cameras are stocked</li>
+            </ul>
+            </p>
+
+        <p>Filmstock is currently in a public alpha. Learn more in our <a href="{% url 'help' %}">FAQ</a>.</p>
+
+        <p>To get started, <a href="{% url 'signup' %}">create an account</a> or <a href="{% url 'cameras' %}">start your search now</a>.</p>
 
       </div>
       <div class="col-md-4">
-        <img src="{% static 'img/home.png' %}" class="img-fluid" alt="Filmstock" style="max-height: 400px">
+        <img src="{% static 'img/home.png' %}" class="img-fluid mx-auto d-block" alt="Filmstock" style="max-height: 250px">
       </div>
     </div>
 

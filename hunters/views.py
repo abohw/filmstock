@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def newUser(request):
@@ -18,6 +19,9 @@ def newUser(request):
 
     return render(request, 'registration/signup.html', {'form': f})
 
+@login_required
 def userSettings(request):
 
-    return render(request, 'index.html')
+
+
+    return render(request, 'settings.html', { 'searches' : request.user.searches.all(), })
