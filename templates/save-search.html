@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% block title %}Save Search{% endblock %}
 {% block content %}
 
   <h2>Save Search</h2>
   <form method="post">
     {% csrf_token %}
-    <p>What's a good name for your search?</p>
+    <p></p>
     {{ save|crispy }}
     <button class="btn btn-primary" type="submit">Save</button>
   </form>

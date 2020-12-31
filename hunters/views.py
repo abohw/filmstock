@@ -4,6 +4,7 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 
 
 def newUser(request):
@@ -11,8 +12,11 @@ def newUser(request):
     if request.method == 'POST':
         f = CustomUserCreationForm(request.POST)
         if f.is_valid():
-            f.save()
-            return HttpResponseRedirect(reverse_lazy('login'))
+            newUser = f.save()
+            newUser = authenticate(email=f.cleaned_data['email'],
+                        password=f.cleaned_data['password1'],)
+            login(request, newUser)
+            return HttpResponseRedirect(reverse_lazy('cameras'))
 
     else:
         f = CustomUserCreationForm()

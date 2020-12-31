@@ -58,7 +58,6 @@
         <table class="table">
 
           <thead>
-            <th scope="col">&nbsp;</th>
             <th scope="col" width="60%">Camera</th>
             <th scope="col">Price</th>
             <th scope="col">Source</th>
@@ -70,14 +69,13 @@
           {% for camera in cameras.qs %}
 
             <tr>
-              <th scope="row">
-                {% if camera.new == True %}
-                 <i style="color: #1B9CFC;" class="fas fa-camera-retro"></i>
-                {% else %}
-                 <i style="color: #CAD3C8;" class="fas fa-camera-retro"></i>
+              <td>
+                <a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name|truncatechars:70 }}</a>
+                {% now "Y-m-d" as today %}
+                {% if today == camera.createdAt|date:"Y-m-d" %}
+                &nbsp;<span class="badge bg-info text-dark">New</span>
                 {% endif %}
-              </th>
-              <td><a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name|truncatechars:120 }}</a></td>
+              </td>
               <td>${{ camera.price }}</td>
               <td class="text-break">
                 {% if camera.source == 'precision' %}

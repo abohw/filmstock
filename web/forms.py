@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import savedSearch
+from django.utils.translation import gettext_lazy as _
 
 class savedSearchForm(ModelForm):
 
@@ -8,7 +9,13 @@ class savedSearchForm(ModelForm):
         model = savedSearch
         fields = [
             'hunter', 'name', 'terms', 'source', 'price_min', 'price_max',
-            'new', 'sort', 'url',]
+            'new', 'sort', 'url', 'is_subscribed',]
+
+        labels = {
+            'name': _('What\'s a good, memorable name for this search?'),
+            'is_subscribed': _('I want to receive an email when new cameras match this search.'),
+        }
+
         widgets = {
             'hunter': forms.HiddenInput(),
             'terms': forms.HiddenInput(),

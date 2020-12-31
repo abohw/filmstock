@@ -7,7 +7,6 @@ class etsySpider(scrapy.Spider):
 
     name = 'etsy'
     start_urls = [
-    'https://www.etsy.com/shop/ColinsCameras',
     'https://www.etsy.com/shop/SantaRosaCamera',
     'https://www.etsy.com/shop/JohnsonCamera',
     'https://www.etsy.com/shop/MyCameraCloset',

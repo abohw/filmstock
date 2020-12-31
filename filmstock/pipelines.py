@@ -20,7 +20,7 @@ class FilmstockPipeline:
 
             if 'dslr' not in item['name'].lower() and 'digital' not in item['name'].lower():
                 price = clean_price(item['price'])
-                if float(price) >= 100:
+                if float(price) >= 11:
 
                     Camera.objects.create(
                         name = item['name'],
