@@ -16,7 +16,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {% for search in user.searches.all %}
-              <li><a class="dropdown-item" href="{% url 'cameras' %}?{{ search.url }}">{{ search.name|truncatechars:20 }}</a></li>
+              <li><a class="dropdown-item" href="{% url 'cameras' %}?{{ search.url }}">{{ search.name|truncatechars:25 }}</a></li>
               {% endfor %}
             </ul>
           </div>
@@ -53,8 +53,6 @@
 
       <div class="col-10">
 
-        <div class="table-responsive">
-
         <table class="table">
 
           <thead>
@@ -77,7 +75,7 @@
                  <i style="color: #CAD3C8;" class="fas fa-camera-retro"></i>
                 {% endif %}
               </th>
-              <td><a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name|truncatechars:100 }}</a></td>
+              <td><a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name|truncatechars:120 }}</a></td>
               <td>${{ camera.price }}</td>
               <td class="text-break">
                 {% if camera.source == 'precision' %}
@@ -107,8 +105,6 @@
         <p class="text-end">
           {{ cameras.qs.count }} cameras in results ({{ total }} available)
         </p>
-
-        </div>
 
       </div>
 

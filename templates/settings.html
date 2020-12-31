@@ -17,7 +17,7 @@
 
           {% for search in searches %}
 
-            <p><b>{{ search.name|truncatechars:20 }}</b> &emsp;
+            <p><b>{{ search.name|truncatechars:25 }}</b> &emsp;
               {% if search.is_subscribed == True %}
               <a href="/cameras/save/unsubscribe/{{ search.id }}">Unsubscribe</a> &emsp;
               {% else %}
