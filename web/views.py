@@ -19,7 +19,7 @@ def home(request):
 
 def cameras(request):
 
-    f = CameraFilter(request.GET, queryset=Camera.objects.all().order_by('-createdAt').order_by('-price'))
+    f = CameraFilter(request.GET, queryset=Camera.objects.all().order_by('-createdAt'))
     return render(request, 'cameras.html', {'cameras': f, 'total': Camera.objects.all().count(), })
 
 
