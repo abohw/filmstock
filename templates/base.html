@@ -20,6 +20,11 @@
       main > .container {
         padding: 60px 15px 0;
       }
+
+      .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        background-color: #3B3B98 !important;
+        border: #3B3B98 !important;
+      }
     </style>
 
     <meta name="robots" content="noindex, nofollow" />
@@ -33,27 +38,27 @@
 
     <header>
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: #fdfdfd;">
-      <div class="container-lg">
-        <a class="navbar-brand" href="/" style="color: #17c0eb;"><strong>Filmstock</strong></a>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color: #2C3A47; letter-spacing: 1.05px;"><i class="fas fa-camera-retro"></i> <strong>Filmstock</strong></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/" style="color: #4b4b4b; font-size: 18px;">Home</a>
+              <a class="nav-link" href="/" style="color: #535c68; font-size: 18px;">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'cameras' %}?new=True" style="color: #4b4b4b; font-size: 18px;">Cameras</a>
+              <a class="nav-link" href="{% url 'cameras' %}?new=True" style="color: #535c68; font-size: 18px;">Cameras</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'film' %}" style="color: #4b4b4b; font-size: 18px;">Film</a>
+              <a class="nav-link" href="{% url 'film' %}" style="color: #535c68; font-size: 18px;">Film</a>
             </li>
           </ul>
           <ul class="navbar-nav d-grid gap-2 d-md-flex justify-content-end">
             {% if user.is_authenticated %}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" style="color: #535c68; font-size: 18px;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ user.email }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -64,7 +69,7 @@
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="btn btn-primary me-md-2" href="{% url 'login' %}" role="button">Log in</a>
+              <a class="btn btn-link me-md-3" href="{% url 'login' %}" role="button" style="color: #535c68; font-size: 18px; text-decoration: none;">Log in</a>
             </li>
             <li class="nav-item">
               <a class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign up</a>
@@ -78,7 +83,7 @@
 
   <main>
 
-    <div class="container-lg">
+    <div class="container-fluid">
 
       {% if user.is_authenticated and user.is_approved == False %}
       <div class="alert alert-info" role="alert">
@@ -94,7 +99,7 @@
   </main>
 
   <footer class="footer mt-auto py-3">
-    <div class="container-lg">
+    <div class="container-fluid">
       <span class="text-muted">© 2020 Filmstock. All rights reserved.</span>
     </div>
   </footer>
