@@ -64,6 +64,7 @@ class savedSearch(models.Model):
     sort = models.CharField(max_length=255, blank=True, default=None, null=True)
     url = models.CharField(max_length=255, blank=True, default=None, null=True)
     is_subscribed = models.BooleanField(blank=True, default=False, null=True)
+    is_active = models.BooleanField(blank=True, default=False, null=True)
 
     def __str__(self):
         return "%s" % (self.name)
