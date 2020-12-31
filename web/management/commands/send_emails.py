@@ -49,9 +49,12 @@ class Command(BaseCommand):
         connection.open()
 
         for hunter in Hunter.objects.filter(is_approved=True):
-            if hunter.searches.filter(is_subscribed=True):
 
-                for search in hunter.searches.all():
+            searches = Hunter.searches.filter(is_subscribed=True)
+            
+            if searches:
+
+                for search in searches:
 
                     cameras = self.sourceCameras(search)
 
