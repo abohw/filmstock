@@ -50,8 +50,8 @@ class Command(BaseCommand):
 
         for hunter in Hunter.objects.filter(is_approved=True):
 
-            searches = Hunter.searches.filter(is_subscribed=True)
-            
+            searches = hunter.searches.filter(is_subscribed=True)
+
             if searches:
 
                 for search in searches:
