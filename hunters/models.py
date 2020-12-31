@@ -36,8 +36,7 @@ class Hunter(AbstractBaseUser):
     is_subscribed = models.BooleanField(default=True)
     is_approved = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    referral_code = models.CharField(max_length=5, blank=True, default=None, null=True)
-
+    
     objects = HunterManager()
 
     USERNAME_FIELD = 'email'
