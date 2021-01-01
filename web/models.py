@@ -6,14 +6,14 @@ import django_filters
 # Create your models here.
 
 class Camera(models.Model):
-    name = models.CharField(max_length=255)
-    source = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
+    source = models.CharField(max_length=255, db_index=True)
     store = models.CharField(max_length=255, blank=True, default=None, null=True)
-    url = models.CharField(max_length=255)
-    price = models.DecimalField(decimal_places=2, max_digits=7)
-    createdAt = models.DateTimeField(default=None, blank=True, null=True)
-    lastSeen = models.DateTimeField(default=None, blank=True, null=True)
-    new = models.BooleanField(default=True)
+    url = models.CharField(max_length=255, db_index=True)
+    price = models.DecimalField(decimal_places=2, max_digits=7, db_index=True)
+    createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
+    lastSeen = models.DateTimeField(auto_now_add=True, db_index=True)
+    new = models.BooleanField(default=True, db_index=True)
 
     class Meta:
         ordering = ["-createdAt"]
@@ -55,17 +55,17 @@ class CameraFilter(django_filters.FilterSet):
 
 class savedSearch(models.Model):
     hunter = models.ForeignKey(Hunter, blank=True, on_delete=models.CASCADE, related_name='searches')
-    name = models.CharField(max_length=255, blank=True, default=None, null=True)
-    terms = models.CharField(max_length=255, blank=True, default=None, null=True)
-    source = models.CharField(max_length=255, blank=True, default=None, null=True)
-    price_min = models.CharField(max_length=8, default=None, blank=True, null=True)
-    price_max = models.CharField(max_length=8, default=None, blank=True, null=True)
-    new = models.BooleanField(blank=True, default=False, null=True)
-    sort = models.CharField(max_length=255, blank=True, default=None, null=True)
-    url = models.CharField(max_length=255, blank=True, default=None, null=True)
+    name = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
+    terms = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
+    source = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
+    price_min = models.CharField(max_length=8, default=None, blank=True, null=True, db_index=True)
+    price_max = models.CharField(max_length=8, default=None, blank=True, null=True, db_index=True)
+    new = models.BooleanField(blank=True, default=False, null=True, db_index=True)
+    sort = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
+    url = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
 
-    is_subscribed = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=True)
+    is_subscribed = models.BooleanField(default=True, db_index=True)
+    is_active = models.BooleanField(default=True, db_index=True)
 
     def __str__(self):
         return "%s" % (self.name)
