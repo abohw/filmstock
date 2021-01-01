@@ -25,9 +25,9 @@
               </ul>
               </p>
 
-          <p>Filmstock is currently in a public alpha. Learn more in our <a href="{% url 'help' %}">FAQ</a>.</p>
+          <p>Filmstock is currently in a public alpha. Learn more in our <a class="link" href="{% url 'help' %}">FAQ</a>.</p>
 
-          <p>To get started, <a href="{% url 'signup' %}">create an account</a> or start your search below.</p>
+          <p>To get started, <a class="link" href="{% url 'signup' %}">create an account</a> or start your search below.</p>
 
         </div>
         <div class="col-auto">
@@ -102,7 +102,7 @@
 
             <tr>
               <td>
-                <a href="{{ camera.url }}" target="_blank" style="color: #000000;">{{ camera.name|truncatechars:70 }}</a>
+                <a class="link" href="{{ camera.url }}" target="_blank">{{ camera.name|truncatechars:70 }}</a>
                 {% now "Y-m-d" as today %}
                 {% if today == camera.createdAt|date:"Y-m-d" %}
                 &nbsp;<span class="badge bg-info text-dark">New</span>
