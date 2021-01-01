@@ -69,6 +69,7 @@ class Command(BaseCommand):
                             'emails/new-camera.html',
                             {
                                 'name': search.name,
+                                'url': search.url,
                                 'cameras': cameras,
                             }
                         )
@@ -79,7 +80,7 @@ class Command(BaseCommand):
 
                         mail.send_mail(
                             '%s: %s new camera(s)' % (name, cameras.count()),
-                            'Filmstock\n\n%s' % (message),
+                            'Filmstock\n\n%sUnsubscribe from this alert: https://filmstock.app/users/users/settings' % (message),
                             'Filmstock <alerts@mail.filmstock.app>',
                             [hunter.email],
                             fail_silently=True,

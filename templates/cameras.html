@@ -136,6 +136,10 @@
 
         <p class="text-end">
           {{ cameras.qs.count }} cameras in results ({{ total }} available)
+          {% if request.GET.name is not None %}
+          <br>
+          Can't find anything? Try searching <a href="{{ reddit_url }}" target="_blank">Reddit</a> or <a href="{{ ebay_url }}" target="_blank">eBay</a>
+          {% endif %}
         </p>
 
       </div>

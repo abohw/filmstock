@@ -23,9 +23,8 @@ def newUser(request):
 
     return render(request, 'registration/signup.html', {'form': f})
 
+
 @login_required
 def userSettings(request):
-
-
 
     return render(request, 'settings.html', { 'searches' : request.user.searches.all(), })
