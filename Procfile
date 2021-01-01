@@ -1,1 +1,1 @@
-web: gunicorn vch.wsgi --log-file -
+web: gunicorn filmstock.wsgi --log-file -
