@@ -8,14 +8,6 @@ from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
 
-def home(request):
-
-    t = get_template('index.html')
-
-    html = t.render({'cameras': None}, request)
-
-    return HttpResponse(html)
-
 
 def cameras(request):
 

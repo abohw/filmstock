@@ -22,7 +22,7 @@ from web.models import Camera
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('', views.cameras, name='home'),
     path('help/', views.help, name='help'),
     re_path(r'^cameras/save/new$', views.saveSearch, name='save-search'),
     path('cameras/save/delete/<int:id>', views.deleteSearch, name='delete-search'),
