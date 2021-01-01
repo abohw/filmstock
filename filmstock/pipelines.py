@@ -16,7 +16,9 @@ def clean_price(param):
 class FilmstockPipeline:
     def process_item(self, item, spider):
 
-        if Camera.objects.filter(url__exact=item['url']).count() == 0:
+        url = item['url'].split('?')[0]
+
+        if Camera.objects.filter(url__exact=url).count() == 0:
 
             if 'dslr' not in item['name'].lower() and 'digital' not in item['name'].lower():
                 price = clean_price(item['price'])
@@ -24,7 +26,7 @@ class FilmstockPipeline:
 
                     Camera.objects.create(
                         name = item['name'],
-                        url = item['url'],
+                        url = url,
                         source = item['source'],
                         store = item['store'],
                         price = price,
@@ -35,7 +37,7 @@ class FilmstockPipeline:
                     print("new camera added")
 
         else:
-            camera = Camera.objects.get(url__exact=item['url'])
+            camera = Camera.objects.get(url__exact=url)
 
             if camera.createdAt <= (timezone.now() - timezone.timedelta(days=3)):
                 print("updated, no longer new")
