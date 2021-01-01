@@ -19,11 +19,11 @@
 
             <p><b>{{ search.name|truncatechars:25 }}</b> &emsp;
               {% if search.is_subscribed == True %}
-              <a href="/cameras/save/unsubscribe/{{ search.id }}">Unsubscribe</a> &emsp;
+              <a class="link" href="/cameras/save/unsubscribe/{{ search.id }}">Unsubscribe</a> &emsp;
               {% else %}
-              <a href="/cameras/save/subscribe/{{ search.id }}">Subscribe</a> &emsp;
+              <a class="link" href="/cameras/save/subscribe/{{ search.id }}">Subscribe</a> &emsp;
               {% endif %}
-              <a href="/cameras/save/delete/{{ search.id }}">Delete</a></p>
+              <a class="link" href="/cameras/save/delete/{{ search.id }}">Delete</a></p>
 
             <p></p>
 
@@ -37,8 +37,8 @@
 
         <h3 style="margin-top: 25px;">Account settings</h3>
         <p></p>
-        <p><a href="{% url 'password_change' %}">Change password</a></p>
-        <p>To delete your account, please contact <a href="mailto:hi@filmstock.app">support</a>.</p>
+        <p><a hclass="link" ref="{% url 'password_change' %}">Change password</a></p>
+        <p>To delete your account, please contact <a class="link" href="mailto:hi@filmstock.app">support</a>.</p>
 
   </div>
 
