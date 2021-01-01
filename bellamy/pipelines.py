@@ -13,7 +13,7 @@ import pytz
 def clean_price(param):
     return param.strip().replace('$', '').replace(',','')
 
-class FilmstockPipeline:
+class BellamyPipeline:
     def process_item(self, item, spider):
 
         url = item['url'].split('?')[0]
