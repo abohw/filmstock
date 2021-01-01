@@ -34,18 +34,18 @@ class CameraFilter(django_filters.FilterSet):
         ('etsy', 'Etsy'),
     ))
 
-    new = django_filters.ChoiceFilter(label='Date added:', choices=(
+    new = django_filters.ChoiceFilter(label='Date added:', empty_label='Whenever', choices=(
         (True, 'Last 3 days'),
     ))
 
     sort = django_filters.OrderingFilter(
         label='Sort by:',
+        empty_label='Recently added',
         choices=(
             ('-price', 'Price (High to Low)'),
             ('price', 'Price (Low to High)'),
             ('source', 'Source (A to Z)'),
             ('-source', 'Source (Z to A)'),
-            ('-createdAt', 'Recently added'),
         ),
     )
 
