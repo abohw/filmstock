@@ -7,8 +7,10 @@ from .models import Camera, CameraFilter
 from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
+from django.views.decorators.gzip import gzip_page
 
 
+@gzip_page
 def cameras(request):
 
     f = CameraFilter(request.GET, queryset=Camera.objects.all())
