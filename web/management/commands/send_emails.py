@@ -33,7 +33,7 @@ class Command(BaseCommand):
         elif search.price_min:
             cameras = cameras.filter(price__gt=float(search.price_min))
         elif search.price_max:
-            cameras = cameras.filter(price__lt=float(search.price_min))
+            cameras = cameras.filter(price__lt=float(search.price_max))
 
         if search.sort:
             cameras = cameras.order_by(search.sort)
