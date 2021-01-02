@@ -29,6 +29,7 @@ class CameraFilter(django_filters.FilterSet):
     source = django_filters.MultipleChoiceFilter(choices=(
         ('bh', 'B&H'),
         ('precision', 'Precision Camera'),
+        ('brooklyn', 'Brooklyn Film Camera'),
         ('austin_camera', 'Austin Camera'),
         ('keh', 'KEH Camera'),
         ('etsy', 'Etsy'),
