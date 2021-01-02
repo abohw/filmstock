@@ -20,7 +20,10 @@ class BellamyPipeline:
 
         if Camera.objects.filter(url__exact=url).count() == 0:
 
-            if 'dslr' not in item['name'].lower() and 'digital' not in item['name'].lower() and 'decorative' not in item['name'].lower():
+            BANNED_WORDS = ['dslr', 'digital', 'decorative']
+
+            if any([x in item['name'].lower() for x in BANNED_WORDS]):
+
                 price = clean_price(item['price'])
                 if float(price) >= 11:
 
