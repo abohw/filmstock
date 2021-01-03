@@ -13,6 +13,7 @@ class Camera(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=7, db_index=True)
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
     lastSeen = models.DateTimeField(auto_now_add=True, db_index=True)
+    new = models.BooleanField(null=True)
 
     class Meta:
         ordering = ["-createdAt"]

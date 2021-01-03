@@ -46,7 +46,6 @@ class BellamyPipeline:
         else:
             camera = Camera.objects.get(url__exact=url)
             camera.lastSeen = timezone.now()
-
             camera.save()
 
         return item
