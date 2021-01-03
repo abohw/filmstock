@@ -8,6 +8,8 @@ from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
 from django.views.decorators.gzip import gzip_page
+from django.views.generic.list import ListView
+from django.core.paginator import Paginator
 
 
 @gzip_page
@@ -30,8 +32,12 @@ def cameras(request):
     reddit_url = 'https://www.reddit.com/r/photomarket/search?q=%s flair:\"selling\"&restrict_sr=1&t=week' % (terms)
     ebay_url = 'https://www.ebay.com/sch/15230/i.html?_from=R40&_nkw=%s&LH_PrefLoc=1&rt=nc&_udlo=%s&_udhi=%s' % (terms, price_min, price_max)
 
+    paginator = Paginator(f.qs, 25)
+    page_obj = paginator.get_page(request.GET.get('page'))
+
     return render(request, 'cameras.html', {
         'cameras': f,
+        'page_obj' : page_obj,
         'total': Camera.objects.all().count(),
         'reddit_url' : reddit_url,
         'ebay_url' : ebay_url,

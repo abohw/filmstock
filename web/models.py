@@ -54,6 +54,7 @@ class CameraFilter(django_filters.FilterSet):
         model = Camera
         fields = ['name', 'price', 'source', 'new',]
 
+
 class savedSearch(models.Model):
     hunter = models.ForeignKey(Hunter, blank=True, on_delete=models.CASCADE, related_name='searches')
     name = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
