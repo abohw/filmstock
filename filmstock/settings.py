@@ -115,8 +115,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'hunters.Hunter'
-LOGIN_REDIRECT_URL = '/cameras?new=True'
-LOGOUT_REDIRECT_URL = '/cameras?new=True'
+LOGIN_REDIRECT_URL = '/cameras'
+LOGOUT_REDIRECT_URL = '/cameras'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

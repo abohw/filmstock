@@ -5,8 +5,8 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path(r'^$', views.cameras, name='home'),
     re_path(r'^cameras$', views.cameras, name='cameras'),
-    path('', RedirectView.as_view(url='/cameras?new=True', permanent=False)),
     path('help/', views.help, name='help'),
     re_path(r'^cameras/save/new$', views.saveSearch, name='save-search'),
     path('users/', include('hunters.urls')),
