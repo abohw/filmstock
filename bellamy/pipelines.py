@@ -45,13 +45,6 @@ class BellamyPipeline:
 
         else:
             camera = Camera.objects.get(url__exact=url)
-
-            if camera.createdAt <= (timezone.now() - timezone.timedelta(days=3)):
-                print("updated, no longer new")
-                camera.new = False
-
-            else: print("updated, still new")
-
             camera.lastSeen = timezone.now()
 
             camera.save()
