@@ -18,9 +18,6 @@ class Command(BaseCommand):
         if search.terms:
             cameras = cameras.filter(name__icontains=search.terms)
 
-        if search.new:
-            cameras = cameras.filter(new=search.new)
-
         # yes i know the source search code is janky. i'll fix it later.
         if search.source and search.source != '[]':
             source = search.source

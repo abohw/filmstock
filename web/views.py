@@ -66,7 +66,6 @@ def saveSearch(request):
             'price_min' : request.GET.get('price_min'),
             'price_max' : request.GET.get('price_max'),
             'sort' : request.GET.get('sort'),
-            'new' : request.GET.get('new'),
             'url' : request.GET.urlencode(),
         }
         form = savedSearchForm(initial=data)

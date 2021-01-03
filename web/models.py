@@ -13,7 +13,6 @@ class Camera(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=7, db_index=True)
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
     lastSeen = models.DateTimeField(auto_now_add=True, db_index=True)
-    new = models.BooleanField(default=True, db_index=True)
 
     class Meta:
         ordering = ["-createdAt"]
@@ -35,10 +34,6 @@ class CameraFilter(django_filters.FilterSet):
         ('etsy', 'Etsy'),
     ))
 
-    new = django_filters.ChoiceFilter(label='Date added:', empty_label='Whenever', choices=(
-        (True, 'Last 3 days'),
-    ))
-
     sort = django_filters.OrderingFilter(
         label='Sort by:',
         empty_label='Recently added',
@@ -52,7 +47,7 @@ class CameraFilter(django_filters.FilterSet):
 
     class Meta:
         model = Camera
-        fields = ['name', 'price', 'source', 'new',]
+        fields = ['name', 'price', 'source',]
 
 
 class savedSearch(models.Model):
@@ -62,7 +57,6 @@ class savedSearch(models.Model):
     source = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
     price_min = models.CharField(max_length=8, default=None, blank=True, null=True, db_index=True)
     price_max = models.CharField(max_length=8, default=None, blank=True, null=True, db_index=True)
-    new = models.BooleanField(blank=True, default=False, null=True, db_index=True)
     sort = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
     url = models.CharField(max_length=255, blank=True, default=None, null=True, db_index=True)
 

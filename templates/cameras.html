@@ -51,7 +51,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               {% for search in user.searches.all %}
-              <li><a class="dropdown-item" href="{% url 'cameras' %}?{{ search.url }}">{{ search.name|truncatechars:25 }}</a></li>
+              <li><a class="dropdown-item" href="/?{{ search.url }}">{{ search.name|truncatechars:25 }}</a></li>
               {% endfor %}
             </ul>
           </div>

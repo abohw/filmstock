@@ -9,7 +9,7 @@ class savedSearchForm(ModelForm):
         model = savedSearch
         fields = [
             'hunter', 'name', 'terms', 'source', 'price_min', 'price_max',
-            'new', 'sort', 'url', 'is_subscribed',]
+            'sort', 'url', 'is_subscribed',]
 
         labels = {
             'name': _('What\'s a good, memorable name for this search?'),
@@ -22,7 +22,6 @@ class savedSearchForm(ModelForm):
             'source': forms.HiddenInput(),
             'price_min': forms.HiddenInput(),
             'price_max': forms.HiddenInput(),
-            'new': forms.HiddenInput(),
             'sort': forms.HiddenInput(),
             'url': forms.HiddenInput(),
             }
