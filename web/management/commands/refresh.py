@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
         x = 0
 
-        for camera in Camera.objects.filter(lastSeen__lt=(timezone.now() - timezone.timedelta(hours=4))):
+        for camera in Camera.objects.filter(lastSeen__lt=(timezone.now() - timezone.timedelta(hours=2))):
             print('deleting %s from %s' % (camera.name, camera.source))
             camera.delete()
             x += 1
