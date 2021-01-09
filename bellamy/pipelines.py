@@ -45,6 +45,10 @@ class BellamyPipeline:
 
         else:
             camera = Camera.objects.get(url__exact=url)
+
+            if item['price'] is not None:
+                camera.price = clean_price(item['price'])
+
             camera.lastSeen = timezone.now()
             camera.save()
 

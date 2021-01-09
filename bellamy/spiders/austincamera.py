@@ -8,13 +8,16 @@ class austinCameraSpider(scrapy.Spider):
 
     def parse(self, response):
         for camera in response.css('div.product-card'):
-            yield {
-            'name': camera.css('div.product-card__title::text').get(),
-            'url': 'https://austincamera.com%s' % (camera.css('a::attr(href)').get()),
-            'price': camera.css('span.price-item::text').get(),
-            'source': 'austin_camera',
-            'store': '',
-            }
+
+            if not camera.css('dl.price--sold-out'):
+                
+                yield {
+                'name': camera.css('div.product-card__title::text').get(),
+                'url': 'https://austincamera.com%s' % (camera.css('a::attr(href)').get()),
+                'price': camera.css('span.price-item::text').get(),
+                'source': 'austin_camera',
+                'store': '',
+                }
 
         next_page = response.css('ul.pagination li a::attr(href)').getall()
         if next_page is not None:
