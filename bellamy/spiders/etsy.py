@@ -12,6 +12,12 @@ class etsySpider(scrapy.Spider):
     'https://www.etsy.com/shop/MyCameraCloset',
     'https://www.etsy.com/shop/KmcamerasUS',
     'https://www.etsy.com/shop/AnalogRelics',
+    'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648149',
+    'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648139',
+    'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648143',
+    'https://www.etsy.com/shop/QualityCameraCompany?section_id=26885330',
+    'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648185',
+    'https://www.etsy.com/shop/QualityCameraCompany?section_id=25431258',
     ]
 
     def parse(self, response):

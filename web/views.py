@@ -53,6 +53,10 @@ def saveSearch(request):
         if form.is_valid():
             newSearch = form.save(commit=False)
             newSearch.hunter = request.user
+
+            if request.user.searches.filter(is_subscribed=True).count() >= 25:
+                newSearch.is_subscribed = False
+
             newSearch.save()
 
             return HttpResponseRedirect(reverse_lazy('cameras') + '?' + newSearch.url)
@@ -103,8 +107,10 @@ def subscribeSearch(request, id):
 
     try:
         search = request.user.searches.get(id__exact=id)
-        search.is_subscribed = True
-        search.save()
+
+        if request.user.searches.filter(is_subscribed=True).count() < 25:
+            search.is_subscribed = True
+            search.save()
 
         return HttpResponseRedirect(reverse_lazy('settings'))
 

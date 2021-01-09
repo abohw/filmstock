@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body bgcolor="#fdfdfd" style="font-family: 'Helvetica Neue','Helvetica',sans-serif; font-size: 16px;">
+        <h1 style="color: #2C3A47; letter-spacing: 1.05px;">Filmstock</h1>
+        <p></p>
+        <p>Welcome! Verify your account by clicking this link:</p>
+        <p>
+          <a href="https://{{ domain }}{% url 'activate' uidb64=uid token=token %}">
+            https://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+          </a>
+        </p>
+        <p></p>
+        <p style="font-size: 12px; color: #7f8c8d;">© 2021 Filmstock. All rights reserved.</p>
+    </body>
+</html>

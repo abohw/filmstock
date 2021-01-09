@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
         connection.open()
 
-        for hunter in Hunter.objects.filter(is_approved=True):
+        for hunter in Hunter.objects.filter(is_subscribed=True):
 
             searches = hunter.searches.filter(is_subscribed=True)
 

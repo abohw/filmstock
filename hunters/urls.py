@@ -17,6 +17,7 @@ from django.urls import path
 from hunters import views
 
 urlpatterns = [
-    path('users/new', views.newUser, name='signup'),
-    path('users/settings', views.userSettings, name='settings'),
+    path('activate/<uidb64>/<token>/', views.activateUser, name='activate'),
+    path('new/', views.newUser, name='signup'),
+    path('settings/', views.userSettings, name='settings'),
 ]

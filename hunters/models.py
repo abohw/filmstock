@@ -22,7 +22,7 @@ class HunterManager(BaseUserManager):
             password=password,
         )
         user.is_admin = True
-        user.is_approved = True
+        user.is_subscribed = True
         user.save(using=self._db)
         return user
 
@@ -34,9 +34,7 @@ class Hunter(AbstractBaseUser):
     )
 
     is_active = models.BooleanField(default=True)
-    is_subscribed = models.BooleanField(default=True)
-    is_approved = models.BooleanField(default=True)
-    
+    is_subscribed = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
     objects = HunterManager()

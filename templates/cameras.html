@@ -18,7 +18,7 @@
 
           <p></p>
 
-          <p>Filmstock checks the inventory of <b>used film cameras</b> from around the US.</p>
+          <p>Filmstock checks the inventory of <b>vintage film cameras</b> from around the US.</p>
 
           <p>Find the elusive camera you've been longing after:
             <ul>
@@ -28,7 +28,7 @@
               </ul>
               </p>
 
-          <p>Filmstock is currently in a public alpha. Learn more in our <a class="link" href="{% url 'help' %}">FAQ</a>.</p>
+          <p>Filmstock is currently in public beta. Learn more in our <a class="link" href="{% url 'help' %}">FAQ</a>.</p>
 
           <p>To get started, <a class="link" href="{% url 'signup' %}">create an account</a> or start your search below.</p>
 
@@ -66,7 +66,7 @@
           </div>
         </form>
 
-        {% if user.is_authenticated and user.is_approved %}
+        {% if user.is_authenticated %}
 
         <p></p>
 
@@ -74,7 +74,7 @@
           <a class="btn btn-secondary btn-sm" href="{% url 'save-search' %}?{{ clean_filters }}" role="button">Save this search</a>
         </div>
 
-        {% elif user.is_authenticated == False %}
+        {% else %}
 
         <p></p>
 
