@@ -65,3 +65,13 @@ class savedSearch(models.Model):
 
     def __str__(self):
         return "%s" % (self.name)
+
+
+class emailTask(models.Model):
+    time = models.DateTimeField(auto_now_add=True, db_index=True)
+    sent = models.IntegerField(default=0)
+    skipped = models.IntegerField(default=0)
+    success = models.BooleanField(default=False, db_index=True)
+
+    def __str__(self):
+        return "%s (%s)" % (self.time, self.success)

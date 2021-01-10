@@ -4,16 +4,16 @@ from django.utils import timezone
 import pytz
 from django.core import mail
 from hunters.models import Hunter
-from web.models import Camera
+from web.models import Camera, emailTask
 from django.template import loader
 
 
 class Command(BaseCommand):
     help = 'what'
 
-    def sourceCameras(self, search):
+    def sourceCameras(self, search, lastRun):
 
-        cameras = Camera.objects.filter(createdAt__range=[timezone.now() - timezone.timedelta(hours=1), timezone.now()])
+        cameras = Camera.objects.filter(createdAt__gt=lastRun)
 
         if search.terms:
             cameras = cameras.filter(name__icontains=search.terms)
@@ -42,9 +42,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        connection = mail.get_connection()
+        lastRun = emailTask.objects.filter(success=True).latest('id').time
 
+        connection = mail.get_connection()
         connection.open()
+
+        sent = 0
+        skipped = 0
 
         for hunter in Hunter.objects.filter(is_subscribed=True):
 
@@ -54,7 +58,7 @@ class Command(BaseCommand):
 
                 for search in searches:
 
-                    cameras = self.sourceCameras(search)
+                    cameras = self.sourceCameras(search, lastRun)
                     name = search.name
 
                     if cameras:
@@ -85,8 +89,17 @@ class Command(BaseCommand):
                             html_message=html_message,
                         )
 
+                        sent += 1
                         print('%s new cameras for %s, email sent to %s' % (cameras.count(), name, hunter.email))
 
-                    else: print('no new cameras for %s, no email sent to %s' % (name, hunter.email))
+                    else:
+                        skipped += 1
+                        print('no new cameras for %s, no email sent to %s' % (name, hunter.email))
 
         connection.close()
+
+        emailTask.objects.create(
+            sent = sent,
+            skipped = skipped,
+            success = True,
+        )
