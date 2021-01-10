@@ -42,7 +42,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        lastRun = emailTask.objects.filter(success=True).latest('id').time
+        try:
+            lastRun = emailTask.objects.filter(success=True).latest('id').time
+        except emailTask.DoesNotExist:
+            lastRun = timezone.now() - timezone.timedelta(minutes=30)
 
         connection = mail.get_connection()
         connection.open()
