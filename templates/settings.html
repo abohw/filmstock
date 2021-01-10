@@ -15,19 +15,32 @@
 
         {% if searches %}
 
+
+        <table class="table table-sm table-borderless" style="max-width: 500px;">
+
           {% for search in searches %}
 
-            <p><b>{{ search.name|truncatechars:25 }}</b> &emsp;
-              {% if search.is_subscribed == True %}
-              <a class="link" href="/cameras/save/unsubscribe/{{ search.id }}">Unsubscribe</a> &emsp;
-              {% else %}
-              <a class="link" href="/cameras/save/subscribe/{{ search.id }}">Subscribe</a> &emsp;
-              {% endif %}
-              <a class="link" href="/cameras/save/delete/{{ search.id }}">Delete</a></p>
+          <tr>
 
-            <p></p>
+            <td>
+              <b>{{ search.name|truncatechars:25 }}</b>
+            </td>
+            <td>
+              {% if search.is_subscribed == True %}
+              <a class="link" href="/cameras/save/unsubscribe/{{ search.id }}">Unsubscribe</a>
+              {% else %}
+              <a class="link" href="/cameras/save/subscribe/{{ search.id }}">Subscribe</a>
+              {% endif %}
+            </td>
+            <td>
+              <a class="link" href="/cameras/save/delete/{{ search.id }}">Delete</a>
+            </td>
+
+          </tr>
 
           {% endfor %}
+
+        </table>
 
         {% else %}
 
