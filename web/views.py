@@ -103,6 +103,22 @@ def unsubscribeSearch(request, id):
 
 
 @login_required
+def unsubscribeHunter(request):
+
+    try:
+        searches = request.user.searches.all()
+
+        for search in searches:
+            search.is_subscribed = False
+            search.save()
+
+        return HttpResponseRedirect(reverse_lazy('settings'))
+
+    except:
+        raise Http404
+
+
+@login_required
 def subscribeSearch(request, id):
 
     try:

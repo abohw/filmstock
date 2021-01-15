@@ -9,6 +9,7 @@ urlpatterns = [
     re_path(r'^cameras$', views.cameras, name='cameras'),
     path('help/', views.help, name='help'),
     re_path(r'^cameras/save/new$', views.saveSearch, name='save-search'),
+    path('users/unsubscribe', views.unsubscribeHunter, name='unsubscribe-all'),
     path('users/', include('hunters.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('cameras/save/delete/<int:id>', views.deleteSearch, name='delete-search'),

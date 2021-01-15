@@ -20,6 +20,11 @@ BOT_NAME = 'bellamy'
 SPIDER_MODULES = ['bellamy.spiders']
 NEWSPIDER_MODULE = 'bellamy.spiders'
 
+# Logging
+
+LOG_LEVEL = 'ERROR'
+LOG_SHORT_NAMES = True
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Filmstock (+https://filmstock.app)'
@@ -39,7 +44,7 @@ DOWNLOAD_DELAY = 3
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False

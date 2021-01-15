@@ -8,13 +8,18 @@ class kehCameraSpider(scrapy.Spider):
 
     def parse(self, response):
         for camera in response.css('li.product-item'):
-            yield {
-            'name': camera.css('meta[itemprop=name]::attr(content)').get(),
-            'url': camera.css('a.product-item-link::attr(href)').get(),
-            'price': camera.css('span.price::text').get(),
-            'source': 'keh',
-            'store': '',
-            }
+
+            price = camera.css('span.price::text').get()
+
+            if price is not None:
+                
+                yield {
+                'name': camera.css('meta[itemprop=name]::attr(content)').get(),
+                'url': camera.css('a.product-item-link::attr(href)').get(),
+                'price': camera.css('span.price::text').get(),
+                'source': 'keh',
+                'store': '',
+                }
 
         next_page = response.css('a[id=load-more-product-link]::attr(href)').get()
 

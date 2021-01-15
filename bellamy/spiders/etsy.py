@@ -18,6 +18,9 @@ class etsySpider(scrapy.Spider):
     'https://www.etsy.com/shop/QualityCameraCompany?section_id=26885330',
     'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648185',
     'https://www.etsy.com/shop/QualityCameraCompany?section_id=25431258',
+    'https://www.etsy.com/shop/jeremiahsphotocorner',
+    'https://www.etsy.com/shop/DevelopStopFix',
+    'https://www.etsy.com/shop/grainyvision',
     ]
 
     def parse(self, response):
