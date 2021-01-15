@@ -12,11 +12,11 @@ class kehCameraSpider(scrapy.Spider):
             price = camera.css('span.price::text').get()
 
             if price is not None:
-                
+
                 yield {
                 'name': camera.css('meta[itemprop=name]::attr(content)').get(),
                 'url': camera.css('a.product-item-link::attr(href)').get(),
-                'price': camera.css('span.price::text').get(),
+                'price': price,
                 'source': 'keh',
                 'store': '',
                 }
