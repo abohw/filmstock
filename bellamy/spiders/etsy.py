@@ -25,7 +25,7 @@ class etsySpider(scrapy.Spider):
 
     def parse(self, response):
 
-        store = response.css('h1.mb-lg-1::text').get()
+        store = response.css('div.shop-name-and-title-container h1::text').get()
 
         for camera in response.css('a.listing-link'):
             yield {
