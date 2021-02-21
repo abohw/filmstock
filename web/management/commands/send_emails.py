@@ -39,7 +39,6 @@ class Command(BaseCommand):
 
         return cameras
 
-
     def handle(self, *args, **options):
 
         try:
@@ -102,7 +101,13 @@ class Command(BaseCommand):
         connection.close()
 
         emailTask.objects.create(
-            sent = sent,
-            skipped = skipped,
-            success = True,
+            sent=sent,
+            skipped=skipped,
+            success=True,
         )
+
+        taskMax = emailTask.objects.count()
+
+        if taskMax > 200:
+            for task in emailTask.objects.all()[200:taskMax]:
+                task.delete()
