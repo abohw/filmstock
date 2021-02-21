@@ -100,14 +100,14 @@ class Command(BaseCommand):
 
         connection.close()
 
+        taskMax = emailTask.objects.count()
+
+        if taskMax > 200:
+            for task in emailTask.objects.all().order_by('-time')[200:taskMax]:
+                task.delete()
+
         emailTask.objects.create(
             sent=sent,
             skipped=skipped,
             success=True,
         )
-
-        taskMax = emailTask.objects.count()
-
-        if taskMax > 200:
-            for task in emailTask.objects.all()[200:taskMax]:
-                task.delete()
