@@ -113,7 +113,19 @@
               </td>
               <td>${{ camera.price }}</td>
               <td class="text-break">
-                {{  camera.source.name }}
+                {% if camera.source == 'precision' %}
+                  Precision Camera
+                {% elif camera.source == 'bh' %}
+                  B&H
+                {% elif camera.source == 'austin_camera' %}
+                  Austin Camera
+                {% elif camera.source == 'keh' %}
+                  KEH Camera
+                {% elif camera.source == 'etsy' %}
+                  Etsy ({{ camera.store }})
+                {% else %}
+                  {{ camera.source }}
+                {% endif %}
               </td>
               <td>
                 {{ camera.createdAt|date:'N j, Y' }}

@@ -22,8 +22,8 @@ NEWSPIDER_MODULE = 'bellamy.spiders'
 
 # Logging
 
-#LOG_LEVEL = 'ERROR'
-#LOG_SHORT_NAMES = True
+LOG_LEVEL = 'ERROR'
+LOG_SHORT_NAMES = True
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
