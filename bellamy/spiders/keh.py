@@ -19,6 +19,7 @@ class kehCameraSpider(scrapy.Spider):
                 'price': price,
                 'source': 'keh',
                 'store': '',
+                'type': 'camera',
                 }
 
         next_page = response.css('a[id=load-more-product-link]::attr(href)').get()

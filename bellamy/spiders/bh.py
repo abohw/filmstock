@@ -17,6 +17,7 @@ class bhCameraSpider(scrapy.Spider):
             'price': camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(),
             'source': 'bh',
             'store': '',
+            'type': 'camera',
             }
 
 #        next_page = response.css('ul.pagination li a::attr(href)').getall()

@@ -1,10 +1,13 @@
 import scrapy
 # from hunter.items import CameraItem
 
-class austinCameraSpider(scrapy.Spider):
+class austinCameraFilmSpider(scrapy.Spider):
 
-    name = 'austin_camera'
-    start_urls = ['https://austincamera.com/collections/film-cameras',]
+    name = 'acfilm'
+    start_urls = [
+    'https://austincamera.com/collections/film-1/120',
+    'https://austincamera.com/collections/film-1/35mm',
+    ]
 
     def parse(self, response):
         for camera in response.css('div.product-card'):
@@ -16,8 +19,7 @@ class austinCameraSpider(scrapy.Spider):
                 'url': 'https://austincamera.com%s' % (camera.css('a::attr(href)').get()),
                 'price': camera.css('span.price-item::text').get(),
                 'source': 'austin_camera',
-                'store': '',
-                'type': 'camera',
+                'type': 'film',
                 }
 
         next_page = response.css('ul.pagination li a::attr(href)').getall()

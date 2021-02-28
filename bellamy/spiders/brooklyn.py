@@ -17,4 +17,5 @@ class brooklynFilmCameraSpider(scrapy.Spider):
                 'url': 'https://www.brooklynfilmcamera.com%s' % (camera.css('a::attr(href)').get()),
                 'source': 'brooklyn',
                 'store': '',
+                'type': 'camera',
                 }

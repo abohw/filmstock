@@ -7,7 +7,15 @@ class fctSpider(scrapy.Spider):
 
     name = 'fct'
     start_urls = [
-    'https://filmcameratokyo.com/collections/all',
+    'https://filmcameratokyo.com/collections/mediumformat-camera',
+    'https://filmcameratokyo.com/collections/contax-t2',
+    'https://filmcameratokyo.com/collections/contax-t3',
+    'https://filmcameratokyo.com/collections/contax-t3',
+    'https://filmcameratokyo.com/collections/nikon',
+    'https://filmcameratokyo.com/collections/fujifilm',
+    'https://filmcameratokyo.com/collections/pentax',
+    'https://filmcameratokyo.com/collections/mamiya',
+    'https://filmcameratokyo.com/collections/hasselblad',
     ]
 
     def parse(self, response):
@@ -22,6 +30,7 @@ class fctSpider(scrapy.Spider):
                 'price': camera.css('span.money::text').get(),
                 'source': 'fct',
                 'store': '',
+                'type': 'camera',
                 }
 
         next_page = response.css('a.next::attr(href)').get()

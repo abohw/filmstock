@@ -34,6 +34,7 @@ class etsySpider(scrapy.Spider):
             'price': camera.css('span.currency-value::text').get(),
             'source': 'etsy',
             'store': store.lower(),
+            'type': 'camera',
             }
 
         global page

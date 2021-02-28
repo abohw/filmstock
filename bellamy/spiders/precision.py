@@ -14,4 +14,5 @@ class precisionCameraSpider(scrapy.Spider):
             'price': camera.css('span.price--withoutTax::text').get(),
             'source': 'precision',
             'store': '',
+            'type': 'camera',
             }
