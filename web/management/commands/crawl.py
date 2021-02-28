@@ -9,8 +9,9 @@ class Command(BaseCommand):
           process = CrawlerProcess(get_project_settings())
 
         # film crawlers
-        #  process.crawl('acfilm')
-        #  process.crawl('fpp')
+          process.crawl('acfilm')
+          process.crawl('fpp')
+          process.crawl('retrospekt')
 
         # camera crawlers
           process.crawl('brooklyn')
@@ -18,6 +19,7 @@ class Command(BaseCommand):
           process.crawl('precision')
           process.crawl('keh')
           process.crawl('bh')
-          process.crawl('etsy')
+        # not super impressed with etsy, tbh
+        # process.crawl('etsy')
 
           process.start()

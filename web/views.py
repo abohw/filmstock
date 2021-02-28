@@ -3,13 +3,55 @@ from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
-from .models import Camera, CameraFilter
+from .models import Camera, CameraFilter, Film, FilmFilter
 from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
 from django.views.decorators.gzip import gzip_page
 from django.views.generic.list import ListView
+from django.db.models import Min
 from django.core.paginator import Paginator
+
+def film(request):
+
+    f = FilmFilter(request.GET, queryset=Film.objects.annotate(price=Min('stock__price')))
+
+    return render(request, 'film.html', {
+        'films' : f,
+    })
+
+def filmStock(request, brand='', name='', format=''):
+
+    film = Film.objects.all()
+
+    if brand != '':
+        film = film.filter(brand__iexact=brand)
+
+    if name != '':
+        film = film.filter(name__iexact=name.replace('+',' '))
+
+    if format != '':
+        film = film.filter(format__iexact=format)
+
+    film = film[0]
+
+    films = []
+
+    if film.stock.count() != 0:
+        for x in film.stock.all().order_by('-price'):
+
+                films.append({
+                    'name' : x.name,
+                    'url' : x.url,
+                    'source' : x.source.short_name,
+                    'price' : x.price,
+                    'per_unit' : x.price / x.quantity,
+                    'with_shipping' : x.price + x.source.shipping,
+                })
+
+    return render(request, 'film-stock.html', {
+        'film' : films,
+    })
 
 
 @gzip_page

@@ -60,7 +60,7 @@
         {% endif %}
 
         <form action="" method="get">
-          {{ cameras.form|crispy }}
+          {{ films.form|crispy }}
           <div class="d-grid gap-2">
             <input class="btn btn-primary btn-sm" type="submit" value="Submit">
           </div>
@@ -93,30 +93,26 @@
         <table class="table">
 
           <thead>
-            <th scope="col" width="60%">Camera</th>
+            <th scope="col" width="60%">Film</th>
             <th scope="col">Price</th>
-            <th scope="col">Source</th>
-            <th scope="col">Added</th>
+            <th scope="col">Format</th>
+            <th scope="col">Type</th>
           </thead>
 
           <tbody>
 
-          {% for camera in page_obj %}
+          {% for film in films.qs %}
 
             <tr>
               <td>
-                <a class="link" href="{{ camera.url }}" target="_blank">{{ camera.name|truncatechars:70 }}</a>
-                {% now "Y-m-d" as today %}
-                {% if today == camera.createdAt|date:"Y-m-d" %}
-                &nbsp;<span class="badge bg-info text-dark">New</span>
-                {% endif %}
+                <a class="link" href="/film/{{ film.brand }}/{{ film.name }}/{{ film.format }}/">{{ film.brand }} {{  film.name  }}</a>
               </td>
-              <td>${{ camera.price }}</td>
-              <td class="text-break">
-                {{  camera.source.name }}
+              <td>${{ film.price }}</td>
+              <td>
+                {{ film.format }}
               </td>
               <td>
-                {{ camera.createdAt|date:'N j, Y' }}
+                {{ film.get_type_display }}
               </td>
             </tr>
 
@@ -171,7 +167,7 @@
         </nav>
 
         <p class="text-start">
-          {{ cameras.qs.count }} cameras in results ({{ total }} available)
+          {{ films.qs.count }} films in results ({{ total }} available)
           {% if request.GET.name is not None %}
           <br>
           Can't find anything? Try searching <a class="link" href="{{ reddit_url }}" target="_blank">Reddit</a> or <a class="link" href="{{ ebay_url }}" target="_blank">eBay</a>

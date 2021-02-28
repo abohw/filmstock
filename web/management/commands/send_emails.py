@@ -55,6 +55,33 @@ class Command(BaseCommand):
         for hunter in Hunter.objects.filter(is_subscribed=True):
 
             searches = hunter.searches.filter(is_subscribed=True)
+            follows = hunter.follows.filter(is_subscribed=True).filter(film__lowUpdatedOn__gt=lastRun)
+
+            if follows:
+
+                for follow in follows:
+
+                   html_message = loader.render_to_string(
+                       'emails/new-film.html',
+                       {
+                           'name': '%s %s' % (follow.film.brand, follow.film.name),
+                           'url': 'https://filmstock.app/film/%s/%s/%s/' % (follow.film.brand, follow.film.name, follow.film.format),
+                           'film': follow.film,
+                       }
+                   )
+
+                   mail.send_mail(
+                       'New low price: %s %s' % (follow.film.brand, follow.film.name),
+                       'Filmstock\n\nhttps://filmstock.app/film/%s/%s/%s/\n\nUnsubscribe from this alert: https://filmstock.app/users/users/settings' % (follow.film.brand, follow.film.name, follow.film.format),
+                       'Filmstock <alerts@mail.filmstock.app>',
+                       [hunter.email],
+                       fail_silently=True,
+                       connection=connection,
+                       html_message=html_message,
+                   )
+
+                   sent += 1
+                   print('film price drop for %s, email sent to %s' % (follow.film.name, hunter.email))
 
             if searches:
 
