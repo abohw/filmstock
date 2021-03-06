@@ -57,11 +57,11 @@
                 {{ stock.source }}
                 <br><small>
                   ({% if stock.shipping == 0.00 %}Free
-                  {% else %}${{ stock.shipping }}
+                  {% else %}${{ stock.shipping|floatformat:2 }}
                   {% endif %}delivery)</small>
               </td>
               <td class="align-middle">{{ stock.quantity }}</td>
-              <td class="align-middle">${{ stock.price }}<br><small>(${{ stock.per_unit }} per roll)</small></td>
+              <td class="align-middle">${{ stock.price|floatformat:2 }}<br><small>(${{ stock.per_unit|floatformat:2 }} per roll)</small></td>
               <td class="align-middle">
                 <a href="{{ stock.url }}" target="_blank" class="btn btn-primary" tabindex="-1" role="button">
                     Buy
