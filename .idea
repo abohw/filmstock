@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5c3df77e-43a1-4765-ae96-4eecbf32e678" name="Default Changelist" comment="wtf" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="ProjectId" id="1onHxYr4hjEqcpcJMK3VCZKtMQi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bellamy/spiders" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/templates/emails" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c3df77e-43a1-4765-ae96-4eecbf32e678" name="Default Changelist" comment="" />
+      <created>1613915681426</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613915681426</updated>
+      <workItem from="1613915683451" duration="442000" />
+      <workItem from="1613916134267" duration="119000" />
+      <workItem from="1613916268213" duration="20737000" />
+      <workItem from="1614444178666" duration="46612000" />
+      <workItem from="1615066700260" duration="527000" />
+      <workItem from="1615067230411" duration="157000" />
+      <workItem from="1615067401782" duration="504000" />
+    </task>
+    <task id="LOCAL-00001" summary="limit email task storage">
+      <created>1613924412926</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613924412926</updated>
+    </task>
+    <task id="LOCAL-00002" summary="oops, gotta sort">
+      <created>1613927979224</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1613927979224</updated>
+    </task>
+    <task id="LOCAL-00003" summary="crawl command">
+      <created>1613949722491</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1613949722491</updated>
+    </task>
+    <task id="LOCAL-00004" summary="film tracker dark launch">
+      <created>1614549303362</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1614549303362</updated>
+    </task>
+    <task id="LOCAL-00005" summary="hide film urls">
+      <created>1614549394715</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1614549394715</updated>
+    </task>
+    <task id="LOCAL-00006" summary="pycharm learning curve">
+      <created>1614549884563</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1614549884563</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixing a bug">
+      <created>1614550329321</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1614550329321</updated>
+    </task>
+    <task id="LOCAL-00008" summary="scrapy settings">
+      <created>1614552900263</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1614552900263</updated>
+    </task>
+    <task id="LOCAL-00009" summary="remove vscode crap">
+      <created>1615062962301</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1615062962301</updated>
+    </task>
+    <task id="LOCAL-00010" summary="oops">
+      <created>1615063541786</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1615063541786</updated>
+    </task>
+    <task id="LOCAL-00011" summary="nullable all time time">
+      <created>1615064262851</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1615064262851</updated>
+    </task>
+    <task id="LOCAL-00012" summary="nullable all time time">
+      <created>1615064295399</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1615064295399</updated>
+    </task>
+    <task id="LOCAL-00013" summary="ignore .idea">
+      <created>1615064531970</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1615064531970</updated>
+    </task>
+    <task id="LOCAL-00014" summary="re-sort film stock">
+      <created>1615065681085</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1615065681085</updated>
+    </task>
+    <task id="LOCAL-00015" summary="re-sort film stock">
+      <created>1615065929763</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1615065929764</updated>
+    </task>
+    <task id="LOCAL-00016" summary="wtf">
+      <created>1615066118729</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1615066118729</updated>
+    </task>
+    <task id="LOCAL-00017" summary="wtf">
+      <created>1615067593271</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1615067593271</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="limit email task storage" />
+    <MESSAGE value="oops, gotta sort" />
+    <MESSAGE value="crawl command" />
+    <MESSAGE value="film tracker dark launch" />
+    <MESSAGE value="hide film urls" />
+    <MESSAGE value="pycharm learning curve" />
+    <MESSAGE value="fixing a bug" />
+    <MESSAGE value="scrapy settings" />
+    <MESSAGE value="remove vscode crap" />
+    <MESSAGE value="oops" />
+    <MESSAGE value="nullable all time time" />
+    <MESSAGE value="ignore .idea" />
+    <MESSAGE value="re-sort film stock" />
+    <MESSAGE value="wtf" />
+    <option name="LAST_COMMIT_MESSAGE" value="wtf" />
+  </component>
+</project>
