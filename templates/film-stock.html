@@ -11,7 +11,9 @@
 
     {% include 'filmstock-intro.html' %}
 
-    <div class="container-lg justify-content-between" style="margin-top:25px;">
+        <div class="row justify-content-around">
+
+            <div class="col-md-6" style="margin-top:10px;">
 
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -61,8 +63,9 @@
                   {% endif %}delivery)</small>
               </td>
               <td class="align-middle">{{ stock.quantity }}</td>
-              <td class="align-middle">${{ stock.price|floatformat:2 }}<br><small>(${{ stock.per_unit|floatformat:2 }} per roll)</small></td>
-              <td class="align-middle">
+              <td class="align-middle">${{ stock.price|floatformat:2 }}
+                  {% if stock.quantity != 1 %}<br><small>(${{ stock.per_unit|floatformat:2 }} per roll)</small>{% endif %}</td>
+              <td class="align-middle text-end">
                 <a href="{{ stock.url }}" target="_blank" class="btn btn-primary" tabindex="-1" role="button">
                     Buy
                 </a>
