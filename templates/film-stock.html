@@ -55,7 +55,10 @@
             <tr>
               <td class="align-middle">
                 {{ stock.source }}
-                <br><small>(${{ stock.shipping }} delivery)</small>
+                <br><small>
+                  ({% if stock.shipping == 0.00 %}Free
+                  {% else %}${{ stock.shipping }}
+                  {% endif %}delivery)</small>
               </td>
               <td class="align-middle">{{ stock.quantity }}</td>
               <td class="align-middle">${{ stock.price }}<br><small>(${{ stock.per_unit }} per roll)</small></td>

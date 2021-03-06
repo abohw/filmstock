@@ -26,7 +26,7 @@ class Film(models.Model):
     format = models.CharField(max_length=10, choices=[('35mm', '35mm'), ('120', '120'), ('instant', 'Instant'), ('large', 'Large format'), ('110', '110')], db_index=True)
     type = models.CharField(max_length=10, choices=[('bw', 'Black & white'), ('cn', 'Color negative'), ('cp', 'Color positive')], db_index=True)
     exposures = models.IntegerField(db_index=True, choices=[(36, '36'), (24, '24')])
-    lowLast30d = models.DecimalField(decimal_places=2, max_digits=7, default=0.00, db_index=True)
+    lowLast30d = models.DecimalField(decimal_places=2, null=True, max_digits=7, default=0.00, db_index=True)
     lowUpdatedOn = models.DateTimeField(default=None, null=True, db_index=True)
     lowAllTime = models.DecimalField(decimal_places=2, null=True, max_digits=7, default=0.00, db_index=True)
 
