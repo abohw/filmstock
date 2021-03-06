@@ -3,21 +3,28 @@ from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
-from .models import Camera, CameraFilter, Film, FilmFilter
+from .models import Camera, CameraFilter, Film, FilmFilter, followedFilm
 from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
-from django.views.decorators.gzip import gzip_page
+from django.utils import timezone
+import pytz
 from django.views.generic.list import ListView
 from django.db.models import Min
 from django.core.paginator import Paginator
 
 def film(request):
 
-    f = FilmFilter(request.GET, queryset=Film.objects.annotate(price=Min('stock__price')))
+    film = Film.objects.filter(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).annotate(price=Min('stock__price')).order_by('price')
+    f = FilmFilter(request.GET, queryset=film)
+
+    paginator = Paginator(f.qs, 25)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
     return render(request, 'film.html', {
         'films' : f,
+        'page_obj' : page_obj,
+        'total' : Film.objects.filter(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).count()
     })
 
 def filmStock(request, brand='', name='', format=''):
@@ -38,23 +45,27 @@ def filmStock(request, brand='', name='', format=''):
     films = []
 
     if film.stock.count() != 0:
-        for x in film.stock.all().order_by('-price'):
+        for x in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).order_by('-price'):
 
                 films.append({
-                    'name' : x.name,
                     'url' : x.url,
-                    'source' : x.source.short_name,
+                    'source' : x.source.name,
                     'price' : x.price,
-                    'per_unit' : x.price / x.quantity,
-                    'with_shipping' : x.price + x.source.shipping,
+                    'per_unit' : x.price/x.quantity,
+                    'quantity' : x.quantity,
+                    'shipping' : x.source.shipping,
                 })
 
+    paginator = Paginator(films, 25)
+    page_obj = paginator.get_page(request.GET.get('page'))
+
     return render(request, 'film-stock.html', {
-        'film' : films,
+        'film' : film,
+        'page_obj' : page_obj,
+        'stocks' : films,
     })
 
 
-@gzip_page
 def cameras(request):
 
     f = CameraFilter(request.GET, queryset=Camera.objects.all())
@@ -84,6 +95,36 @@ def cameras(request):
         'reddit_url' : reddit_url,
         'ebay_url' : ebay_url,
         })
+
+
+@login_required
+def untrackFilm(request, id):
+
+    try:
+        followedFilm.objects.get(film__id__exact=id, hunter=request.user).delete()
+        return HttpResponseRedirect(reverse_lazy('settings'))
+
+    except:
+        raise Http404
+
+
+@login_required
+def trackFilm(request, id):
+
+    try:
+        film = Film.objects.get(id__exact=id)
+
+        newTrack = followedFilm(
+            hunter=request.user,
+            film=film,
+            is_subscribed=True,
+        )
+        newTrack.save()
+
+        return HttpResponseRedirect(reverse_lazy('film'))
+
+    except:
+        raise Http404
 
 
 @login_required
@@ -147,17 +188,17 @@ def unsubscribeSearch(request, id):
 @login_required
 def unsubscribeHunter(request):
 
-    try:
-        searches = request.user.searches.all()
+    searches = request.user.searches.all()
+    follows = request.user.follows.all()
 
-        for search in searches:
-            search.is_subscribed = False
-            search.save()
+    for search in searches:
+        search.is_subscribed = False
+        search.save()
 
-        return HttpResponseRedirect(reverse_lazy('settings'))
+    for follow in follows:
+        follow.delete()
 
-    except:
-        raise Http404
+    return HttpResponseRedirect(reverse_lazy('settings'))
 
 
 @login_required

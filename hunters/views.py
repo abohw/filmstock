@@ -54,7 +54,10 @@ def newUser(request):
 @login_required
 def userSettings(request):
 
-    return render(request, 'settings.html', { 'searches' : request.user.searches.all(), })
+    return render(request, 'settings.html', {
+        'searches' : request.user.searches.all(),
+        'follows' : request.user.follows.all(),
+    })
 
 
 @login_required

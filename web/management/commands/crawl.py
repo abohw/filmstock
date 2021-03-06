@@ -12,6 +12,9 @@ class Command(BaseCommand):
           process.crawl('acfilm')
           process.crawl('fpp')
           process.crawl('retrospekt')
+          process.crawl('brooklyn-film')
+          process.crawl('precision-film')
+          process.crawl('bhfilm')
 
         # camera crawlers
           process.crawl('brooklyn')

@@ -1,0 +1,31 @@
+    {% load static %}
+    {% if user.is_authenticated == False %}
+    <div class="container-lg" style="margin-top: 10px; margin-bottom: 10px; background-color: #dfe4ea; padding: 25px;">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-auto me-auto">
+
+          <h1>Welcome to Filmstock.</h1>
+
+          <p></p>
+
+          <p>Filmstock checks the inventory of <b>vintage film cameras</b> from around the US.</p>
+
+          <p>Find the elusive camera you've been longing after:
+            <ul>
+              <li>Create and save customized searches</li>
+              <li>Check current inventory</li>
+              <li>Be alerted as soon as new cameras are stocked</li>
+              </ul>
+              </p>
+
+          <p>Filmstock is currently in public beta. Learn more in our <a class="link" href="{% url 'help' %}">FAQ</a>.</p>
+
+          <p>To get started, <a class="link" href="{% url 'signup' %}">create an account</a> or start your search below.</p>
+
+        </div>
+        <div class="col-auto">
+          <img src="{% static 'img/home.png' %}" loading="lazy" class="img-fluid mx-auto d-block" alt="Filmstock" style="max-height: 250px">
+        </div>
+      </div>
+    </div>
+    {% endif %}

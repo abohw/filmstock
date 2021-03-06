@@ -55,7 +55,7 @@ class Command(BaseCommand):
         for hunter in Hunter.objects.filter(is_subscribed=True):
 
             searches = hunter.searches.filter(is_subscribed=True)
-            follows = hunter.follows.filter(is_subscribed=True).filter(film__lowUpdatedOn__gt=lastRun)
+            follows = hunter.follows.filter(is_subscribed=True).filter(film__lastSeen__gt=lastRun).filter(film__lowUpdatedOn__gt=lastRun)
 
             if follows:
 

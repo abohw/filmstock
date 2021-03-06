@@ -9,107 +9,61 @@
     {% load query_parameters %}
     {% del_query_parameters page as=clean_filters %}
 
-    {% if user.is_authenticated == False %}
-    <div class="container-lg" style="margin-top: 10px; margin-bottom: 10px; background-color: #dfe4ea; padding: 25px;">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-auto me-auto">
+    {% include 'filmstock-intro.html' %}
 
-          <h1>Welcome to Filmstock.</h1>
+    <div class="container-lg justify-content-between" style="margin-top:25px;">
 
-          <p></p>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/film/" class="link">Film</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ film.brand }} {{ film.name }} ({{ film.format }})</li>
+          </ol>
+        </nav>
 
-          <p>Filmstock checks the inventory of <b>vintage film cameras</b> from around the US.</p>
 
-          <p>Find the elusive camera you've been longing after:
-            <ul>
-              <li>Create and save customized searches</li>
-              <li>Check current inventory</li>
-              <li>Be alerted as soon as new cameras are stocked</li>
-              </ul>
-              </p>
-
-          <p>Filmstock is currently in public beta. Learn more in our <a class="link" href="{% url 'help' %}">FAQ</a>.</p>
-
-          <p>To get started, <a class="link" href="{% url 'signup' %}">create an account</a> or start your search below.</p>
-
-        </div>
-        <div class="col-auto">
-          <img src="{% static 'img/home.png' %}" loading="lazy" class="img-fluid mx-auto d-block" alt="Filmstock" style="max-height: 250px">
-        </div>
-      </div>
-    </div>
+       {% if user.is_authenticated %}
+        {% if film.follows.hunter == user %}
+        <a href="#" class="btn btn-primary disabled" tabindex="-1" role="button">
+            Tracking
+        </a>
+        {% else %}
+        <a href="/film/track/{{ film.id }}" class="btn btn-primary" tabindex="-1" role="button">
+            Track
+        </a>
+        {% endif %}
+    {% else %}
+    <a href="{% url 'signup' %}?from=savesearch" class="btn btn-primary" tabindex="-1" role="button">
+        Track
+    </a>
     {% endif %}
 
-    <div class="row justify-content-between">
-
-      <div class="col-md-2 ms-auto" style="margin-top:10px;">
-
-        {% if user.is_authenticated and user.searches.all %}
-          <div class="dropdown">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Saved searches
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {% for search in user.searches.all %}
-              <li><a class="dropdown-item" href="/?{{ search.url }}">{{ search.name|truncatechars:25 }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-
-          <p></p>
-        {% endif %}
-
-        <form action="" method="get">
-
-          <div class="d-grid gap-2">
-            <input class="btn btn-primary btn-sm" type="submit" value="Submit">
-          </div>
-        </form>
-
-        {% if user.is_authenticated %}
-
-        <p></p>
-
-        <div class="d-grid gap-2">
-          <a class="btn btn-secondary btn-sm" href="{% if clean_filters %}{% url 'save-search' %}?{{ clean_filters }}{% endif %}" role="button">Save this search</a>
-        </div>
-
-        {% else %}
-
-        <p></p>
-
-        <div class="d-grid gap-2">
-          <a class="btn btn-secondary btn-sm" href="{% url 'signup' %}?from=savesearch" role="button">Save this search</a>
-        </div>
-
-        {% endif %}
-
-      </div>
-
-      <div class="col-md-10">
-
-        <div class="table-responsive">
+        <div class="table-responsive" style="margin-top:25px;">
 
         <table class="table">
 
           <thead>
-            <th scope="col" width="60%">Film</th>
-            <th scope="col">Source</th>
+            <th scope="col" width="60%">Source</th>
+            <th scope="col">Quantity</th>
             <th scope="col">Price</th>
-            <th scope="col">Price per roll</th>
+            <th scope="col"></th>
           </thead>
 
           <tbody>
 
-          {% for stock in film %}
+          {% for stock in stocks %}
 
             <tr>
-              <td>
-                <a class="link" href="{{ stock.url }}" target="_blank">{{ stock.name }}</a>
+              <td class="align-middle">
+                {{ stock.source }}
+                <br><small>(${{ stock.shipping }} delivery)</small>
               </td>
-              <td>{{ stock.source }}</td>
-              <td>${{ stock.price }} (${{ price.with_shipping }})</td>
-              <td>${{ stock.per_unit }}</td>
+              <td class="align-middle">{{ stock.quantity }}</td>
+              <td class="align-middle">${{ stock.price }}<br><small>(${{ stock.per_unit }} per roll)</small></td>
+              <td class="align-middle">
+                <a href="{{ stock.url }}" target="_blank" class="btn btn-primary" tabindex="-1" role="button">
+                    Buy
+                </a>
+              </td>
             </tr>
 
           {% endfor %}
@@ -164,7 +118,6 @@
 
 
     </div>
-
-  </div>
+    </div>
 
 {% endblock %}

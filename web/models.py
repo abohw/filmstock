@@ -58,12 +58,14 @@ class FilmFilter(django_filters.FilterSet):
     format = django_filters.MultipleChoiceFilter(choices=(
         ('35mm', '35mm'),
         ('120', 'Medium'),
-        ('large', 'Large'),
+        ('instant', 'Instant'),
     ))
 
     brand = django_filters.MultipleChoiceFilter(choices=(
-        ('kodak', 'Kodak'),
-        ('fujifilm', 'Fujifilm'),
+        ('Kodak', 'Kodak'),
+        ('Fujifilm', 'Fujifilm'),
+        ('Ilford', 'Ilford'),
+        ('Polaroid', 'Polaroid'),
     ))
 
     type = django_filters.MultipleChoiceFilter(choices=(
@@ -104,7 +106,6 @@ class CameraFilter(django_filters.FilterSet):
         ('brooklyn', 'Brooklyn Film Camera'),
         ('austin_camera', 'Austin Camera'),
         ('keh', 'KEH Camera'),
-        ('etsy', 'Etsy'),
     ))
 
     sort = django_filters.OrderingFilter(

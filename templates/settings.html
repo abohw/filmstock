@@ -42,12 +42,43 @@
 
         </table>
 
-        <p><a href="/users/unsubscribe" class="link">Unsubscribe from all emails</a></p>
-
         {% else %}
 
           <p>You have no saved searches.</p>
 
+        {% endif %}
+
+        <h3 style="margin-top: 25px;">Followed films</h3>
+
+        <p></p>
+
+        {% if follows %}
+
+        <table class="table table-sm table-borderless" style="max-width: 500px;">
+
+          {% for follow in follows %}
+
+          <tr>
+            <td>
+              <b>{{ follow.film.brand }} {{ follow.film.name }}</b>
+            </td>
+            <td>
+              <a class="link" href="/film/untrack/{{ follow.film.id }}">Unfollow</a>
+            </td>
+          </tr>
+
+          {% endfor %}
+
+        </table>
+
+        {% else %}
+
+          <p>You have no followed films.</p>
+
+        {% endif %}
+
+        {% if follows or searches %}
+        <p><a href="/users/unsubscribe" class="link">Unsubscribe from all emails</a></p>
         {% endif %}
 
         <h3 style="margin-top: 25px;">Account settings</h3>
