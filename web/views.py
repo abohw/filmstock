@@ -45,7 +45,7 @@ def filmStock(request, brand='', name='', format=''):
     films = []
 
     if film.stock.count() != 0:
-        for x in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).order_by('-price'):
+        for x in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).order_by('price'):
 
                 films.append({
                     'url' : x.url,

@@ -28,7 +28,7 @@ class Film(models.Model):
     exposures = models.IntegerField(db_index=True, choices=[(36, '36'), (24, '24')])
     lowLast30d = models.DecimalField(decimal_places=2, max_digits=7, default=0.00, db_index=True)
     lowUpdatedOn = models.DateTimeField(default=None, null=True, db_index=True)
-    lowAllTime = models.DecimalField(decimal_places=2, max_digits=7, default=0.00, db_index=True)
+    lowAllTime = models.DecimalField(decimal_places=2, null=True, max_digits=7, default=0.00, db_index=True)
 
     def __str__(self):
         return '%s %s (%s exp., %s)' % (self.brand, self.name, self.exposures, self.format)
