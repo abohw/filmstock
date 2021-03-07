@@ -18,7 +18,7 @@ def film(request):
     film = Film.objects.filter(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).annotate(price=Min('stock__price')).order_by('price')
     f = FilmFilter(request.GET, queryset=film)
 
-    paginator = Paginator(f.qs, 25)
+    paginator = Paginator(f.qs, 10)
     page_obj = paginator.get_page(request.GET.get('page'))
 
     return render(request, 'film.html', {
@@ -44,7 +44,7 @@ def filmStock(request, id):
                 'shipping' : x.source.shipping,
             })
 
-    paginator = Paginator(films, 25)
+    paginator = Paginator(films, 10)
     page_obj = paginator.get_page(request.GET.get('page'))
 
     return render(request, 'film-stock.html', {
