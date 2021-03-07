@@ -52,7 +52,6 @@ class filmStock(models.Model):
 
 
 class FilmFilter(django_filters.FilterSet):
-    price = django_filters.RangeFilter(label='Price is between:')
     name = django_filters.CharFilter(label='Film name contains:', lookup_expr='icontains')
 
     format = django_filters.MultipleChoiceFilter(choices=(
@@ -75,9 +74,20 @@ class FilmFilter(django_filters.FilterSet):
         ('cp', 'Color positive'),
     ))
 
+    sort = django_filters.OrderingFilter(
+        label='Sort by:',
+        empty_label='Price (Low to High)',
+        choices=(
+            ('type', 'Film type'),
+            ('format', 'Film format'),
+            ('iso', 'ISO (Low to High)'),
+            ('-iso', 'ISO (High to Low)'),
+        ),
+    )
+
     class Meta:
         model = Film
-        fields = ['name', 'price', 'brand', 'format', 'type', ]
+        fields = ['name', 'brand', 'format', 'type', ]
 
 
 class Camera(models.Model):

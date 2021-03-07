@@ -49,7 +49,7 @@
                 &nbsp;<span class="badge bg-info text-dark">Price Drop</span>
                 {% endif %}
                 <br>
-                <small>{{ film.format }} · {{ film.get_type_display }}
+                <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %} · {{ film.get_type_display }}
               </td>
               <td class="align-middle">${{ film.price }}</td>
               <td class="align-middle text-end">
