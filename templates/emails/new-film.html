@@ -5,9 +5,9 @@
     <body bgcolor="#fdfdfd" style="font-family: 'Helvetica Neue','Helvetica',sans-serif; font-size: 16px;">
         <h1 style="color: #2C3A47; letter-spacing: 1.05px;">Filmstock</h1>
         <p></p>
-        <p>Your followed film {{ film.brand }} {{ film.name }} has a new low price.</p>
+        <p>Your followed film {{ name }} has a new low price.</p>
         <p></p>
-        <p><a href="https://filmstock.app/film/{{ film.brand }}/{{ film.name }}/{{ film.format }}/">${{ film.lowLast30d }}</a></p>
+        <p><a href="{{ url }}">${{ price }}</a></p>
         <p></p>
         <p style="font-size: 12px; color: #7f8c8d;">If you're no longer enjoying these emails, you can disable this alert in your <a href="https://filmstock.app{% url 'settings' %}">Settings</a>.</p>
         <p></p>

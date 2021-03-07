@@ -55,7 +55,7 @@ class Command(BaseCommand):
         for hunter in Hunter.objects.filter(is_subscribed=True):
 
             searches = hunter.searches.filter(is_subscribed=True)
-            follows = hunter.follows.filter(is_subscribed=True).filter(film__stock__lastSeen__gt=lastRun).filter(film__lowUpdatedOn__gt=lastRun)
+            follows = hunter.follows.filter(is_subscribed=True).filter(film__lowUpdatedOn__gt=lastRun)
 
             if follows:
 
@@ -65,14 +65,14 @@ class Command(BaseCommand):
                        'emails/new-film.html',
                        {
                            'name': '%s %s' % (follow.film.brand, follow.film.name),
-                           'url': 'https://filmstock.app/film/%s/%s/%s/' % (follow.film.brand, follow.film.name, follow.film.format),
-                           'film': follow.film,
+                           'url': 'https://filmstock.app/film/%s/' % (follow.film.id),
+                           'price': follow.film.lowLast30d,
                        }
                    )
 
                    mail.send_mail(
                        'New low price: %s %s' % (follow.film.brand, follow.film.name),
-                       'Filmstock\n\nhttps://filmstock.app/film/%s/%s/%s/\n\nUnsubscribe from this alert: https://filmstock.app/users/users/settings' % (follow.film.brand, follow.film.name, follow.film.format),
+                       'Filmstock\n\nhttps://filmstock.app/film/%s/\n\nUnsubscribe from this alert: https://filmstock.app/users/users/settings' % (follow.film.id),
                        'Filmstock <alerts@mail.filmstock.app>',
                        [hunter.email],
                        fail_silently=True,

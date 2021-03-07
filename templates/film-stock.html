@@ -57,6 +57,9 @@
             <tr>
               <td class="align-middle">
                 {{ stock.source }}
+                {% if stock.per_unit < film.price %}
+                &nbsp;<span class="badge bg-info text-dark">Best Value</span>
+                {% endif %}
                 <br><small>
                   ({% if stock.shipping == 0.00 %}Free
                   {% else %}${{ stock.shipping|floatformat:2 }}

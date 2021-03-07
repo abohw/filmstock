@@ -65,6 +65,7 @@ class FilmFilter(django_filters.FilterSet):
         ('Kodak', 'Kodak'),
         ('Fujifilm', 'Fujifilm'),
         ('Ilford', 'Ilford'),
+        ('Cinestill', 'Cinestill'),
         ('Polaroid', 'Polaroid'),
     ))
 

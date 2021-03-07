@@ -27,20 +27,9 @@ def film(request):
         'total' : Film.objects.filter(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).count()
     })
 
-def filmStock(request, brand='', name='', format=''):
+def filmStock(request, id):
 
-    film = Film.objects.all()
-
-    if brand != '':
-        film = film.filter(brand__iexact=brand)
-
-    if name != '':
-        film = film.filter(name__iexact=name.replace('+',' '))
-
-    if format != '':
-        film = film.filter(format__iexact=format)
-
-    film = film[0]
+    film = Film.objects.annotate(price=Min('stock__price')).get(id__exact=id)
 
     films = []
 
