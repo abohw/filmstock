@@ -24,7 +24,7 @@ def film(request):
     return render(request, 'film.html', {
         'films' : f,
         'page_obj' : page_obj,
-        'total' : Film.objects.filter(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).count()
+        'total' : Film.objects.count(),
     })
 
 def filmStock(request, id):
