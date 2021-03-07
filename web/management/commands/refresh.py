@@ -10,18 +10,20 @@ class Command(BaseCommand):
 
     def refreshFilm(self):
 
-        for film in Film.objects.annotate(lowest=Min('stock__price')):
+        for film in Film.objects.all():
 
-            if film.lowest is not None and (film.lowest < film.lowLast30d or film.lowLast30d == 0.00 or film.lowUpdatedOn < (timezone.now() - timezone.timedelta(days=30))):
-                film.lowLast30d = film.lowest
-                film.lowUpdatedOn = timezone.now()
-                print('new low price for %s' % (film.name))
+            for stock in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))):
 
-                if film.lowest < film.lowAllTime or film.lowAllTime == 0.00:
-                    film.lowAllTime = film.lowest
+                if stock.price < film.lowLast30d or film.lowLast30d == 0.00:
+                    film.lowLast30d = stock.price
+                    film.lowUpdatedOn = timezone.now()
+                    print('new low price for %s' % (film.name))
+
+                if stock.price < film.lowAllTime or film.lowAllTime == 0.00:
+                    film.lowAllTime = stock.price
                     print('new all time low price for %s' % (film.name))
 
-                film.save()
+            film.save()
 
     def handle(self, *args, **options):
 

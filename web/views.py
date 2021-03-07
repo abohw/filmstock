@@ -33,17 +33,16 @@ def filmStock(request, id):
 
     films = []
 
-    if film.stock.count() != 0:
-        for x in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).order_by('price'):
+    for x in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).order_by('price'):
 
-                films.append({
-                    'url' : x.url,
-                    'source' : x.source.name,
-                    'price' : x.price,
-                    'per_unit' : x.price/x.quantity,
-                    'quantity' : x.quantity,
-                    'shipping' : x.source.shipping,
-                })
+            films.append({
+                'url' : x.url,
+                'source' : x.source.name,
+                'price' : x.price,
+                'per_unit' : x.price/x.quantity,
+                'quantity' : x.quantity,
+                'shipping' : x.source.shipping,
+            })
 
     paginator = Paginator(films, 25)
     page_obj = paginator.get_page(request.GET.get('page'))
