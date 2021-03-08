@@ -53,9 +53,15 @@
               </td>
               <td class="align-middle">${{ film.price }}</td>
               <td class="align-middle text-end">
+                {% if film.stock.count == 0 %}
+                <a href="#" class="btn btn-secondary btn-sm disabled" tabindex="-1" role="button">
+                    Out of stock
+                </a>
+                {% else %}
                 <a href="/film/{{ film.id }}/" class="btn btn-secondary btn-sm" tabindex="-1" role="button">
                     View stock
                 </a>
+                {% endif %}
               </td>
               <td class="align-middle text-end">
                 {% if user.is_authenticated %}
