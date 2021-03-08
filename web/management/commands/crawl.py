@@ -15,6 +15,7 @@ class Command(BaseCommand):
           process.crawl('brooklyn-film')
           process.crawl('precision-film')
           process.crawl('bhfilm')
+          process.crawl('freestyle')
 
         # camera crawlers
           process.crawl('brooklyn')

@@ -44,12 +44,8 @@ def filmStock(request, id):
                 'shipping' : x.source.shipping,
             })
 
-    paginator = Paginator(films, 10)
-    page_obj = paginator.get_page(request.GET.get('page'))
-
     return render(request, 'film-stock.html', {
         'film' : film,
-        'page_obj' : page_obj,
         'stocks' : films,
     })
 
