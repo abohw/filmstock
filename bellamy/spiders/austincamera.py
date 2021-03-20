@@ -1,10 +1,16 @@
 import scrapy
+from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 class austinCameraSpider(scrapy.Spider):
 
     name = 'austin_camera'
     start_urls = ['https://austincamera.com/collections/film-cameras',]
+
+    def start_requests(self):
+
+        for url in self.start_urls:
+            yield SeleniumRequest(url=url, callback=self.parse)
 
     def parse(self, response):
         for camera in response.css('div.product-card'):
@@ -27,4 +33,4 @@ class austinCameraSpider(scrapy.Spider):
             except:
                 nextUrl = response.urljoin(next_page[0])
 
-            yield scrapy.Request(nextUrl, callback=self.parse)
+            yield SeleniumRequest(url=nextUrl, callback=self.parse)

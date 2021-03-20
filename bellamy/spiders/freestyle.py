@@ -1,4 +1,5 @@
 import scrapy
+from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 page = 1
@@ -7,6 +8,11 @@ class freestyleFilmSpider(scrapy.Spider):
 
     name = 'freestyle'
     start_urls = ['https://www.freestylephoto.biz/category/1-Film?max=96',]
+
+    def start_requests(self):
+
+        for url in self.start_urls:
+            yield SeleniumRequest(url=url, callback=self.parse)
 
     def parse(self, response):
         for camera in response.css('div.product-grid-top'):
@@ -30,4 +36,4 @@ class freestyleFilmSpider(scrapy.Spider):
             nextUrl = response.urljoin(next_page[page-1])
             page += 1
 
-            yield scrapy.Request(nextUrl, callback=self.parse)
+            yield SeleniumRequest(url=nextUrl, callback=self.parse)

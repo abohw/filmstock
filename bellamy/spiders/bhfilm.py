@@ -1,4 +1,5 @@
 import scrapy
+from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 class bhCameraFilmSpider(scrapy.Spider):
@@ -10,6 +11,11 @@ class bhCameraFilmSpider(scrapy.Spider):
      'https://www.bhphotovideo.com/c/buy/120-film/ci/39570?filters=fct_a_filter_by%3A03_INSTOCK',
      'https://www.bhphotovideo.com/c/buy/Sheet-Film/ci/335/N/4093113314?filters=fct_a_filter_by%3A03_INSTOCK',
      'https://www.bhphotovideo.com/c/buy/other-film-formats/ci/39571?filters=fct_a_filter_by%3A03_INSTOCK',]
+
+    def start_requests(self):
+
+        for url in self.start_urls:
+            yield SeleniumRequest(url=url, callback=self.parse)
 
     def parse(self, response):
         for camera in response.css('div[class*=productInner]'):
@@ -26,4 +32,4 @@ class bhCameraFilmSpider(scrapy.Spider):
 
         if next_page is not None:
             nextUrl = response.urljoin(next_page)
-            yield scrapy.Request(nextUrl, callback=self.parse)
+            yield SeleniumRequest(url=nextUrl, callback=self.parse)
