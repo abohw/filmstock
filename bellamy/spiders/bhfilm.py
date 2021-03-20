@@ -15,7 +15,7 @@ class bhCameraFilmSpider(scrapy.Spider):
     def start_requests(self):
 
         for url in self.start_urls:
-            yield SeleniumRequest(url=url, callback=self.parse)
+            yield SeleniumRequest(url=url, callback=self.parse, script="Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
     def parse(self, response):
         for camera in response.css('div[class*=productInner]'):
