@@ -67,6 +67,7 @@ from shutil import which
 
 SELENIUM_DRIVER_NAME = 'chrome'
 SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
+SELENIUM_BROWSER_EXECUTABLE_PATH = os.environ.get("GOOGLE_CHROME_BIN", "chromedriver")
 SELENIUM_DRIVER_ARGUMENTS=[
     '--headless',
     '--disable-gpu',
