@@ -72,6 +72,7 @@ SELENIUM_DRIVER_ARGUMENTS=[
     '-disable-gpu',
     '-no-sandbox',
     '-disable-dev-shm-usage',
+    '-remote-debugging-port=9222',
 ]
 
 # Enable or disable downloader middlewares
