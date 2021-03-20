@@ -68,10 +68,10 @@ from shutil import which
 SELENIUM_DRIVER_NAME = 'chrome'
 SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
 SELENIUM_DRIVER_ARGUMENTS=[
-    '-headless',
-    '-disable-gpu',
-    '-no-sandbox',
-    '-disable-dev-shm-usage',
+    '--headless',
+    '--disable-gpu',
+    '--no-sandbox',
+    '--disable-dev-shm-usage',
 ]
 
 # Enable or disable downloader middlewares
