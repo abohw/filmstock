@@ -71,6 +71,7 @@ SELENIUM_DRIVER_ARGUMENTS=[
     '-headless',
     '-disable-gpu',
     '-no-sandbox',
+    '-disable-dev-shm-usage',
 ]
 
 # Enable or disable downloader middlewares
