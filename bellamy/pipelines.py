@@ -3,23 +3,11 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
-
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 from web.models import Camera, filmStock, Source
 from django.utils import timezone
 import pytz
-
-#def clean_price(param, locale):
-#
-#    if locale == 'jp':
-#
-#        price = param.strip().replace('¥', '').replace(',','')
-#        price = round(int(price) * 0.0096, 2)
-#
-#        return price
-#
-#    else: return param.strip().replace('$', '').replace(',','')
 
 def clean_price(param):
     return param.strip().replace('$', '').replace(',','')
@@ -36,10 +24,6 @@ class BellamyPipeline:
             source = Source.objects.create(short_name=item['source'])
 
         if item['type'] == 'camera':
-
-    #        if item['source'] == 'fct':
-    #            locale = 'jp'
-    #        else: locale = 'us'
 
             if Camera.objects.filter(url__exact=url).count() == 0:
 

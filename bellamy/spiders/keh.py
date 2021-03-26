@@ -1,16 +1,10 @@
 import scrapy
-from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 class kehCameraSpider(scrapy.Spider):
 
     name = 'keh'
     start_urls = ['https://www.keh.com/shop/cameras/film-cameras.html?stock=1',]
-
-    def start_requests(self):
-
-        for url in self.start_urls:
-            yield SeleniumRequest(url=url, callback=self.parse)
 
     def parse(self, response):
         for camera in response.css('li.product-item'):
@@ -31,4 +25,4 @@ class kehCameraSpider(scrapy.Spider):
         next_page = response.css('a[id=load-more-product-link]::attr(href)').get()
 
         if next_page is not None:
-            yield SeleniumRequest(url=response.urljoin(next_page), callback=self.parse)
+            yield scrapy.Request(response.urljoin(next_page), callback=self.parse)

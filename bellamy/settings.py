@@ -63,23 +63,11 @@ DOWNLOAD_DELAY = 3
 #    'hunter.middlewares.HunterSpiderMiddleware': 543,
 #}
 
-from shutil import which
-
-SELENIUM_DRIVER_NAME = 'chrome'
-SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
-SELENIUM_BROWSER_EXECUTABLE_PATH = os.environ.get("GOOGLE_CHROME_BIN", "chromedriver")
-SELENIUM_DRIVER_ARGUMENTS=[
-    '--headless',
-    '--disable-gpu',
-    '--no-sandbox',
-    '--disable-dev-shm-usage',
-]
-
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_selenium.SeleniumMiddleware': 800,
-}
+#DOWNLOADER_MIDDLEWARES = {
+#    'scrapy_selenium.SeleniumMiddleware': 800,
+#}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html

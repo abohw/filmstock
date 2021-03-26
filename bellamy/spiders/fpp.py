@@ -1,5 +1,4 @@
 import scrapy
-from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 class fppFilmSpider(scrapy.Spider):
@@ -9,11 +8,6 @@ class fppFilmSpider(scrapy.Spider):
     'http://filmphotographystore.com/collections/all/120-film',
     'http://filmphotographystore.com/collections/all/35mm-film',
     ]
-
-    def start_requests(self):
-
-        for url in self.start_urls:
-            yield SeleniumRequest(url=url, callback=self.parse)
 
     def parse(self, response):
         for camera in response.css('a.product-grid-item'):
@@ -35,4 +29,4 @@ class fppFilmSpider(scrapy.Spider):
             except:
                 nextUrl = response.urljoin(next_page[0])
 
-            yield SeleniumRequest(url=nextUrl, callback=self.parse)
+            yield scrapy.Request(nextUrl, callback=self.parse)
