@@ -1,5 +1,4 @@
 import scrapy
-from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 class brooklynFilmCameraFilmSpider(scrapy.Spider):
