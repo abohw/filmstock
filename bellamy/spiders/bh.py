@@ -1,5 +1,4 @@
 import scrapy
-from scrapy_selenium import SeleniumRequest
 # from hunter.items import CameraItem
 
 class bhCameraSpider(scrapy.Spider):
@@ -10,16 +9,12 @@ class bhCameraSpider(scrapy.Spider):
      'https://www.bhphotovideo.com/c/buy/35mm-Cameras/ci/3017/N/3607616145',
      'https://www.bhphotovideo.com/c/buy/General/ci/3147/N/3755784780',]
 
-    def start_requests(self):
-        for url in self.start_urls:
-            yield SeleniumRequest(url=url, callback=self.parse, script="Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-
     def parse(self, response):
         for camera in response.css('div[class*=productInner]'):
             yield {
             'name': camera.css('span[data-selenium=miniProductPageProductName]::text').get(),
             'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
-            'price': camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(),
+            'price': '%s.%s' % (camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(), camera.css('sup[data-selenium=uppedDecimalPriceSecond]::text').get()),
             'source': 'bh',
             'store': '',
             'type': 'camera',
