@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
     <meta property="og:title" content="Filmstock">
-    <meta property="og:description" content="A vintage camera hunting app.">
+    <meta property="og:description" content="A vintage camera and film hunting app.">
     <meta property="og:image" content="{% static 'img/home-og.png' %}">
     <meta property="og:url" content="https://filmstock.app/">
 
@@ -66,19 +66,15 @@
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fdfdfd;">
       <div class="container-fluid align-items-center">
         <a class="navbar-brand" href="/" style="color: #2C3A47; letter-spacing: 1.05px;"><i class="fas fa-camera-retro"></i> <strong>Filmstock</strong></a>
-        <!--
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="/" style="color: #535c68; font-size: 18px;">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href=" " style="color: #535c68; font-size: 18px;">Cameras</a>
-            </li>
-          </ul> -->
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item">
+           <a class="nav-link" href="/cameras">Cameras</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="/film">Film</a>
+         </li>
+        </ul>
 
           {% if user.is_authenticated %}
           <ul class="navbar-nav d-flex">
