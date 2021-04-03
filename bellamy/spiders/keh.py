@@ -9,7 +9,7 @@ class kehCameraSpider(scrapy.Spider):
     def parse(self, response):
         for camera in response.css('li.product-item'):
 
-            if camera.css('div.unavailable') is not None:
+            if camera.css('div.unavailable') is None:
 
                 price = camera.css('span.price::text').get()
 
