@@ -11,9 +11,9 @@
 
     {% include 'filmstock-intro.html' %}
 
-    <div class="row justify-content-around">
+    <div class="row justify-content-between">
 
-      <div class="col-md-3" style="margin-top:10px;">
+      <div class="col-md-2 ms-auto" style="margin-top:10px;">
 
         <form action="" method="get">
           {{ films.form|crispy }}
@@ -24,49 +24,36 @@
 
       </div>
 
-      <div class="col-md-7">
+      <div class="col-md-10">
 
-        <div class="table-responsive">
+        <div class="table">
 
-        <table class="table">
+          <div class="row row-cols-1 row-cols-md-4 justify-content-between align-items-center">
 
-          <thead>
-            <th scope="col">Film</th>
-            <th scope="col"> </th>
-            <th scope="col">Price</th>
-            <th scope="col" width="15%"></th>
-            <th scope="col" width="15%"></th>
-          </thead>
+            {% for film in page_obj %}
+            <div class="col" style="padding: 25px;">
 
-          <tbody>
+                <div class="border border-1 rounded border-secondary" style="padding: 25px;">
 
-          {% for film in page_obj %}
-
-            <tr>
-              <td class="align-middle">
                 <a class="link" href="/film/{{ film.id }}/">{{ film.brand }} {{ film.name }}</a>
+
                 {% now "Y-m-d" as today %}
                 {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
                 &nbsp;<span class="badge bg-info text-dark">Price Drop</span>
                 {% endif %}
-              </td>
-              <td class="align-middle">
-                <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %} · {{ film.get_type_display }}
-              </td>
-              <td class="align-middle">${{ film.price }}</td>
-              <td class="align-middle text-end">
-                {% if film.stock.count == 0 %}
-                <a href="#" class="btn btn-secondary btn-sm disabled" tabindex="-1" role="button">
-                    Out of stock
-                </a>
-                {% else %}
-                <a href="/film/{{ film.id }}/" class="btn btn-secondary btn-sm" tabindex="-1" role="button">
-                    View stock
-                </a>
-                {% endif %}
-              </td>
-              <td class="align-middle text-end">
-                {% if user.is_authenticated %}
+
+                <br>
+
+                <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %}
+                    <br>{{ film.get_type_display }}</small>
+
+                <br><br>
+
+                <strong>${{ film.price }}</strong>
+
+                <br><br>
+
+                 {% if user.is_authenticated %}
                     {% if film.follows.hunter == user %}
                     <a href="#" class="btn btn-primary btn-sm disabled" tabindex="-1" role="button">
                         Tracked
@@ -81,13 +68,22 @@
                     &nbsp; Track &nbsp;
                 </a>
                 {% endif %}
-              </td>
-            </tr>
 
+                &nbsp;
+
+                {% if film.stock.count == 0 %}
+                <a href="#" class="btn btn-secondary btn-sm disabled" tabindex="-1" role="button">
+                    Out of stock
+                </a>
+                {% else %}
+                <a href="/film/{{ film.id }}/" class="btn btn-secondary btn-sm" tabindex="-1" role="button">
+                    View stock
+                </a>
+                {% endif %}
+
+            </div>
+            </div>
           {% endfor %}
-
-          </tbody>
-        </table>
 
         </div>
 

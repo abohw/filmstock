@@ -37,7 +37,7 @@ class BellamyPipeline:
 
                     price = clean_price(item['price'])
 
-                    if float(price) > 10:
+                    if price is not None and float(price) > 10:
 
                         Camera.objects.create(
                             name = item['name'],
