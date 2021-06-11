@@ -65,7 +65,7 @@ class FilmFilter(django_filters.FilterSet):
         ('Fujifilm', 'Fujifilm'),
         ('Ilford', 'Ilford'),
         ('Cinestill', 'Cinestill'),
-        ('Polaroid', 'Polaroid'),
+        ('Foma', 'Foma'),
     ))
 
     type = django_filters.MultipleChoiceFilter(choices=(
