@@ -23,7 +23,7 @@ class BellamyPipeline:
         except Source.DoesNotExist:
             source = Source.objects.create(short_name=item['source'])
 
-        if item['type'] == 'camera':
+        if item['type'] == 'camera' and item['price'] is not None:
 
             if Camera.objects.filter(url__exact=url).count() == 0:
 
@@ -37,7 +37,7 @@ class BellamyPipeline:
 
                     price = clean_price(item['price'])
 
-                    if price is not None and float(price) > 10:
+                    if float(price) > 10:
 
                         Camera.objects.create(
                             name = item['name'],
@@ -60,7 +60,7 @@ class BellamyPipeline:
                 camera.lastSeen = timezone.now()
                 camera.save()
 
-        if item['type'] == 'film':
+        if item['type'] == 'film' and item['price'] is not None:
 
             if filmStock.objects.filter(url__exact=url).count() == 0:
 
