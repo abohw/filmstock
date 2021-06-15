@@ -12,15 +12,21 @@ class bhCameraFilmSpider(scrapy.Spider):
      'https://www.bhphotovideo.com/c/buy/other-film-formats/ci/39571?filters=fct_a_filter_by%3A03_INSTOCK',]
 
     def parse(self, response):
+
         for camera in response.css('div[class*=productInner]'):
-            yield {
-            'name': camera.css('span[data-selenium=miniProductPageProductName]::text').get(),
-            'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
-            'price': '%s.%s' % (camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(), camera.css('sup[data-selenium=uppedDecimalPriceSecond]::text').get()),
-            'source': 'bh',
-            'store': '',
-            'type': 'film',
-            }
+
+            price = camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(), camera.css('sup[data-selenium=uppedDecimalPriceSecond]::text').get()
+
+            if price is not None:
+
+                yield {
+                'name': camera.css('span[data-selenium=miniProductPageProductName]::text').get(),
+                'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
+                'price': '%s.%s' % (price),
+                'source': 'bh',
+                'store': '',
+                'type': 'film',
+                }
 
         next_page = response.css('a[data-selenium=listingPagingPageNext]::attr(href)').get()
 

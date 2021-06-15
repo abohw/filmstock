@@ -10,21 +10,25 @@ class bhCameraSpider(scrapy.Spider):
      'https://www.bhphotovideo.com/c/buy/General/ci/3147/N/3755784780',]
 
     def parse(self, response):
-        for camera in response.css('div[class*=productInner]'):
-            yield {
-            'name': camera.css('span[data-selenium=miniProductPageProductName]::text').get(),
-            'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
-            'price': '%s.%s' % (camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(), camera.css('sup[data-selenium=uppedDecimalPriceSecond]::text').get()),
-            'source': 'bh',
-            'store': '',
-            'type': 'camera',
-            }
 
-#        next_page = response.css('ul.pagination li a::attr(href)').getall()
-#        if next_page is not None:
-#            try:
-#                nextUrl = response.urljoin(next_page[1])
-#            except:
-#                nextUrl = response.urljoin(next_page[0])
-#
-#            yield scrapy.Request(nextUrl, callback=self.parse)
+        for camera in response.css('div[class*=productInner]'):
+
+            price = camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(), camera.css(
+                'sup[data-selenium=uppedDecimalPriceSecond]::text').get()
+
+            if price is not None:
+                yield {
+                    'name': camera.css('span[data-selenium=miniProductPageProductName]::text').get(),
+                    'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
+                    'price': '%s.%s' % (price),
+                    'source': 'bh',
+                    'store': '',
+                    'type': 'camera',
+                }
+
+
+        next_page = response.css('a[data-selenium=listingPagingPageNext]::attr(href)').get()
+
+        if next_page is not None:
+            nextUrl = response.urljoin(next_page)
+            yield scrapy.Request(nextUrl, callback=self.parse)
