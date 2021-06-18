@@ -13,19 +13,19 @@ class bhCameraSpider(scrapy.Spider):
 
         for camera in response.css('div[class*=productInner]'):
 
-            price = '%s.%s' % (camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get(), camera.css(
-                'sup[data-selenium=uppedDecimalPriceSecond]::text').get())
+            dollars = camera.css('span[data-selenium=uppedDecimalPriceFirst]::text').get()
+            cents = camera.css('sup[data-selenium=uppedDecimalPriceSecond]::text').get()
 
-            if price is not None:
+            if dollars is not None and cents is not None:
+
                 yield {
                     'name': camera.css('span[data-selenium=miniProductPageProductName]::text').get(),
                     'url': 'https://bhphotovideo.com%s' % (camera.css('a::attr(href)').get()),
-                    'price': price,
+                    'price': '%s.%s' % (dollars, cents),
                     'source': 'bh',
                     'store': '',
                     'type': 'camera',
                 }
-
 
         next_page = response.css('a[data-selenium=listingPagingPageNext]::attr(href)').get()
 
