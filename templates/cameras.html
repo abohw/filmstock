@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 {% block title %}Search for Used Film Cameras{% endblock %}
 
@@ -82,7 +83,7 @@
                 &nbsp;<span class="badge bg-info text-dark">New</span>
                 {% endif %}
               </td>
-              <td>${{ camera.price }}</td>
+              <td>${{ camera.price|intcomma }}</td>
               <td class="text-break">
                 {% if camera.source == 'precision' %}
                   Precision Camera
