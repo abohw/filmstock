@@ -10,7 +10,7 @@ from django.utils import timezone
 import pytz
 
 def clean_price(param):
-    return param.strip().replace('$', '').replace(',','')
+    return param.strip().replace('$', '').replace(',','').replace('USD','')
 
 class BellamyPipeline:
     def process_item(self, item, spider):
