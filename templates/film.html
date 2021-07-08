@@ -51,7 +51,7 @@
                 <br><br>
 
                 {% if film.stock.count != 0 and today == film.lastSeen|date:"Y-m-d" %}
-                   <strong>${{ film.price|intcomma }}</strong> per roll
+                   <strong>${{ film.price|intcomma }}</strong>
                 {% endif %}
 
                 <br><br>

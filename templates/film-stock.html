@@ -68,7 +68,7 @@
                 {% endif %}
                 <br><small>
                   ({% if stock.shipping == 0.00 %}Free
-                  {% else %}${{ stock.shipping|floatformat:2 }}
+                  {% else %}~${{ stock.shipping|floatformat:2 }}
                   {% endif %}delivery)</small>
               </td>
               <td class="align-middle">{{ stock.quantity }}</td>
