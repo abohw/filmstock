@@ -18,7 +18,7 @@ def film(request):
     film = Film.objects.all().annotate(price=Min('stock__price')).annotate(lastSeen=Max('stock__lastSeen')).order_by('price')
     f = FilmFilter(request.GET, queryset=film)
 
-    paginator = Paginator(f.qs, 25)
+    paginator = Paginator(f.qs, 24)
     page_obj = paginator.get_page(request.GET.get('page'))
 
     return render(request, 'film.html', {

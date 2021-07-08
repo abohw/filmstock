@@ -52,6 +52,12 @@
 
           <tbody>
 
+          {% if not stocks %}
+           <tr>
+             <td class="align-middle" colspan="3">No stock available</td>
+           </tr>
+          {% endif %}
+
           {% for stock in stocks %}
 
             <tr>
