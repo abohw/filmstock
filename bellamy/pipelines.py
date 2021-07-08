@@ -62,24 +62,30 @@ class BellamyPipeline:
 
         if item['type'] == 'film':
 
-            if filmStock.objects.filter(url__exact=url).count() == 0:
+            try:
+                price = clean_price(item['price'])
 
-                filmStock.objects.create(
-                    name = item['name'],
-                    price = clean_price(item['price']),
-                    url = url,
-                    source = source,
-                )
+                if filmStock.objects.filter(url__exact=url).count() == 0:
 
-                print("new film: %s (%s)" % (item['name'], item['source']))
+                    filmStock.objects.create(
+                        name = item['name'],
+                        price = price,
+                        url = url,
+                        source = source,
+                    )
 
-            else:
-                film = filmStock.objects.get(url__exact=url)
+                    print("new film: %s (%s)" % (item['name'], item['source']))
 
-                if item['price'] is not None:
-                    film.price = clean_price(item['price'])
+                else:
+                    film = filmStock.objects.get(url__exact=url)
 
-                film.lastSeen = timezone.now()
-                film.save()
+                    if price is not None:
+                        film.price = price
+
+                    film.lastSeen = timezone.now()
+                    film.save()
+
+            except Exception:
+                print('price is weird, skipping')
 
         return item
