@@ -86,6 +86,6 @@ class BellamyPipeline:
                     film.save()
 
             except Exception:
-                print('price is weird, skipping')
+                print('skipping %s (%s), price is weird' % (item['name'], item['source']))
 
         return item
