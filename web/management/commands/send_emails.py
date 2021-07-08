@@ -6,6 +6,7 @@ from django.core import mail
 from hunters.models import Hunter
 from web.models import Camera, emailTask
 from django.template import loader
+from django.db.models import Max
 
 
 class Command(BaseCommand):
@@ -55,11 +56,45 @@ class Command(BaseCommand):
         for hunter in Hunter.objects.filter(is_subscribed=True):
 
             searches = hunter.searches.filter(is_subscribed=True)
-            follows = hunter.follows.filter(is_subscribed=True).filter(film__lowUpdatedOn__gt=lastRun)
 
-            if follows:
+            follows = hunter.follows.filter(is_subscribed=True)
+            filmPriceDrops = follows.filter(film__lowUpdatedOn__gt=lastRun)
+            filmInStock = follows.filter(in_stock=False).annotate(lastSeen=Max('film__stock__lastSeen'))
 
-                for follow in follows:
+            if filmInStock:
+
+                for follow in filmInStock:
+
+                    if follow.lastSeen >= lastRun:
+
+                        follow.in_stock = True
+                        follow.save()
+
+                        html_message = loader.render_to_string(
+                            'emails/film-in-stock.html',
+                            {
+                                'name': '%s %s' % (follow.film.brand, follow.film.name),
+                                'url': 'https://filmstock.app/film/%s/' % (follow.film.id),
+                            }
+                        )
+
+                        mail.send_mail(
+                            'Back in stock: %s %s' % (follow.film.brand, follow.film.name),
+                            'Filmstock\n\nhttps://filmstock.app/film/%s/\n\nUnsubscribe from this alert: https://filmstock.app/users/users/settings' % (
+                                follow.film.id),
+                            'Filmstock <alerts@mail.filmstock.app>',
+                            [hunter.email],
+                            fail_silently=True,
+                            connection=connection,
+                            html_message=html_message,
+                        )
+
+                        sent += 1
+                        print('film in stock for %s, email sent to %s' % (follow.film.name, hunter.email))
+
+            if filmPriceDrops:
+
+                for follow in filmPriceDrops:
 
                    html_message = loader.render_to_string(
                        'emails/new-film.html',
