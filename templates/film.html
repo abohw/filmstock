@@ -50,7 +50,7 @@
                 {% endif %}
                 {% now "Y-m-d" as today %}
                 {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
-                &nbsp;<span class="badge bg-info text-dark">&nbsp; Price Drop</span>
+                &nbsp;<span class="badge bg-info text-dark">Price Drop</span>
                 {% endif %}
 
                 <br><br>
