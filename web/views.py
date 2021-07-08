@@ -10,12 +10,12 @@ from django.http import Http404
 from django.utils import timezone
 import pytz
 from django.views.generic.list import ListView
-from django.db.models import Min
+from django.db.models import Min, Max
 from django.core.paginator import Paginator
 
 def film(request):
 
-    film = Film.objects.filter(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))).annotate(price=Min('stock__price')).order_by('price')
+    film = Film.objects.all().annotate(price=Min('stock__price')).annotate(lastSeen=Max('stock__lastSeen')).order_by('price')
     f = FilmFilter(request.GET, queryset=film)
 
     paginator = Paginator(f.qs, 25)
@@ -93,10 +93,10 @@ def untrackFilm(request, id):
 
 
 @login_required
-def trackFilm(request, id):
+def trackFilm(request, slug):
 
     try:
-        film = Film.objects.get(id__exact=id)
+        film = Film.objects.get(slug__exact=slug)
 
         newTrack = followedFilm(
             hunter=request.user,

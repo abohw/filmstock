@@ -50,7 +50,9 @@
 
                 <br><br>
 
-                <strong>${{ film.price|intcomma }}</strong> per roll
+                {% if film.stock.count != 0 and today == film.lastSeen|date:"Y-m-d" %}
+                   <strong>${{ film.price|intcomma }}</strong> per roll
+                {% endif %}
 
                 <br><br>
 
@@ -72,7 +74,7 @@
 
                 &nbsp;
 
-                {% if film.stock.count == 0 %}
+                {% if film.stock.count == 0 or today != film.lastSeen|date:"Y-m-d" %}
                 <a href="#" class="btn btn-secondary btn-sm disabled" tabindex="-1" role="button">
                     Out of stock
                 </a>
