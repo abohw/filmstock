@@ -38,11 +38,6 @@
 
                 <a class="link" href="/film/{{ film.id }}/">{{ film.brand }} {{ film.name }}</a>
 
-                {% now "Y-m-d" as today %}
-                {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
-                &nbsp;<span class="badge bg-info text-dark">Price Drop</span>
-                {% endif %}
-
                 <br>
 
                 <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %}
@@ -52,6 +47,10 @@
 
                 {% if film.stock.count != 0 and today == film.lastSeen|date:"Y-m-d" %}
                    <strong>${{ film.price|intcomma }}</strong>
+                {% endif %}
+                {% now "Y-m-d" as today %}
+                {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
+                &nbsp;<span class="badge bg-info text-dark">&nbsp; Price Drop</span>
                 {% endif %}
 
                 <br><br>
