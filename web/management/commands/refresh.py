@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 from django.conf import settings
-from web.models import Camera, Film
+from web.models import Camera, Film, followedFilm
 from django.utils import timezone
 from django.db.models import Min
 import pytz
@@ -30,6 +30,14 @@ class Command(BaseCommand):
         x = 0
 
         self.refreshFilm()
+
+        for follow in followedFilm.objects.all():
+
+            if follow.film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))) is None:
+
+                follow.in_stock = False
+                follow.save()
+                print('updated %s, not in stock' % (follow.film.name))
 
         for camera in Camera.objects.filter(lastSeen__lt=(timezone.now() - timezone.timedelta(hours=1))):
             print('deleting %s from %s' % (camera.name, camera.source))
