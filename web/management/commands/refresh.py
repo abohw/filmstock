@@ -33,7 +33,7 @@ class Command(BaseCommand):
 
         for follow in followedFilm.objects.all():
 
-            if follow.film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))) is None:
+            if follow.film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(days=5))) is None:
 
                 follow.in_stock = False
                 follow.save()
