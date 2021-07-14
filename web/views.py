@@ -93,10 +93,10 @@ def untrackFilm(request, id):
 
 
 @login_required
-def trackFilm(request, slug):
+def trackFilm(request, id):
 
     try:
-        film = Film.objects.get(slug__exact=slug)
+        film = Film.objects.get(id__exact=id)
 
         newTrack = followedFilm(
             hunter=request.user,
@@ -107,7 +107,7 @@ def trackFilm(request, slug):
 
         return HttpResponseRedirect(reverse_lazy('film'))
 
-    except:
+    except Film.DoesNotExist:
         raise Http404
 
 

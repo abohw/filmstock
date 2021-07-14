@@ -9,6 +9,14 @@
 
         <h1>Settings</h1>
 
+        <p style="margin-top: 25px;">
+            {% if user.is_subscribed == True %}
+                <a class="link" href="/users/subscribe/manage">Manage Subscription</a>
+            {% elif user.is_verified == True %}
+                <a class="link" href="/users/subscribe">Subscribe to Filmstock+</a>
+            {% endif %}
+        </p>
+
         <h3 style="margin-top: 25px;">Saved searches</h3>
 
         <p></p>

@@ -13,11 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path, include
 from hunters import views
 
 urlpatterns = [
     path('activate/<uidb64>/<token>/', views.activateUser, name='activate'),
     path('new/', views.newUser, name='signup'),
     path('settings/', views.userSettings, name='settings'),
+    path('subscribe/', views.subscribe, name='subscribe'),
+    path('subscribe/manage', views.manageSubscription, name='manage-subscription'),
+    path('subscribe/provision', views.provisionStripe),
 ]

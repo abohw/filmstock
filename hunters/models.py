@@ -22,7 +22,7 @@ class HunterManager(BaseUserManager):
             password=password,
         )
         user.is_admin = True
-        user.is_subscribed = True
+        user.is_verified = True
         user.save(using=self._db)
         return user
 
@@ -34,13 +34,19 @@ class Hunter(AbstractBaseUser):
     )
 
     is_active = models.BooleanField(default=True)
+    is_verified = models.BooleanField(default=False)
+
     is_subscribed = models.BooleanField(default=False)
+    was_subscribed = models.BooleanField(default=False)
+
+    stripe_session_id = models.CharField(max_length=255, default=None, null=True, blank=True)
+    stripe_customer_id = models.CharField(max_length=255, default=None, null=True, blank=True)
+
     is_admin = models.BooleanField(default=False)
 
     objects = HunterManager()
 
     USERNAME_FIELD = 'email'
-#    REQUIRED_FIELDS = ['date_of_birth']
 
     def __str__(self):
         return self.email

@@ -7,8 +7,8 @@
         <p></p>
         <p>Welcome! Verify your account by clicking this link:</p>
         <p>
-          <a href="https://{{ domain }}{% url 'activate' uidb64=uid token=token %}">
-            https://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+          <a href="{{ domain }}{% url 'activate' uidb64=uid token=token %}">
+            {{ domain }}{% url 'activate' uidb64=uid token=token %}
           </a>
         </p>
         <p></p>

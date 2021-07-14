@@ -38,12 +38,20 @@
           </div>
         </form>
 
-        {% if user.is_authenticated %}
+        {% if user.is_subscribed %}
 
         <p></p>
 
         <div class="d-grid gap-2">
           <a class="btn btn-secondary btn-sm" href="{% if clean_filters %}{% url 'save-search' %}?{{ clean_filters }}{% endif %}" role="button">Save this search</a>
+        </div>
+
+        {% elif user.is_authenticated %}
+
+        <p></p>
+
+        <div class="d-grid gap-2">
+          <a class="btn btn-secondary btn-sm" href="{% url 'subscribe' %}?return={% url 'save-search'|urlencode %}?{{ clean_filters|urlencode }}" role="button">Save this search</a>
         </div>
 
         {% else %}

@@ -7,8 +7,6 @@ from django.core.exceptions import ValidationError
 
 from hunters.models import Hunter
 
-# Register your models here.
-
 class UserCreationForm(forms.ModelForm):
 
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -41,7 +39,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = Hunter
-        fields = ('email', 'password', 'is_subscribed', 'is_active', 'is_admin')
+        fields = ('email', 'password', 'is_subscribed', 'is_active', 'is_admin','is_verified')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -51,21 +49,17 @@ class UserChangeForm(forms.ModelForm):
 
 
 class UserAdmin(BaseUserAdmin):
-    # The forms to add and change user instances
+
     form = UserChangeForm
     add_form = UserCreationForm
 
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
-    list_display = ('email','is_admin','is_subscribed')
+    list_display = ('email','is_admin','is_subscribed','is_verified')
     list_filter = ('is_admin','is_subscribed')
     fieldsets = (
-        (None, {'fields': ('email', 'password',)}),
-        ('Permissions', {'fields': ('is_admin','is_active','is_subscribed')}),
+        (None, {'fields': ('email', 'password', 'stripe_session_id', 'stripe_customer_id',)}),
+        ('Permissions', {'fields': ('is_admin', 'is_verified', 'is_subscribed', 'was_subscribed',)}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -77,8 +71,5 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-# Now register the new UserAdmin...
 admin.site.register(Hunter, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
 admin.site.unregister(Group)
