@@ -113,12 +113,18 @@ def subscribe(request):
 @login_required
 def manageSubscription(request):
 
-    session = stripe.billing_portal.Session.create(
-        customer=request.user.stripe_customer_id,
-        return_url='https://filmstock.app/users/settings',
-    )
+    try:
 
-    return HttpResponseRedirect(session.url, status=303)
+        session = stripe.billing_portal.Session.create(
+            customer=request.user.stripe_customer_id,
+            return_url='https://filmstock.app/users/settings',
+        )
+
+        return HttpResponseRedirect(session.url, status=303)
+
+    except:
+
+        return HttpResponse(status=404)
 
 
 @csrf_exempt
