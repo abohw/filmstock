@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 from django.conf import settings
-from web.models import Camera, Film, followedFilm
+from web.models import Camera, Film, followedFilm, Source
 from django.utils import timezone
 from django.db.models import Min
 import pytz
