@@ -23,21 +23,25 @@
         </nav>
 
 
-       {% if user.is_authenticated %}
-        {% if film.follows.hunter == user %}
-        <a href="#" class="btn btn-primary disabled" tabindex="-1" role="button">
-            Tracking
-        </a>
-        {% else %}
-        <a href="/film/track/{{ film.id }}" class="btn btn-primary" tabindex="-1" role="button">
-            Track
-        </a>
-        {% endif %}
-    {% else %}
-    <a href="{% url 'signup' %}?from=savesearch" class="btn btn-primary" tabindex="-1" role="button">
-        Track
-    </a>
-    {% endif %}
+             {% if user.is_subscribed %}
+                {% if film.follows.hunter == user %}
+                <a href="#" class="btn btn-primary btn-sm disabled" tabindex="-1" role="button">
+                    Tracking
+                </a>
+                {% else %}
+                <a href="/film/track/{{ film.id }}" class="btn btn-primary btn-sm" tabindex="-1" role="button">
+                     &nbsp; Track &nbsp;
+                </a>
+                {% endif %}
+            {% elif user.is_authenticated %}
+                <a href="{% url 'subscribe' %}?return={% url 'film'|urlencode %}?" class="btn btn-primary btn-sm" tabindex="-1" role="button">
+                    &nbsp; Track &nbsp;
+                </a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-sm" tabindex="-1" role="button">
+                    &nbsp; Track &nbsp;
+                </a>
+            {% endif %}
 
         <div class="table-responsive" style="margin-top:25px;">
 

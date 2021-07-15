@@ -13,6 +13,7 @@ class Source(models.Model):
     country = models.CharField(default=None, blank=True, null=True, max_length=255, db_index=True)
     shipping = models.DecimalField(default=0, decimal_places=2, max_digits=7, db_index=True)
     url = models.CharField(default=None, blank=True, null=True, max_length=255, db_index=True)
+    lastScrapeTotal = models.IntegerField(default=0, blank=True, null=True, db_index=True)
 
     def __str__(self):
         return self.short_name

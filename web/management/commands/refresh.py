@@ -40,8 +40,15 @@ class Command(BaseCommand):
                 print('updated %s, not in stock' % (follow.film.name))
 
         for camera in Camera.objects.filter(lastSeen__lt=(timezone.now() - timezone.timedelta(hours=1))):
-            print('deleting %s from %s' % (camera.name, camera.source))
-            camera.delete()
-            x += 1
+
+            source = Source.objects.get(short_name__exact=camera.source)
+
+            if source.lastScrapeTotal > 0:
+                print('deleting %s from %s' % (camera.name, camera.source))
+                camera.delete()
+                x += 1
+
+            else:
+                print('wanted to delete %s (%s), but might be broken' % (camera.name, camera.source))
 
         print('%s records deleted' % (x))
