@@ -1,7 +1,13 @@
 from django.contrib import admin
 from django.urls import re_path, path, include
 from web import views
-from django.views.generic import RedirectView
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import StaticViewSitemap, FilmSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'film': FilmSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,4 +25,6 @@ urlpatterns = [
     path('cameras/save/delete/<int:id>', views.deleteSearch, name='delete-search'),
     path('cameras/save/unsubscribe/<int:id>', views.unsubscribeSearch, name='unsubscribe-search'),
     path('cameras/save/subscribe/<int:id>', views.subscribeSearch, name='subscribe-search'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+     name='django.contrib.sitemaps.views.sitemap')
 ]
