@@ -81,6 +81,10 @@
 
   <body class="d-flex flex-column h-100">
 
+  {% if request.GET.sub == 'success' %}
+   <script>fbq('track', 'Subscribe');</script>
+  {% endif %}
+
     <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fdfdfd;">
       <div class="container-fluid align-items-baseline">
