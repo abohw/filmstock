@@ -158,7 +158,6 @@ class Command(BaseCommand):
 
                     else:
                         skipped += 1
-                        print('no new cameras for %s, no email sent to %s' % (name, hunter.email))
 
         connection.close()
 

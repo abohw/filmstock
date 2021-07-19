@@ -1,15 +1,13 @@
 from django.shortcuts import render
-from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
-from django.conf import settings
+from django.http import HttpResponseRedirect
 from .models import Camera, CameraFilter, Film, FilmFilter, followedFilm
 from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
 from django.utils import timezone
+from django import forms
 import pytz
-from django.views.generic.list import ListView
 from django.db.models import Min, Max
 from django.core.paginator import Paginator
 
@@ -140,6 +138,9 @@ def saveSearch(request):
             'url' : request.GET.urlencode(),
         }
         form = savedSearchForm(initial=data)
+
+        if not request.user.is_subscribed:
+            form.fields['is_subscribed'].widget = forms.HiddenInput()
 
     return render(request, 'save-search.html', {'save': form})
 

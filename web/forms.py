@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import savedSearch
 from django.utils.translation import gettext_lazy as _
+from hunters.models import Hunter
 
 class savedSearchForm(ModelForm):
 

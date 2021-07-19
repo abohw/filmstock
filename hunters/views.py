@@ -84,11 +84,12 @@ def activateUser(request, uidb64, token):
 def subscribe(request):
 
     if request.GET.get('return'):
-        successUrl = '%s%s&sub=success' % (request.build_absolute_uri('/').strip("/"), request.GET.get('return'))
+        returnUrl = '%s%s' % (request.build_absolute_uri('/').strip("/"), request.GET.get('return'))
 
     else:
-        successUrl = request.build_absolute_uri('/').strip("/") + '?sub=success'
+        returnUrl = request.build_absolute_uri('/').strip("/") + '?'
 
+    successUrl = returnUrl + '&sub=success'
     cancelUrl = '%s%s?sub=cancelled' % (request.build_absolute_uri('/').strip("/"), reverse_lazy('settings'))
 
     session = stripe.checkout.Session.create(
@@ -107,6 +108,7 @@ def subscribe(request):
 
     return render(request, 'registration/subscribe.html', {
         'stripeSession': session.url,
+        'returnUrl': returnUrl,
     })
 
 

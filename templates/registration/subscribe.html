@@ -5,25 +5,27 @@
 
 {% block content %}
 
-  <div class="row justify-content-center" style="margin-top:15px;">
+  <div class="row justify-content-center" style="margin-top:20px;">
 
   <div class="col-auto col-md-5 justify-content-center align-items-center">
 
   <p></p>
 
-  <p>Subscribe to <b>Filmstock+</b> to save your search, receive alerts when tracked cameras become available, and when film is restocked or goes on sale.</p>
+  <p>Subscribe to <b>Filmstock+</b> to receive alerts when tracked cameras become available, when film is restocked, or when film goes on sale.</p>
 
   <p>You can also just look at it as a donation to keep Filmstock up and running. :-)</p>
 
   <p>If you subscribe now, it's only $5 per year. Forever. Cancel anytime.</p>
 
-  <p></p>
+  <p>&nbsp;</p>
 
   <a href="{{ stripeSession }}" class="btn btn-primary btn-lg" role="button">Subscribe</a>
-  <p></p>
 
       <p><small>We use Stripe to manage subscriptions. <br>
           You'll be redirected to Stripe, but don't worry, we'll bring you back to the right place.</small></p>
+
+   <p>&nbsp;</p>
+      <p><small><a href="{{ returnUrl }}" class="link" style="text-decoration: none;">No thanks, I'm fine without alerts.</a></small></p>
 
   </div></div>
 
