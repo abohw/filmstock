@@ -74,6 +74,17 @@
     /></noscript>
     <!-- End Facebook Pixel Code -->
 
+    <!-- Global site tag (gtag.js) - Google Ads: 332801433 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-332801433"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-332801433');
+    </script>
+
+
   </head>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,7 +93,10 @@
   <body class="d-flex flex-column h-100">
 
   {% if request.GET.sub == 'success' %}
-   <script>fbq('track', 'Subscribe');</script>
+    <script>fbq('track', 'Subscribe');</script>
+    <script>
+      gtag('event', 'conversion', {'send_to': 'AW-332801433/gTCNCMPJs9kCEJnL2J4B'});
+    </script>
   {% endif %}
 
     <header>
