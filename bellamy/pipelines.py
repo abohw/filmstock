@@ -45,6 +45,7 @@ class BellamyPipeline:
                             source = source,
                             store = item['store'],
                             price = price,
+                            image = item['image'],
                             createdAt = timezone.now(),
                             lastSeen = timezone.now(),
                         )

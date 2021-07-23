@@ -43,6 +43,7 @@ class kehCameraSpider(scrapy.Spider):
                     yield {
                     'name': camera.css('meta[itemprop=name]::attr(content)').get(),
                     'url': camera.css('a.product-item-link::attr(href)').get(),
+                    'image': camera.css('img.product-image-photo::attr(data-src)').get(),
                     'price': price,
                     'source': 'keh',
                     'store': '',

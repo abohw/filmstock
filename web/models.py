@@ -98,8 +98,9 @@ class Camera(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     source = models.CharField(max_length=255, db_index=True)
     store = models.CharField(max_length=255, blank=True, default=None, null=True)
-    url = models.CharField(max_length=255, db_index=True)
+    url = models.URLField(db_index=True)
     price = models.DecimalField(decimal_places=2, max_digits=7, db_index=True)
+    image = models.URLField(default=None, blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True, db_index=True)
     lastSeen = models.DateTimeField(auto_now_add=True, db_index=True)
 

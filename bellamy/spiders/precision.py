@@ -32,11 +32,12 @@ class precisionCameraSpider(scrapy.Spider):
             pass
 
     def parse(self, response):
-        for camera in response.css('div.card-body'):
+        for camera in response.css('li.product'):
             yield {
-            'name': camera.css('a::text').get(),
-            'url': camera.css('a::attr(href)').get(),
-            'price': camera.css('span.price--withoutTax::text').get(),
+            'name': camera.css('div.card-body a::text').get(),
+            'url': camera.css('div.card-body a::attr(href)').get(),
+            'price': camera.css('div.card-body span.price--withoutTax::text').get(),
+            'image': camera.css('img.card-image::attr(data-src)').get(),
             'source': 'precision',
             'store': '',
             'type': 'camera',
