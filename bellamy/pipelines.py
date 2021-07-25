@@ -37,6 +37,12 @@ class BellamyPipeline:
 
                     price = clean_price(item['price'])
 
+                    try:
+                        image = item['image']
+
+                    except KeyError:
+                        image = None
+
                     if float(price) > 10:
 
                         Camera.objects.create(
@@ -45,7 +51,7 @@ class BellamyPipeline:
                             source = source,
                             store = item['store'],
                             price = price,
-                            image = item['image'],
+                            image = image,
                             createdAt = timezone.now(),
                             lastSeen = timezone.now(),
                         )
@@ -57,6 +63,12 @@ class BellamyPipeline:
 
                 if item['price'] is not None:
                     camera.price = clean_price(item['price'])
+
+                try:
+                    camera.image = item['image']
+
+                except KeyError:
+                    pass
 
                 camera.lastSeen = timezone.now()
                 camera.save()
