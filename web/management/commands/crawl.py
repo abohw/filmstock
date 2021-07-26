@@ -8,7 +8,6 @@ class Command(BaseCommand):
       help = "Release the spiders"
 
       def handle(self, *args, **options):
-          configure_logging()
           process = CrawlerRunner(get_project_settings())
 
         # film crawlers
