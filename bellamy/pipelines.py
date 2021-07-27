@@ -30,7 +30,8 @@ class BellamyPipeline:
                 BANNED_WORDS = [
                     'dslr', 'digital', 'decorative',
                     'light meter', 'bag', 'sunglasses',
-                    'shipping', 'camera lens', 'player', 'much better']
+                    'shipping', 'camera lens', 'player',
+                    'much better', 'neck strap', ]
 
                 if any([x in item['name'].lower() for x in BANNED_WORDS]):
 
