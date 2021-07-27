@@ -44,7 +44,7 @@ class Command(BaseCommand):
             source = Source.objects.get(short_name__exact=camera.source)
 
             if source.lastScrapeTotal > 0:
-                # print('deleting %s from %s' % (camera.name, camera.source))
+                print('deleting %s from %s' % (camera.name, camera.source))
                 camera.delete()
                 x += 1
 
