@@ -130,6 +130,7 @@ class CameraFilter(django_filters.FilterSet):
         ('brooklyn', 'Brooklyn Film Camera'),
         ('austin_camera', 'Austin Camera'),
         ('keh', 'KEH Camera'),
+        ('etsy', 'Etsy'),
     ))
 
     sort = django_filters.OrderingFilter(
