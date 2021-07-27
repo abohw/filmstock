@@ -6,6 +6,8 @@ page = 1
 class etsySpider(scrapy.Spider):
 
     name = 'etsy'
+    source = 'etsy'
+    allowed_domains = ['etsy.com',]
     start_urls = [
     'https://www.etsy.com/shop/SantaRosaCamera',
     'https://www.etsy.com/shop/JohnsonCamera',
@@ -22,6 +24,27 @@ class etsySpider(scrapy.Spider):
     'https://www.etsy.com/shop/DevelopStopFix',
     'https://www.etsy.com/shop/grainyvision',
     ]
+
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        spider = super(etsySpider, cls).from_crawler(crawler, *args, **kwargs)
+        crawler.signals.connect(spider.item_scraped, signal=scrapy.signals.item_scraped)
+        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
+        return spider
+
+    def item_scraped(self, spider):
+        global itemCount
+        itemCount += 1
+
+    def spider_closed(self, spider):
+
+        try:
+            source = Source.objects.get(short_name__exact=spider.source)
+            source.lastScrapeTotal = itemCount
+            source.save()
+
+        except Source.DoesNotExist:
+            pass
 
     def parse(self, response):
 
