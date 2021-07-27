@@ -38,7 +38,7 @@
 
         <div class="col">
 
-              <div class="border border-1 rounded border-secondary" style="padding: 35px;">
+              <div class="border border-1 rounded border-secondary" style="padding: 25px;">
 
                 <h5 class="text-center"><a href="/film/" class="link" style="text-decoration: none;">
                     or find <strong>great deals</strong>
@@ -66,11 +66,11 @@
 
         <div class="col" style="padding: 25px;">
 
-            <a href="{{ camera.url }}">
+            <a href="{{ camera.url }}" target="_blank">
                 <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-fluid rounded mx-auto d-block" style="max-height: 200px;">
             </a>
 
-            <p><small><a href="{{ camera.url }}"><strong>{{ camera.name|truncatechars:20 }}</strong></a></small></p>
+            <p><small><a href="{{ camera.url }}" target="_blank"><strong>{{ camera.name|truncatechars:20 }}</strong></a></small></p>
             <p><small>${{ camera.price }}</small></p>
 
         </div>
@@ -94,11 +94,11 @@
 
         <div class="col" style="padding: 25px;">
 
-            <a href="{{ camera.url }}">
+            <a href="{{ camera.url }}" target="_blank">
                 <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-fluid rounded mx-auto d-block" style="max-height: 200px;">
             </a>
 
-            <p><small><a href="{{ camera.url }}"><strong>{{ camera.name|truncatechars:20 }}</strong></a></small></p>
+            <p><small><a href="{{ camera.url }}" target="_blank"><strong>{{ camera.name|truncatechars:20 }}</strong></a></small></p>
             <p><small>${{ camera.price }}</small></p>
 
         </div>
