@@ -36,7 +36,9 @@
 
                 <div class="border border-1 rounded border-secondary" style="padding: 25px;">
 
-                <a class="link" href="/film/{{ film.id }}/">{{ film.brand }} {{ film.name }}</a>
+                <a class="link" href="{{ film.url }}">
+                    {{ film.brand }} {{ film.name }}
+                </a>
 
                 <br>
 
@@ -84,7 +86,7 @@
                     Out of stock
                 </a>
                 {% else %}
-                <a href="/film/{{ film.id }}/" class="btn btn-secondary btn-sm" tabindex="-1" role="button">
+                <a href="{{ film.url }}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">
                     View stock
                 </a>
                 {% endif %}

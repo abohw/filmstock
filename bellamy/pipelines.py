@@ -27,7 +27,10 @@ class BellamyPipeline:
 
             if Camera.objects.filter(url__exact=url).count() == 0:
 
-                BANNED_WORDS = ['dslr', 'digital', 'decorative', 'light meter']
+                BANNED_WORDS = [
+                    'dslr', 'digital', 'decorative',
+                    'light meter', 'bag', 'sunglasses',
+                    'shipping', 'camera lens',]
 
                 if any([x in item['name'].lower() for x in BANNED_WORDS]):
 

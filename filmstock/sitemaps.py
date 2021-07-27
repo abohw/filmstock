@@ -11,7 +11,8 @@ class FilmSitemap(sitemaps.Sitemap):
         return Film.objects.all()
 
     def location(self, obj):
-        return '/film/%s/' % (obj.id)
+
+        return obj.url
 
 
 class StaticViewSitemap(sitemaps.Sitemap):

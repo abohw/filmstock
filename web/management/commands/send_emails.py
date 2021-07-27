@@ -73,8 +73,8 @@ class Command(BaseCommand):
                         html_message = loader.render_to_string(
                             'emails/film-in-stock.html',
                             {
-                                'name': '%s %s' % (follow.film.brand, follow.film.name),
-                                'url': 'https://filmstock.app/film/%s/' % (follow.film.id),
+                                'name': 'https://filmstock.app%s' % follow.film.url,
+                                'url': url,
                             }
                         )
 
@@ -96,16 +96,16 @@ class Command(BaseCommand):
 
                 for follow in filmPriceDrops:
 
-                   html_message = loader.render_to_string(
+                    html_message = loader.render_to_string(
                        'emails/new-film.html',
                        {
                            'name': '%s %s' % (follow.film.brand, follow.film.name),
-                           'url': 'https://filmstock.app/film/%s/' % (follow.film.id),
+                           'url': 'https://filmstock.app%s' % follow.film.url,
                            'price': follow.film.lowLast30d,
                        }
-                   )
+                     )
 
-                   mail.send_mail(
+                    mail.send_mail(
                        'New low price: %s %s' % (follow.film.brand, follow.film.name),
                        'Filmstock\n\nhttps://filmstock.app/film/%s/\n\nUnsubscribe from this alert: https://filmstock.app/users/users/settings' % (follow.film.id),
                        'Filmstock <alerts@mail.filmstock.app>',
@@ -113,10 +113,10 @@ class Command(BaseCommand):
                        fail_silently=True,
                        connection=connection,
                        html_message=html_message,
-                   )
+                    )
 
-                   sent += 1
-                   print('film price drop for %s, email sent to %s' % (follow.film.name, hunter.email))
+                    sent += 1
+                    print('film price drop for %s, email sent to %s' % (follow.film.name, hunter.email))
 
             if searches:
 

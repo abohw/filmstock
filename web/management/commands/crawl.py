@@ -27,8 +27,7 @@ class Command(BaseCommand):
           process.crawl('precision')
           process.crawl('keh')
           process.crawl('bh')
-        # not super impressed with etsy, tbh
-        # process.crawl('etsy')
+          process.crawl('etsy')
 
           d = process.join()
           d.addBoth(lambda _: reactor.stop())

@@ -11,6 +11,14 @@ import pytz
 from django.db.models import Min, Max
 from django.core.paginator import Paginator
 
+
+def home(request):
+
+    latest = Camera.objects.filter(image__isnull=False).order_by('id')[:6]
+    cheapest = Camera.objects.filter(image__isnull=False).filter(price__lt=100).order_by('?')[:6]
+
+    return render(request, 'home.html', { 'latest': latest, 'cheapest': cheapest, })
+
 def film(request):
 
     film = Film.objects.all().annotate(price=Min('stock__price')).annotate(lastSeen=Max('stock__lastSeen')).order_by('price')
@@ -25,7 +33,39 @@ def film(request):
         'total' : Film.objects.count(),
     })
 
-def filmStock(request, id):
+
+def privacyPolicy(request):
+    return render(request, 'privacy.html', { })
+
+
+def termsOfUse(request):
+    return render(request, 'terms-of-use.html', { })
+
+
+def filmStock(request, brand, name, format='35mm', exposures=36):
+
+    name = name.replace('-', ' ')
+
+    if format == '120':
+
+        try:
+            film = Film.objects.get(brand__iexact=brand, name__iexact=name, format=format)
+            return filmStockLookup(request, film.id)
+
+        except Film.DoesNotExist:
+            raise Http404
+
+    else:
+
+        try:
+            film = Film.objects.get(brand__iexact=brand, name__iexact=name, format=format, exposures=exposures)
+            return filmStockLookup(request, film.id)
+
+        except Film.DoesNotExist:
+            raise Http404
+
+
+def filmStockLookup(request, id):
 
     film = Film.objects.annotate(price=Min('stock__price')).get(id__exact=id)
 

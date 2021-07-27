@@ -32,6 +32,7 @@ class etsySpider(scrapy.Spider):
             'name': camera.css('a.listing-link::attr(title)').get(),
             'url': camera.css('a.listing-link::attr(href)').get(),
             'price': camera.css('span.currency-value::text').get(),
+            'image': camera.css('img::attr(src)').get(),
             'source': 'etsy',
             'store': store.lower(),
             'type': 'camera',

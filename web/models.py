@@ -31,6 +31,14 @@ class Film(models.Model):
     lowUpdatedOn = models.DateTimeField(default=None, null=True, db_index=True)
     lowAllTime = models.DecimalField(decimal_places=2, null=True, max_digits=7, default=0.00, db_index=True)
 
+    @property
+    def url(self):
+
+        if self.exposures:
+            return '/film/%s/%s/%s/%s/' % (self.brand, self.name.replace(' ', '-'), self.format, self.exposures)
+        else:
+            return '/film/%s/%s/%s/' % (self.brand, self.name.replace(' ', '-'), self.format)
+
     def __str__(self):
         return '%s %s (%s exp., %s)' % (self.brand, self.name, self.exposures, self.format)
 

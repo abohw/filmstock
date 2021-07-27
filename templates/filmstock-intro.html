@@ -1,10 +1,12 @@
     {% load static %}
     {% if user.is_authenticated == False %}
-    <div class="container-lg" style="margin-top: 10px; margin-bottom: 10px; background-color: #dfe4ea; padding: 25px;">
+    <div class="container-fluid" style="margin-bottom:25px; background-color: #dfe4ea; padding: 25px;">
       <div class="row align-items-center justify-content-center">
         <div class="col-auto me-auto">
 
-          <p>Filmstock checks the inventory of <b>film cameras</b> and <b>film stocks</b> from around the US.</p>
+            <h3>Welcome to <strong>Filmstock</strong>.</h3>
+
+          <p style="margin-top:25px;">We make it easy to check the inventory of <b>film cameras</b> and <b>film stocks</b> in shops around the United States.</p>
 
           <p>Find the elusive camera you've been longing after:
             <ul>
@@ -16,12 +18,29 @@
 
           <p>You can track inventory and prices of your favorite film stocks too.</p>
 
-          <p>To get started, <a class="link" href="{% url 'signup' %}">create an account</a> or start your search below.</p>
+          <a class="btn btn-lg btn-primary" href="{% url 'signup' %}" role="button" style="margin-top:15px; color:#ffffff;">Get Started</a>
 
         </div>
-        <div class="col-auto">
-          <img src="{% static 'img/filmstock-logo.png' %}" loading="lazy" class="img-fluid mx-auto d-block" alt="Filmstock" style="max-height: 300px">
+        <div class="col-auto" style="padding:10px;">
+          <img src="{% static 'img/camera.jpg' %}" loading="lazy" class="rounded img-fluid mx-auto d-block" alt="Filmstock" style="max-height: 400px">
         </div>
       </div>
     </div>
+
+    {% elif user.is_subscribed == False %}
+
+    <div class="container-fluid" style="margin-bottom:25px; background-color: #dfe4ea; padding: 25px;">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-auto me-auto">
+
+          <p>To get email alerts when cameras that match your saved searches become available, or when your favorite film stocks are re-stocked or drop in price, subscribe to Filmstock+.</p>
+
+          <p>Right now, you can subscribe for only $5 annually.</p>
+
+          <a class="btn btn-lg btn-primary" href="{% url 'subscribe' %}" role="button" style="margin-top:15px; color:#ffffff;">Subscribe</a>
+
+        </div>
+      </div>
+    </div>
+
     {% endif %}
