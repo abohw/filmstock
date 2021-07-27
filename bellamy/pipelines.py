@@ -34,11 +34,7 @@ class BellamyPipeline:
                     'strap', 'radio', 'passports',
                     'hardcover', 'reel', 'flash bar', 'expired', ]
 
-                if any([x in item['name'].lower() for x in BANNED_WORDS]):
-
-                    print("skipping %s, name contains banned word" % (item['name']))
-
-                else:
+                if not any([x in item['name'].lower() for x in BANNED_WORDS]):
 
                     price = clean_price(item['price'])
 
@@ -104,6 +100,7 @@ class BellamyPipeline:
                     film.save()
 
             except Exception:
-                print('skipping %s (%s), price is weird' % (item['name'], item['source']))
+                # print('skipping %s (%s), price is weird' % (item['name'], item['source']))
+                pass
 
         return item
