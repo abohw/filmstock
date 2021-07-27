@@ -32,7 +32,7 @@ class BellamyPipeline:
                     'light meter', 'bag', 'sunglasses',
                     'shipping', 'camera lens', 'player',
                     'strap', 'radio', 'passports',
-                    'hardcover', 'reel', ]
+                    'hardcover', 'reel', 'flash bar', 'expired', ]
 
                 if any([x in item['name'].lower() for x in BANNED_WORDS]):
 
