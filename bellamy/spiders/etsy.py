@@ -1,7 +1,8 @@
 import scrapy
-# from hunter.items import CameraItem
+from web.models import Source
 
 page = 1
+itemCount = 0
 
 class etsySpider(scrapy.Spider):
 
