@@ -15,7 +15,7 @@ from django.core.paginator import Paginator
 def home(request):
 
     latest = Camera.objects.filter(image__isnull=False).order_by('id')[:6]
-    cheapest = Camera.objects.filter(image__isnull=False).filter(price__lt=100).order_by('?')[:6]
+    cheapest = Camera.objects.filter(image__isnull=False).filter(price__lt=100).exclude(name__icontains='lens').order_by('?')[:6]
 
     return render(request, 'home.html', { 'latest': latest, 'cheapest': cheapest, })
 
