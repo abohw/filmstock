@@ -48,7 +48,7 @@ def newUser(request):
             newUser = authenticate(email=f.cleaned_data.get('email'),
                         password=f.cleaned_data.get('password1'),)
             login(request, newUser)
-            return HttpResponseRedirect(reverse_lazy('cameras'))
+            return HttpResponseRedirect(reverse_lazy('home'))
 
     else:
         f = CustomUserCreationForm()

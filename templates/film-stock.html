@@ -94,6 +94,8 @@
 
     </div>
 
+    {% if similar %}
+
     <div class="row justify-content-around" style="margin-top:25px;">
 
         <div class="col-md-8 col">
@@ -117,15 +119,7 @@
                 <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %}
                     <br>{{ film.get_type_display }}</small>
 
-                <br><br>
-
-                {% now "Y-m-d" as today %}
-
-                {% if today == film.lastSeen|date:"Y-m-d" %}
-                   <strong>${{ film.price|intcomma }}</strong>
-                {% endif %}
-
-            </div>
+                </div>
             </div>
 
             {% endfor %}
@@ -133,5 +127,7 @@
         </div>
 
     </div>
+
+    {% endif %}
 
 {% endblock %}

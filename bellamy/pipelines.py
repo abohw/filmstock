@@ -7,7 +7,7 @@ BANNED_WORDS = [
     'light meter', 'bag', 'sunglasses',
     'shipping', 'camera lens', 'player', 'filter',
     'radio', 'passports', 'walkman', 'flashes',
-    'hardcover', 'reel', 'flash bar', 'expired', ]
+    'neck strap', 'hardcover', 'reel', 'flash bar', 'expired', ]
 
 
 def clean_price(param):
