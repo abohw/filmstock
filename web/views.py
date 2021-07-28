@@ -44,7 +44,8 @@ def termsOfUse(request):
 
 def filmStock(request, brand, name, format='35mm', exposures=36):
 
-    name = name.replace('-', ' ')
+    name = name.rsplit('-', 1)
+    name = '%s %s' % (name[0], name[1])
 
     if format == '120':
 
@@ -69,7 +70,12 @@ def filmStockLookup(request, id):
 
     film = Film.objects.annotate(price=Min('stock__price')).get(id__exact=id)
 
-    similar = Film.objects.all().order_by('?')[:4]
+    similar = Film.objects.filter(format=film.format).filter(type=film.type)
+
+    if similar.count() > 3:
+        similar.filter(iso__range=[(film.iso - 200), (film.iso + 200)])
+
+    similar = similar[:3]
 
     films = []
 

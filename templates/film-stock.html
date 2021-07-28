@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 {% block title %}{{ film.brand }} {{ film.name }} ({{ film.format }}){% endblock %}
 
@@ -13,7 +14,7 @@
 
         <div class="row justify-content-around">
 
-            <div class="col-md-6" style="margin-top:10px;">
+            <div class="col-md-8 col" style="margin-top:10px;">
 
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -43,9 +44,7 @@
                 </a>
             {% endif %}
 
-        <div class="table-responsive" style="margin-top:25px;">
-
-        <table class="table">
+        <table class="table" style="margin-top:25px;">
 
           <thead>
             <th scope="col" width="60%">Source</th>
@@ -90,9 +89,49 @@
           </tbody>
         </table>
 
-        </div>
 
     </div>
+
+    </div>
+
+    <div class="row justify-content-around" style="margin-top:25px;">
+
+        <div class="col-md-8 col">
+
+            <h6>Film similar to {{ film.brand }} {{ film.name }}:</h6>
+
+        <div class="row row-cols-1 row-cols-md-3 justify-content-start">
+
+            {% for film in similar %}
+
+            <div class="col" style="padding: 10px;">
+
+                <div class="border border-1 rounded border-secondary" style="padding: 25px;">
+
+                <a class="link" href="{{ film.url }}">
+                    {{ film.brand }} {{ film.name }}
+                </a>
+
+                <br>
+
+                <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %}
+                    <br>{{ film.get_type_display }}</small>
+
+                <br><br>
+
+                {% now "Y-m-d" as today %}
+
+                {% if today == film.lastSeen|date:"Y-m-d" %}
+                   <strong>${{ film.price|intcomma }}</strong>
+                {% endif %}
+
+            </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
 
 {% endblock %}
