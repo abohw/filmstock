@@ -13,7 +13,6 @@ class etsySpider(scrapy.Spider):
     'https://www.etsy.com/shop/SantaRosaCamera',
     'https://www.etsy.com/shop/JohnsonCamera',
     'https://www.etsy.com/shop/MyCameraCloset',
-    'https://www.etsy.com/shop/KmcamerasUS',
     'https://www.etsy.com/shop/AnalogRelics',
     'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648149',
     'https://www.etsy.com/shop/QualityCameraCompany?section_id=24648139',
