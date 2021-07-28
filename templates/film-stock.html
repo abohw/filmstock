@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% load humanize %}
 
-{% block title %}{{ film.brand }} {{ film.name }} ({{ film.format }}){% endblock %}
+{% block title %}{{ film.brand }} {{ film.name }} ({{ film.format }}{% if film.exposures %}, {{ film.exposures }} exp.{% endif %}){% endblock %}
 
 {% block content %}
 
@@ -19,7 +19,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/film/" class="link">Film</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ film.brand }} {{ film.name }} ({{ film.format }})</li>
+            <li class="breadcrumb-item active" aria-current="page">{{ film.brand }} {{ film.name }} ({{ film.format }}{% if film.exposures %}, {{ film.exposures }} exp.{% endif %})</li>
           </ol>
         </nav>
 
