@@ -10,45 +10,46 @@
     {% load query_parameters %}
     {% del_query_parameters page as=clean_filters %}
 
-    <div class="row justify-content-between align-items-center" style="margin-top:25px; margin-bottom:25px;">
+    <div class="container-md">
 
-        <div class="col-sm-9 col-auto" style="padding:15px;">
+        <form style="margin-top:25px; margin-bottom:25px;" class="row justify-content-between gy-2 gx-3 align-items-center" action="/cameras" method="get">
 
-                <form class="row gy-2 gx-3 align-items-center" action="/cameras" method="get">
+          <div class="col" style="padding:15px;">
 
-                  <div class="col">
+              <h5>Search through <strong>hundreds of film cameras</strong> all in one place.</h5>
 
-                      <h5>Search through <strong>hundreds of film cameras</strong> all in one place.</h5>
-
-                          <div class="input-group mb-3" style="margin-top:25px;">
-                            <label for="name" class="visually-hidden">Search</label>
-                            <input type="search" name="name" class="form-control" id="name">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                          </div>
-
-                          <div id="suggestedSearches" class="form-text">
-                              Search for something like <a href="/cameras?name=leica">leica</a>, <a href="/cameras?name=polaroid">polaroid</a>, or <a href="/cameras?name=contax t2">contax t2</a>
-                          </div>
-
+                  <div class="input-group mb-3" style="margin-top:25px;">
+                    <label for="name" class="visually-hidden">Search</label>
+                    <input type="search" name="name" class="form-control" id="name">
+                    <button type="submit" class="btn btn-primary">Search</button>
                   </div>
 
-              </form>
-
-        </div>
-
-        <div class="col">
-
-              <div class="border border-1 rounded border-secondary" style="padding: 25px;">
-
-                <h5 class="text-center"><a href="/film/" class="link" style="text-decoration: none;">
-                    or find <strong>great deals</strong>
-                    on your favorite <strong>film stocks</strong>.</a></h5>
-
-                  <p class="text-center">
-                      <a class="btn btn-secondary" href="{% url 'film' %}" role="button" style="margin-top:15px; color:#ffffff;">Search Film</a>
-                  </p>
+                  <div id="suggestedSearches" class="form-text">
+                      Search for something like <a href="/cameras?name=leica">leica</a>, <a href="/cameras?name=polaroid">polaroid</a>, or <a href="/cameras?name=contax t2">contax t2</a>
+                  </div>
 
           </div>
+
+        </form>
+
+        <div class="row justify-content-start align-items-center" style="margin-bottom:25px;">
+
+            <div class="col">
+
+                <div class="form-group" style="padding:10px;">
+
+                   <h5><a href="/film/" class="link" style="text-decoration: none;">
+                    ...or find <strong>great deals</strong>
+                       on your favorite <strong>film stocks</strong>.
+                   </a> &nbsp;&nbsp;
+
+                   <a class="btn btn-sm btn-secondary" href="{% url 'film' %}" role="button" style="color:#ffffff;">
+                    Search Film
+                    </a></h5>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -71,10 +72,12 @@
         <div class="col" style="padding: 25px;">
 
             <a href="{{ camera.url }}" target="_blank">
-                <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-fluid rounded mx-auto d-block" style="max-height: 200px;">
+                <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-thumbnail img-fluid mx-auto d-block" style="max-height: 200px;">
             </a>
 
-            <p><small><a href="{{ camera.url }}" target="_blank"><strong>{{ camera.name|truncatechars:20 }}</strong></a></small></p>
+            <p>&nbsp;</p>
+
+            <p><small><a class="link" href="{{ camera.url }}" target="_blank">{{ camera.name|truncatechars:20 }}</></a></small></p>
             <p><small>${{ camera.price }}</small></p>
 
         </div>
@@ -99,10 +102,12 @@
         <div class="col" style="padding: 25px;">
 
             <a href="{{ camera.url }}" target="_blank">
-                <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-fluid rounded mx-auto d-block" style="max-height: 200px;">
+                <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-thumbnail img-fluid mx-auto d-block" style="max-height: 175px;">
             </a>
 
-            <p><small><a href="{{ camera.url }}" target="_blank"><strong>{{ camera.name|truncatechars:20 }}</strong></a></small></p>
+            <p>&nbsp;</p>
+
+            <p><small><a class="link" href="{{ camera.url }}" target="_blank">{{ camera.name|truncatechars:20 }}</></a></small></p>
             <p><small>${{ camera.price }}</small></p>
 
         </div>

@@ -73,7 +73,7 @@ def filmStockLookup(request, id):
     similar = Film.objects.filter(format=film.format).filter(type=film.type)
 
     if similar.count() > 3:
-        similar = similar.filter(iso__range=[(film.iso - 200), (film.iso + 200)])[:3]
+        similar = similar.filter(iso__range=[(film.iso - 120), (film.iso + 240)])[:3]
 
     films = []
 
