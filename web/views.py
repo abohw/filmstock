@@ -70,12 +70,12 @@ def filmStockLookup(request, id):
 
     film = Film.objects.annotate(price=Min('stock__price')).get(id__exact=id)
 
-    similar = Film.objects.exclude(id__exact=film.id).filter(format=film.format).filter(type=film.type)
+    similar = Film.objects.exclude(id__exact=film.id).filter(format=film.format, type=film.type)
 
     if similar.count() > 3:
         similar = similar.filter(iso__range=[(film.iso - 120), (film.iso + 240)])
 
-    similar = similar.annotate(price=Min('stock__price')).order_by('?')[:3]
+    similar = similar.order_by('?')[:3]
 
     films = []
 
