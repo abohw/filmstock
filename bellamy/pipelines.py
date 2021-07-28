@@ -1,21 +1,30 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-# useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
 from web.models import Camera, filmStock, Source
 from django.utils import timezone
 import pytz
 
+BANNED_WORDS = [
+    'dslr', 'digital', 'decorative',
+    'light meter', 'bag', 'sunglasses',
+    'shipping', 'camera lens', 'player', 'filter',
+    'radio', 'passports', 'walkman', 'flashes',
+    'hardcover', 'reel', 'flash bar', 'expired', ]
+
+
 def clean_price(param):
     return param.strip().replace('$', '').replace(',','').replace('USD','')
 
+
 class BellamyPipeline:
+
     def process_item(self, item, spider):
 
         url = item['url'].split('?')[0]
+
+        try:
+            price = clean_price(item['price'])
+
+        except Exception:
+            price = None
 
         try:
             source = Source.objects.get(short_name__exact=item['source'])
@@ -23,84 +32,56 @@ class BellamyPipeline:
         except Source.DoesNotExist:
             source = Source.objects.create(short_name=item['source'])
 
-        if item['type'] == 'camera':
+        if item['type'] == 'camera' and not any([x in item['name'].lower() for x in BANNED_WORDS]):
 
-            if Camera.objects.filter(url__exact=url).count() == 0:
+            try:
+                image = item['image']
 
-                BANNED_WORDS = [
-                    'dslr', 'digital', 'decorative',
-                    'light meter', 'bag', 'sunglasses',
-                    'shipping', 'camera lens', 'player',
-                    'strap', 'radio', 'passports', 'walkman',
-                    'hardcover', 'reel', 'flash bar', 'expired', ]
+            except KeyError:
+                image = None
 
-                if not any([x in item['name'].lower() for x in BANNED_WORDS]):
-
-                    price = clean_price(item['price'])
-
-                    try:
-                        image = item['image']
-
-                    except KeyError:
-                        image = None
-
-                    if float(price) > 10:
-
-                        Camera.objects.create(
-                            name = item['name'],
-                            url = url,
-                            source = source,
-                            store = item['store'],
-                            price = price,
-                            image = image,
-                            createdAt = timezone.now(),
-                            lastSeen = timezone.now(),
-                        )
-
-                        print("new camera: %s (%s)" % (item['name'], item['source']))
-
-            else:
+            try:
                 camera = Camera.objects.get(url__exact=url)
 
-                if item['price'] is not None:
-                    camera.price = clean_price(item['price'])
-
-                try:
-                    camera.image = item['image']
-
-                except KeyError:
-                    pass
-
+                camera.image = image
                 camera.lastSeen = timezone.now()
                 camera.save()
 
-        if item['type'] == 'film':
+            except Camera.DoesNotExist:
 
-            try:
-                price = clean_price(item['price'])
+                if float(price) > 10:
 
-                if filmStock.objects.filter(url__exact=url).count() == 0:
-
-                    filmStock.objects.create(
+                    Camera.objects.create(
                         name = item['name'],
-                        price = price,
                         url = url,
                         source = source,
+                        store = item['store'],
+                        price = price,
+                        image = image,
+                        createdAt = timezone.now(),
+                        lastSeen = timezone.now(),
                     )
 
-                    print("new film: %s (%s)" % (item['name'], item['source']))
+                    print("new camera: %s (%s)" % (item['name'], item['source']))
 
-                else:
-                    film = filmStock.objects.get(url__exact=url)
+        elif item['type'] == 'film':
 
-                    if price is not None:
-                        film.price = price
+            try:
+                film = filmStock.objects.get(url__exact=url)
 
-                    film.lastSeen = timezone.now()
-                    film.save()
+                film.price = price
+                film.lastSeen = timezone.now()
+                film.save()
 
-            except Exception:
-                # print('skipping %s (%s), price is weird' % (item['name'], item['source']))
-                pass
+            except filmStock.DoesNotExist:
+
+                filmStock.objects.create(
+                    name = item['name'],
+                    price = price,
+                    url = url,
+                    source = source,
+                )
+
+                print("new film: %s (%s)" % (item['name'], item['source']))
 
         return item
