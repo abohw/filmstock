@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import Camera, CameraFilter, Film, FilmFilter, followedFilm
+from .models import Camera, CameraFilter, Film, FilmFilter, followedFilm, filmStock
 from .forms import savedSearchForm
 from django.urls import reverse_lazy
 from django.http import Http404
@@ -14,10 +14,26 @@ from django.core.paginator import Paginator
 
 def home(request):
 
-    latest = Camera.objects.filter(image__isnull=False).order_by('-id')[:6]
-    cheapest = Camera.objects.filter(image__isnull=False).filter(price__lt=100).exclude(name__icontains='lens').order_by('?')[:6]
+    cameras = Camera.objects.filter(image__isnull=False).exclude(name__icontains='lens')
+    latest = cameras.order_by('-id')[:6]
+    cheapest = cameras.filter(price__lt=100).order_by('?')[:6]
 
     return render(request, 'home.html', { 'latest': latest, 'cheapest': cheapest, })
+
+
+def redirectCamera(request, id):
+
+    camera = Camera.objects.get(id__exact=id)
+
+    return HttpResponseRedirect(camera.url)
+
+
+def redirectFilmStock(request, id):
+
+    stock = filmStock.objects.get(id__exact=id)
+
+    return HttpResponseRedirect(stock.url)
+
 
 def film(request):
 
@@ -42,7 +58,7 @@ def termsOfUse(request):
     return render(request, 'terms-of-use.html', { })
 
 
-def filmStock(request, brand, name, format='35mm', exposures=36):
+def viewFilmStock(request, brand, name, format='35mm', exposures=36):
 
     name = name.rsplit('-', 1)
     name = '%s %s' % (name[0], name[1])

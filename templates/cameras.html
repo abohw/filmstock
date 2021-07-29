@@ -85,7 +85,7 @@
 
             <tr>
               <td>
-                <a class="link" href="{{ camera.url }}" target="_blank">{{ camera.name|truncatechars:70 }}</a>
+                <a class="link" href="/cameras/view/{{ camera.id }}" target="_blank">{{ camera.name|truncatechars:70 }}</a>
                 {% now "Y-m-d" as today %}
                 {% if today == camera.createdAt|date:"Y-m-d" %}
                 &nbsp;<span class="badge bg-info text-dark">New</span>

@@ -73,8 +73,8 @@ class Command(BaseCommand):
                         html_message = loader.render_to_string(
                             'emails/film-in-stock.html',
                             {
-                                'name': 'https://filmstock.app%s' % follow.film.url,
-                                'url': url,
+                                'name': '%s %s' % (follow.film.brand, follow.film.name),
+                                'url': follow.film.url,
                             }
                         )
 
@@ -100,7 +100,7 @@ class Command(BaseCommand):
                        'emails/new-film.html',
                        {
                            'name': '%s %s' % (follow.film.brand, follow.film.name),
-                           'url': 'https://filmstock.app%s' % follow.film.url,
+                           'url': follow.film.url,
                            'price': follow.film.lowLast30d,
                        }
                      )

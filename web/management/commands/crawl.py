@@ -16,7 +16,7 @@ class Command(BaseCommand):
           process.crawl('retrospekt')
           process.crawl('brooklyn-film')
           process.crawl('precision-film')
-          process.crawl('bhfilm')
+         #process.crawl('bhfilm')
           process.crawl('freestyle')
           process.crawl('moment')
           process.crawl('ultrafine')
@@ -26,7 +26,7 @@ class Command(BaseCommand):
           process.crawl('austin_camera')
           process.crawl('precision')
           process.crawl('keh')
-          process.crawl('bh')
+         #process.crawl('bh')
           process.crawl('etsy')
 
           d = process.join()
