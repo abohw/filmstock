@@ -104,6 +104,7 @@ def filmStockLookup(request, id):
                 'per_unit' : x.price/x.quantity,
                 'quantity' : x.quantity,
                 'shipping' : x.source.shipping,
+                'id' : x.id,
             })
 
     return render(request, 'film-stock.html', {
