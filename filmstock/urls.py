@@ -12,7 +12,7 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^$', views.home, name='home'),
-    path('film/stock/view/<int:id>', views.redirectFilmStock),
+    path('film/view/<int:id>', views.redirectFilmStock),
     path('film/', views.film, name='film'),
     path('film/track/<int:id>', views.trackFilm, name='track-film'),
     path('film/untrack/<int:id>', views.untrackFilm, name='untrack-film'),
