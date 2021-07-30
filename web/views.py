@@ -67,7 +67,12 @@ def termsOfUse(request):
 def viewFilmStock(request, brand, name, format='35mm', exposures=36):
 
     name = name.rsplit('-', 1)
-    name = '%s %s' % (name[0], name[1])
+
+    if len(name) > 1:
+        name = '%s %s' % (name[0], name[1])
+
+    else:
+        name = name[0]
 
     if format == '120':
 
