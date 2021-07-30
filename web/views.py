@@ -23,16 +23,22 @@ def home(request):
 
 def redirectCamera(request, id):
 
-    camera = Camera.objects.get(id__exact=id)
+    try:
+        camera = Camera.objects.get(id__exact=id)
+        return HttpResponseRedirect(camera.url)
 
-    return HttpResponseRedirect(camera.url)
+    except Camera.DoesNotExist:
+        raise Http404
 
 
 def redirectFilmStock(request, id):
 
-    stock = filmStock.objects.get(id__exact=id)
+    try:
+        stock = filmStock.objects.get(id__exact=id)
+        return HttpResponseRedirect(stock.url)
 
-    return HttpResponseRedirect(stock.url)
+    except filmStock.DoesNotExist:
+        raise Http404
 
 
 def film(request):
