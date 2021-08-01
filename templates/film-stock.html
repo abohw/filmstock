@@ -78,7 +78,7 @@
               <td class="align-middle">${{ stock.price|floatformat:2 }}
                   {% if stock.quantity != 1 %}<br><small>(${{ stock.per_unit|floatformat:2 }} per roll)</small>{% endif %}</td>
               <td class="align-middle text-end">
-                <a href="/film/view/{{ stock.id }}" target="_blank" class="btn btn-primary" tabindex="-1" role="button">
+                <a rel="nofollow" href="/film/view/{{ stock.id }}" target="_blank" class="btn btn-primary" tabindex="-1" role="button">
                     Buy
                 </a>
               </td>

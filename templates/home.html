@@ -71,13 +71,13 @@
 
         <div class="col" style="padding: 25px;">
 
-            <a href="/cameras/view/{{ camera.id }}" target="_blank">
+            <a rel="nofollow" href="/cameras/view/{{ camera.id }}" target="_blank">
                 <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-thumbnail img-fluid mx-auto d-block" style="max-height: 200px;">
             </a>
 
             <p>&nbsp;</p>
 
-            <p><small><a class="link" href="/cameras/view/{{ camera.id }}" target="_blank">{{ camera.name|truncatechars:20 }}</></a></small></p>
+            <p><small><a rel="nofollow" class="link" href="/cameras/view/{{ camera.id }}" target="_blank">{{ camera.name|truncatechars:20 }}</></a></small></p>
             <p><small>${{ camera.price }}</small></p>
 
         </div>
@@ -101,13 +101,13 @@
 
         <div class="col" style="padding: 25px;">
 
-            <a href="/cameras/view/{{ camera.id }}" target="_blank">
+            <a rel="nofollow" href="/cameras/view/{{ camera.id }}" target="_blank">
                 <img src="{{ camera.image }}" alt="{{ camera.name }}" class="img-thumbnail img-fluid mx-auto d-block" style="max-height: 175px;">
             </a>
 
             <p>&nbsp;</p>
 
-            <p><small><a class="link" href="/cameras/view/{{ camera.id }}" target="_blank">{{ camera.name|truncatechars:20 }}</></a></small></p>
+            <p><small><a class="link" rel="nofollow" href="/cameras/view/{{ camera.id }}" target="_blank">{{ camera.name|truncatechars:20 }}</></a></small></p>
             <p><small>${{ camera.price }}</small></p>
 
         </div>

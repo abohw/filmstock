@@ -14,6 +14,7 @@ urlpatterns = [
     re_path(r'^$', views.home, name='home'),
     path('film/view/<int:id>', views.redirectFilmStock),
     path('film/', views.film, name='film'),
+    path('film/<int:id>/', views.filmStockLookup),
     path('film/track/<int:id>', views.trackFilm, name='track-film'),
     path('film/untrack/<int:id>', views.untrackFilm, name='untrack-film'),
     path('film/<str:brand>/<str:name>/<str:format>/<int:exposures>/', views.viewFilmStock),
