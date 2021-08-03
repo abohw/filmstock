@@ -125,7 +125,6 @@ class CameraFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(label='Camera name contains:', lookup_expr='icontains')
 
     source = django_filters.MultipleChoiceFilter(choices=(
-        ('bh', 'B&H'),
         ('precision', 'Precision Camera'),
         ('brooklyn', 'Brooklyn Film Camera'),
         ('austin_camera', 'Austin Camera'),
