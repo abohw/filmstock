@@ -22,7 +22,6 @@ urlpatterns = [
     path('film/<str:brand>/<str:name>/', views.viewFilmStock),
     re_path(r'^cameras$', views.cameras, name='cameras'),
     path('cameras/view/<int:id>', views.redirectCamera),
-    path('help/', views.help, name='help'),
     re_path(r'^cameras/save/new$', views.saveSearch, name='save-search'),
     path('users/unsubscribe', views.unsubscribeHunter, name='unsubscribe-all'),
     path('users/', include('hunters.urls')),
