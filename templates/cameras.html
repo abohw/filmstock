@@ -81,6 +81,17 @@
 
           <tbody>
 
+          {% if not page_obj %}
+
+            <tr>
+                <td>
+                    No cameras found that match your search. <br>
+                    Save your search to be notified when cameras like this become available.
+                </td>
+            </tr>
+
+          {% else %}
+
           {% for camera in page_obj %}
 
             <tr>
@@ -115,6 +126,8 @@
             </tr>
 
           {% endfor %}
+
+          {% endif %}
 
           </tbody>
         </table>
