@@ -73,10 +73,9 @@
         <table class="table">
 
           <thead>
-            <th scope="col" width="60%">Camera</th>
+            <th scope="col" width="70%">Camera</th>
             <th scope="col">Price</th>
             <th scope="col">Source</th>
-            <th scope="col">Added</th>
           </thead>
 
           <tbody>
@@ -84,7 +83,7 @@
           {% if not page_obj %}
 
             <tr>
-                <td>
+                <td colspan="3">
                     No cameras found that match your search. <br>
                     Save your search to be notified when cameras like this become available.
                 </td>
@@ -119,9 +118,6 @@
                 {% else %}
                   {{ camera.source }}
                 {% endif %}
-              </td>
-              <td>
-                {{ camera.createdAt|date:'N j, Y' }}
               </td>
             </tr>
 
