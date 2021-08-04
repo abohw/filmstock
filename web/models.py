@@ -24,6 +24,7 @@ class Film(models.Model):
     brand = models.CharField(max_length=10, db_index=True)
     name = models.CharField(max_length=50, db_index=True)
     iso = models.IntegerField(db_index=True)
+    experimental = models.BooleanField(db_index=True, default=False)
     format = models.CharField(max_length=10, choices=[('35mm', '35mm'), ('120', '120'), ('instant', 'Instant'), ('large', 'Large format'), ('110', '110')], db_index=True)
     type = models.CharField(max_length=10, choices=[('bw', 'Black & white'), ('cn', 'Color negative'), ('cp', 'Color positive')], db_index=True)
     exposures = models.IntegerField(db_index=True, choices=[(36, '36'), (24, '24')])
