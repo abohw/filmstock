@@ -51,8 +51,10 @@ class BellamyPipeline:
 
                 if float(price) > 10:
 
+                    name = item['name'].strip()
+
                     Camera.objects.create(
-                        name = item['name'],
+                        name = name,
                         url = url,
                         source = source,
                         store = item['store'],
@@ -62,7 +64,7 @@ class BellamyPipeline:
                         lastSeen = timezone.now(),
                     )
 
-                    print("new camera: %s (%s)" % (item['name'], item['source']))
+                    print("new camera: %s (%s)" % (name, item['source']))
 
         elif item['type'] == 'film':
 
@@ -75,13 +77,15 @@ class BellamyPipeline:
 
             except filmStock.DoesNotExist:
 
+                name = item['name'].strip()
+
                 filmStock.objects.create(
-                    name = item['name'],
+                    name = name,
                     price = price,
                     url = url,
                     source = source,
                 )
 
-                print("new film: %s (%s)" % (item['name'], item['source']))
+                print("new film: %s (%s)" % (name, item['source']))
 
         return item

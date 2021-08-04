@@ -20,6 +20,7 @@ class Command(BaseCommand):
           process.crawl('freestyle')
           process.crawl('moment')
           process.crawl('ultrafine')
+          process.crawl('robertsfilm')
 
         # camera crawlers
           process.crawl('brooklyn')
@@ -28,6 +29,7 @@ class Command(BaseCommand):
           process.crawl('keh')
          #process.crawl('bh')
           process.crawl('etsy')
+          process.crawl('roberts')
 
           d = process.join()
           d.addBoth(lambda _: reactor.stop())
