@@ -66,8 +66,6 @@ class FilmFilter(django_filters.FilterSet):
     format = django_filters.MultipleChoiceFilter(choices=(
         ('35mm', '35mm'),
         ('120', 'Medium'),
-        ('instant', 'Instant'),
-        ('large', 'Large'),
     ))
 
     brand = django_filters.MultipleChoiceFilter(choices=(
@@ -77,7 +75,8 @@ class FilmFilter(django_filters.FilterSet):
         ('Cinestill', 'Cinestill'),
         ('Lomography', 'Lomography'),
         ('Foma', 'Foma'),
-        ('Polaroid', 'Polaroid'),
+        ('Arista', 'Arista'),
+        ('Kentmere', 'Kentmere'),
     ))
 
     type = django_filters.MultipleChoiceFilter(choices=(
