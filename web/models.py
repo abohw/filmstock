@@ -128,6 +128,7 @@ class CameraFilter(django_filters.FilterSet):
         ('brooklyn', 'Brooklyn Film Camera'),
         ('austin_camera', 'Austin Camera'),
         ('keh', 'KEH Camera'),
+        ('roberts', 'Used Photo Pro'),
         ('etsy', 'Etsy'),
     ))
 
