@@ -147,6 +147,9 @@ def provisionStripe(request):
                     user.stripe_customer_id = data['object']['customer']
                     user.is_subscribed = True
                     user.save()
+
+                    print('new subscription from %s' % user.email)
+
                     return HttpResponse(status=200)
 
                 except Hunter.DoesNotExist:
@@ -163,12 +166,15 @@ def provisionStripe(request):
                 except Hunter.DoesNotExist:
                     return HttpResponse(status=404)
 
-            elif event_type == 'invoice.payment_failed':
+            elif event_type == 'customer.subscription.deleted':
                 try:
                     user = Hunter.objects.get(stripe_customer_id__exact=data['object']['customer'])
                     user.is_subscribed = False
                     user.was_subscribed = True
                     user.save()
+
+                    print('subscription ended for %s' % user.email)
+
                     return HttpResponse(status=200)
 
                 except Hunter.DoesNotExist:
