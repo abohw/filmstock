@@ -64,8 +64,6 @@ class BellamyPipeline:
                         lastSeen = timezone.now(),
                     )
 
-                    print("new camera: %s (%s)" % (name, item['source']))
-
         elif item['type'] == 'film':
 
             try:
@@ -85,7 +83,5 @@ class BellamyPipeline:
                     url = url,
                     source = source,
                 )
-
-                print("new film: %s (%s)" % (name, item['source']))
 
         return item

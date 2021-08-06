@@ -17,11 +17,11 @@ class Command(BaseCommand):
                 if film.lowLast30d is None or stock.price < film.lowLast30d:
                     film.lowLast30d = stock.price
                     film.lowUpdatedOn = timezone.now()
-                    print('new low price for %s' % (film.name))
+                    print('new low price for %s' % film.name)
 
                 if film.lowAllTime is None or stock.price < film.lowAllTime:
                     film.lowAllTime = stock.price
-                    print('new all time low price for %s' % (film.name))
+                    print('new all time low price for %s' % film.name)
 
             film.save()
 
@@ -37,14 +37,13 @@ class Command(BaseCommand):
 
                 follow.in_stock = False
                 follow.save()
-                print('updated %s, not in stock' % (follow.film.name))
+                print('updated %s, not in stock' % follow.film.name)
 
         for camera in Camera.objects.filter(lastSeen__lt=(timezone.now() - timezone.timedelta(hours=1))):
 
             source = Source.objects.get(short_name__exact=camera.source)
 
             if source.lastScrapeTotal > 0:
-                print('deleting %s from %s' % (camera.name, camera.source))
                 camera.delete()
                 x += 1
 

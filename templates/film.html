@@ -10,6 +10,12 @@
     {% load query_parameters %}
     {% del_query_parameters page as=clean_filters %}
 
+    {% if request.GET.redirect == 'true' %}
+      <div class="alert alert-danger" role="alert">
+        That film is no longer available.
+      </div>
+    {% endif %}
+
     {% include 'filmstock-intro.html' %}
 
     <div class="row justify-content-between">

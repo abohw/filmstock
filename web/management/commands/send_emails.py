@@ -74,7 +74,7 @@ class Command(BaseCommand):
                             'emails/film-in-stock.html',
                             {
                                 'name': '%s %s' % (follow.film.brand, follow.film.name),
-                                'url': follow.film.url,
+                                'url': 'https://filmstock.app%s' % follow.film.url,
                             }
                         )
 
@@ -100,7 +100,7 @@ class Command(BaseCommand):
                        'emails/new-film.html',
                        {
                            'name': '%s %s' % (follow.film.brand, follow.film.name),
-                           'url': follow.film.url,
+                           'url': 'https://filmstock.app%s' % follow.film.url,
                            'price': follow.film.lowLast30d,
                        }
                      )

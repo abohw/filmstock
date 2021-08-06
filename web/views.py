@@ -28,7 +28,7 @@ def redirectCamera(request, id):
         return HttpResponseRedirect(camera.url)
 
     except Camera.DoesNotExist:
-        raise Http404
+        return HttpResponseRedirect(reverse_lazy('cameras') + '?redirect=true')
 
 
 def redirectFilmStock(request, id):
@@ -38,7 +38,8 @@ def redirectFilmStock(request, id):
         return HttpResponseRedirect(stock.url)
 
     except filmStock.DoesNotExist:
-        raise Http404
+
+        return HttpResponseRedirect(reverse_lazy('film') + '?redirect=true')
 
 
 def film(request):
@@ -278,7 +279,3 @@ def subscribeSearch(request, id):
     except:
         raise Http404
 
-
-def help(request):
-
-    return render(request, 'help-faq.html')
