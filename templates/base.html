@@ -17,7 +17,7 @@
     <meta property="og:title" content="Filmstock">
     <meta property="og:type" content="website" />
     <meta property="og:description" content="A vintage camera and film hunting app.">
-    <meta property="og:image" content="https://filmstock.app{% static 'img/filmstock-logo.png' %}">
+    <meta property="og:image" content="https://filmstock.app{% static 'img/camera.jpg' %}">
     <meta property="og:url" content="https://filmstock.app/">
 
     <style>
@@ -57,48 +57,12 @@
 
     <link rel="canonical" href="https://filmstock.app/" />
 
-    <!-- Facebook Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '539194543795089');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=539194543795089&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-
-    <!-- Global site tag (gtag.js) - Google Ads: 332801433 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-332801433"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-332801433');
-    </script>
-
-
   </head>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
   <body class="d-flex flex-column h-100">
-
-  {% if request.GET.sub == 'success' %}
-    <script>fbq('track', 'Subscribe');</script>
-    <script>
-      gtag('event', 'conversion', {'send_to': 'AW-332801433/gTCNCMPJs9kCEJnL2J4B'});
-    </script>
-  {% endif %}
 
     <header>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fdfdfd;">
