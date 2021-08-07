@@ -65,6 +65,25 @@ def userSettings(request):
     })
 
 
+def sendWelcomeEmail(user):
+
+    html_message = loader.render_to_string(
+        'emails/welcome.html',
+        {
+            'user': user,
+        }
+    )
+
+    mail.send_mail(
+        'Welcome to Filmstock!',
+        'Filmstock',
+        'Filmstock <alerts@mail.filmstock.app>',
+        [user.email],
+        fail_silently=True,
+        html_message=html_message,
+    )
+
+
 @login_required
 def activateUser(request, uidb64, token):
     try:
@@ -74,9 +93,14 @@ def activateUser(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
+
         user.is_verified = True
         user.save()
+
+        sendWelcomeEmail(user)
+
         return HttpResponseRedirect(reverse_lazy('cameras'))
+
     else:
         return HttpResponseRedirect(reverse_lazy('home'))
 
