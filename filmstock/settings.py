@@ -15,7 +15,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
     '.filmstock.app',
     '.filmstock-dev.herokuapp.com',
 ]
