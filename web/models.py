@@ -173,7 +173,7 @@ class savedSearch(models.Model):
     is_active = models.BooleanField(default=True, db_index=True)
 
     def __str__(self):
-        return "%s" % (self.name)
+        return "%s %s" % (self.hunter.email, self.name)
 
 
 class emailTask(models.Model):
