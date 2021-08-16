@@ -52,7 +52,7 @@ class etsySpider(scrapy.Spider):
 
         for camera in response.css('a.listing-link'):
             yield {
-            'name': camera.css('a.listing-link::attr(title)').get(),
+            'name': camera.css('h3::text').get(),
             'url': camera.css('a.listing-link::attr(href)').get(),
             'price': camera.css('span.currency-value::text').get(),
             'image': camera.css('img::attr(src)').get(),
