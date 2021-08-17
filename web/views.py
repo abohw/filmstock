@@ -174,12 +174,17 @@ def trackFilm(request, id):
     try:
         film = Film.objects.get(id__exact=id)
 
-        newTrack = followedFilm(
-            hunter=request.user,
-            film=film,
-            is_subscribed=True,
-        )
-        newTrack.save()
+        try:
+            followedFilm.objects.get(hunter=request.user, film=film)
+
+        except followedFilm.DoesNotExist:
+
+            newTrack = followedFilm(
+                hunter=request.user,
+                film=film,
+                is_subscribed=True,
+            )
+            newTrack.save()
 
         return HttpResponseRedirect(reverse_lazy('film'))
 
