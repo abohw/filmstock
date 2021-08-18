@@ -65,7 +65,7 @@ def termsOfUse(request):
     return render(request, 'terms-of-use.html', { })
 
 
-def viewFilmStock(request, id, brand, name, format, exposures):
+def viewFilmStock(request, id, brand='', name='', format='35mm', exposures=36):
 
     try:
         film = Film.objects.get(id__exact=id)
