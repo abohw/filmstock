@@ -36,11 +36,11 @@ class Film(models.Model):
     def url(self):
 
         if self.format == '35mm':
-            return '/film/%s/%s/%s/%s/' % (self.brand, self.name.replace(' ', '-'), self.format, self.exposures)
+            return '/film/%s/%s/%s/%s/%s/' % (self.id, self.brand, self.name.replace(' ', '-'), self.format, self.exposures)
         elif self.format == 'instant':
-            return '/film/%s/%s/' % (self.brand, self.name.replace(' ', '-'))
+            return '/film/%s/%s/%s/' % (self.id, self.brand, self.name.replace(' ', '-'))
         else:
-            return '/film/%s/%s/%s/' % (self.brand, self.name.replace(' ', '-'), self.format)
+            return '/film/%s/%s/%s/%s/' % (self.id, self.brand, self.name.replace(' ', '-'), self.format)
 
     def __str__(self):
         return '%s %s (%s exp., %s)' % (self.brand, self.name, self.exposures, self.format)
