@@ -67,31 +67,45 @@ def termsOfUse(request):
 
 def viewFilmStock(request, brand, name, format='35mm', exposures=36):
 
-    name = name.rsplit('-', 1)
+    nameClean = name.rsplit('-', 1)
 
-    if len(name) > 1:
-        name = '%s %s' % (name[0], name[1])
+    if len(nameClean) > 1:
+        nameClean = '%s %s' % (nameClean[0], nameClean[1])
 
     else:
-        name = name[0]
+        nameClean = nameClean[0]
 
-    if format == '120':
+    if format == '35mm':
 
         try:
-            film = Film.objects.get(brand__iexact=brand, name__iexact=name, format=format)
+            film = Film.objects.get(brand__iexact=brand, name__iexact=nameClean, format=format, exposures=exposures)
             return filmStockLookup(request, film.id)
 
         except Film.DoesNotExist:
-            raise Http404
+
+            try:
+                film = Film.objects.get(brand__iexact=brand, name__iexact=name, format=format, exposures=exposures)
+                return filmStockLookup(request, film.id)
+
+            except Film.DoesNotExist:
+
+                raise Http404
 
     else:
 
         try:
-            film = Film.objects.get(brand__iexact=brand, name__iexact=name, format=format, exposures=exposures)
+            film = Film.objects.get(brand__iexact=brand, name__iexact=nameClean, format=format)
             return filmStockLookup(request, film.id)
 
         except Film.DoesNotExist:
-            raise Http404
+
+            try:
+                film = Film.objects.get(brand__iexact=brand, name__iexact=name, format=format)
+                return filmStockLookup(request, film.id)
+
+            except Film.DoesNotExist:
+
+                raise Http404
 
 
 def filmStockLookup(request, id):

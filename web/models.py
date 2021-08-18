@@ -26,7 +26,7 @@ class Film(models.Model):
     iso = models.IntegerField(db_index=True)
     experimental = models.BooleanField(db_index=True, default=False)
     format = models.CharField(max_length=10, choices=[('35mm', '35mm'), ('120', '120'), ('instant', 'Instant'), ('large', 'Large format'), ('110', '110')], db_index=True)
-    type = models.CharField(max_length=10, choices=[('bw', 'Black & white'), ('cn', 'Color negative'), ('cp', 'Color positive')], db_index=True)
+    type = models.CharField(max_length=10, choices=[('bw', 'Black & white'), ('cn', 'Color negative'), ('cp', 'Color positive'), ('ci', 'Color (instant)'),], db_index=True)
     exposures = models.IntegerField(db_index=True, choices=[(36, '36'), (24, '24')])
     lowLast30d = models.DecimalField(decimal_places=2, null=True, max_digits=7, default=0.00, db_index=True)
     lowUpdatedOn = models.DateTimeField(default=None, null=True, db_index=True)
@@ -67,6 +67,7 @@ class FilmFilter(django_filters.FilterSet):
     format = django_filters.MultipleChoiceFilter(choices=(
         ('35mm', '35mm'),
         ('120', 'Medium'),
+        ('instant', 'Instant'),
     ))
 
     brand = django_filters.MultipleChoiceFilter(choices=(
@@ -74,9 +75,9 @@ class FilmFilter(django_filters.FilterSet):
         ('Fujifilm', 'Fujifilm'),
         ('Ilford', 'Ilford'),
         ('Cinestill', 'Cinestill'),
+        ('Polaroid', 'Polaroid'),
         ('Lomography', 'Lomography'),
         ('Foma', 'Foma'),
-        ('Arista', 'Arista'),
         ('Kentmere', 'Kentmere'),
     ))
 
