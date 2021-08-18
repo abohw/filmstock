@@ -115,14 +115,12 @@
 
                 <div class="border border-1 rounded border-secondary" style="padding: 25px;">
 
-                <a class="link" href="{{ film.url }}">
-                    {{ film.brand }} {{ film.name }}
-                </a>
+                <a class="link" href="{{ film.url }}">{{ film.brand }} {{ film.name }}</a>
 
                 <br>
 
-                <small>{{ film.format }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %}
-                    <br>{{ film.get_type_display }}</small>
+                <small>{{ film.format|title }} {% if film.format == '35mm' %}({{ film.exposures }} exp.){% endif %}
+                    <br>{% if film.format != 'instant' %}{{ film.get_type_display }}{% endif %}</small>
 
                 </div>
             </div>
