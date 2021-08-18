@@ -35,14 +35,14 @@
 
         <div class="table">
 
-          <div class="row row-cols-1 row-cols-md-4 justify-content-start align-items-center">
+          <div class="row row-cols-1 row-cols-md-3 justify-content-start align-items-center">
 
             {% for film in page_obj %}
             <div class="col" style="padding: 25px;">
 
                 <div class="border border-1 rounded border-secondary" style="padding: 25px;">
 
-                    <small><a class="link" href="{{ film.url }}">{{ film.brand }} {{ film.name }}</a></small>
+                    <a class="link" href="{{ film.url }}">{{ film.brand }} {{ film.name }}</a>
 
                 <br>
 
@@ -54,7 +54,7 @@
                 {% now "Y-m-d" as today %}
 
                 {% if today == film.lastSeen|date:"Y-m-d" %}
-                    <small><strong>${{ film.price|intcomma }}</strong></small>
+                    <strong>${{ film.price|intcomma }}</strong>
                 {% endif %}
 
                 {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
