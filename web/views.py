@@ -65,7 +65,7 @@ def termsOfUse(request):
     return render(request, 'terms-of-use.html', { })
 
 
-def viewFilmStock(request, brand, name, format='35mm', exposures=36):
+def viewFilmStock(request, brand, name, format='instant', exposures=36):
 
     nameClean = name.rsplit('-', 1)
 
