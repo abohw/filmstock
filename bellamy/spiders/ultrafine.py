@@ -21,6 +21,8 @@ class ultrafineFilmSpider(scrapy.Spider):
         'https://www.ultrafineonline.com/koprfibl.html',
         'https://www.ultrafineonline.com/cicofi.html',
         'https://www.ultrafineonline.com/losofipa.html',
+        'https://www.ultrafineonline.com/110formatfilms.html',
+        'https://www.ultrafineonline.com/fuprinfi.html',
     ]
 
     @classmethod

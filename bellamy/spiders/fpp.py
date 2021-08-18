@@ -11,6 +11,8 @@ class fppFilmSpider(scrapy.Spider):
     start_urls = [
     'http://filmphotographystore.com/collections/all/120-film',
     'http://filmphotographystore.com/collections/all/35mm-film',
+    'https://filmphotographystore.com/collections/all/instant-film',
+    'https://filmphotographystore.com/collections/all/110-film',
     ]
 
     @classmethod

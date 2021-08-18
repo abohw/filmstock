@@ -11,6 +11,8 @@ class austinCameraFilmSpider(scrapy.Spider):
     start_urls = [
     'https://austincamera.com/collections/film-1/120',
     'https://austincamera.com/collections/film-1/35mm',
+    'https://austincamera.com/collections/film-1/Instant-Film',
+    'https://austincamera.com/collections/film-1/110',
     ]
 
     @classmethod
