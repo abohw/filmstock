@@ -35,7 +35,7 @@ class Film(models.Model):
     @property
     def url(self):
 
-        if self.exposures:
+        if self.type == '35mm':
             return '/film/%s/%s/%s/%s/' % (self.brand, self.name.replace(' ', '-'), self.format, self.exposures)
         else:
             return '/film/%s/%s/%s/' % (self.brand, self.name.replace(' ', '-'), self.format)
