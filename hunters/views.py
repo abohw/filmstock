@@ -104,6 +104,7 @@ def activateUser(request, uidb64, token):
     else:
         return HttpResponseRedirect(reverse_lazy('home'))
 
+
 @login_required
 def subscribe(request):
 
@@ -119,6 +120,7 @@ def subscribe(request):
     session = stripe.checkout.Session.create(
         success_url=successUrl,
         cancel_url=cancelUrl,
+        allow_promotion_codes='true',
         payment_method_types=['card'],
         mode='subscription',
         line_items=[{
