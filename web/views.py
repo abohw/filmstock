@@ -8,7 +8,7 @@ from django.http import Http404
 from django.utils import timezone
 from django import forms
 import pytz
-from django.db.models import Min, Max
+from django.db.models import Min, Max, Q
 from django.core.paginator import Paginator
 
 
@@ -44,7 +44,7 @@ def redirectFilmStock(request, id):
 
 def film(request):
 
-    film = Film.objects.all().annotate(price=Min('stock__price')).annotate(lastSeen=Max('stock__lastSeen')).order_by('price')
+    film = Film.objects.all().annotate(price=Min('stock__price',filter=Q(stock__lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))))).order_by('price')
     f = FilmFilter(request.GET, queryset=film)
 
     paginator = Paginator(f.qs, 24)

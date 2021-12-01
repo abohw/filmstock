@@ -52,5 +52,5 @@ class kehCameraSpider(scrapy.Spider):
 
         next_page = response.css('a[id=load-more-product-link]::attr(href)').get()
 
-        if next_page is not None:
+        if next_page:
             yield scrapy.Request(response.urljoin(next_page), callback=self.parse)

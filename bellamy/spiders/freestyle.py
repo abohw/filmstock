@@ -50,7 +50,7 @@ class freestyleFilmSpider(scrapy.Spider):
 
         global page
 
-        if next_page is not None:
+        if next_page:
             nextUrl = response.urljoin(next_page[page-1])
             page += 1
 

@@ -50,7 +50,7 @@ class fppFilmSpider(scrapy.Spider):
                 }
 
         next_page = response.css('ul.pagination-custom li a::attr(href)').getall()
-        if next_page is not None:
+        if next_page:
             try:
                 nextUrl = response.urljoin(next_page[1])
             except:

@@ -51,11 +51,7 @@
 
                 <br><br>
 
-                {% now "Y-m-d" as today %}
-
-                {% if today == film.lastSeen|date:"Y-m-d" %}
-                    <strong>${{ film.price|intcomma }}</strong>
-                {% endif %}
+                <strong>${{ film.price|intcomma }}</strong>
 
                 {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
                 &nbsp;<span class="badge bg-info text-dark">Price Drop</span>
@@ -85,7 +81,7 @@
 
                 &nbsp;
 
-                {% if film.stock.count == 0 or today != film.lastSeen|date:"Y-m-d" %}
+                {% if film.stock.count == 0 or not film.price %}
                 <a href="#" class="btn btn-secondary btn-sm disabled" tabindex="-1" role="button">
                     Out of stock
                 </a>

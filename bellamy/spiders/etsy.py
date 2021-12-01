@@ -66,5 +66,5 @@ class etsySpider(scrapy.Spider):
         url = 'a.wt-action-group__item[data-page=\"%s\"]::attr(href)' % (page)
         next_page = response.css(url).get()
 
-        if next_page is not None:
+        if next_page:
             yield scrapy.Request(response.urljoin(next_page), callback=self.parse)

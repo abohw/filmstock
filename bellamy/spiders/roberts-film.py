@@ -50,7 +50,7 @@ class robertsCameraFilmSpider(scrapy.Spider):
 
         next_page = response.css('ul.pages-items li.item a::attr(href)').getall()
 
-        if next_page is not None:
+        if next_page:
             try:
                 nextUrl = response.urljoin(next_page[0])
             except:
