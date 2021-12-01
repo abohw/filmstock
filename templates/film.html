@@ -51,7 +51,9 @@
 
                 <br><br>
 
-                <strong>${{ film.price|intcomma }}</strong>
+                {% if film.price %}
+                    <strong>${{ film.price|intcomma }}</strong>
+                {% endif %}
 
                 {% if film.price == film.lowLast30d and today == film.lowUpdatedOn|date:"Y-m-d" %}
                 &nbsp;<span class="badge bg-info text-dark">Price Drop</span>
