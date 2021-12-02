@@ -3,8 +3,8 @@ from django.utils import timezone
 import pytz
 
 BANNED_WORDS = [
-    'dslr', 'digital', 'decorative',
-    'light meter', 'bag', 'sunglasses',
+    'dslr', 'digital', 'decorative', 'better',
+    'light meter', 'bag', 'sunglasses', 'nope',
     'shipping', 'camera lens', 'player', 'filter',
     'radio', 'passports', 'walkman', 'flashes',
     'neck strap', 'hardcover', 'reel', 'flash bar', 'expired', ]
