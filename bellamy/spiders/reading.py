@@ -52,11 +52,19 @@ class retroReadingFilmSpider(scrapy.Spider):
 
             if not camera.css('div.badge--sold-out'):
 
+                image = camera.css('img::attr(src)')
+
+                if image:
+                    image = 'https:%s' % (camera.css('img::attr(src)').get())
+
+                else:
+                    image = None
+
                 yield {
                 'name': camera.css('p::text').get(),
                 'url': 'https://retrophotoreading.com%s' % (camera.css('a::attr(href)').get()),
                 'price': camera.css('small::text').get(),
-                'image': 'https:%s' % (camera.css('img::attr(src)').get()),
+                'image': image,
                 'source': 'retro_reading',
                 'store': '',
                 'type': 'camera',
