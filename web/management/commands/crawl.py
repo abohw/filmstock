@@ -30,6 +30,7 @@ class Command(BaseCommand):
          #process.crawl('bh')
           process.crawl('etsy')
           process.crawl('roberts')
+          process.crawl('reading')
 
           d = process.join()
           d.addBoth(lambda _: reactor.stop())

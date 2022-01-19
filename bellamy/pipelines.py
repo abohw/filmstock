@@ -32,7 +32,7 @@ class BellamyPipeline:
         except Source.DoesNotExist:
             source = Source.objects.create(short_name=item['source'])
 
-        if item['type'] == 'camera' and not any([x in item['name'].lower() for x in BANNED_WORDS]):
+        if item['price'] is not None and item['type'] == 'camera' and not any([x in item['name'].lower() for x in BANNED_WORDS]):
 
             try:
                 image = item['image']

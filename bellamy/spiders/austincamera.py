@@ -40,7 +40,7 @@ class austinCameraSpider(scrapy.Spider):
                 'name': camera.css('div.product-card__title::text').get(),
                 'url': 'https://austincamera.com%s' % (camera.css('a::attr(href)').get()),
                 'price': camera.css('span.price-item::text').get(),
-                'image': 'https:%s' %(camera.css('img::attr(src)').get()),
+                'image': 'https:%s' % (camera.css('img::attr(src)').get()),
                 'source': 'austin_camera',
                 'store': '',
                 'type': 'camera',
