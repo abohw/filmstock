@@ -15,7 +15,7 @@ class Command(BaseCommand):
           process.crawl('fpp')
           process.crawl('retrospekt')
           process.crawl('brooklyn-film')
-          process.crawl('precision-film')
+         #process.crawl('precision-film')
          #process.crawl('bhfilm')
           process.crawl('freestyle')
           process.crawl('moment')
