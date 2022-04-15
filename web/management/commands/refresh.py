@@ -14,14 +14,16 @@ class Command(BaseCommand):
 
             for stock in film.stock.filter(lastSeen__gt=(timezone.now() - timezone.timedelta(minutes=60))):
 
-                if film.lowLast30d is None or stock.price < film.lowLast30d:
-                    film.lowLast30d = stock.price
-                    film.lowUpdatedOn = timezone.now()
-                    print('new low price for %s' % film.name)
+                if stock.price is not None:
 
-                if film.lowAllTime is None or stock.price < film.lowAllTime:
-                    film.lowAllTime = stock.price
-                    print('new all time low price for %s' % film.name)
+                    if film.lowLast30d is None or stock.price < film.lowLast30d:
+                        film.lowLast30d = stock.price
+                        film.lowUpdatedOn = timezone.now()
+                        print('new low price for %s' % film.name)
+
+                    if film.lowAllTime is None or stock.price < film.lowAllTime:
+                        film.lowAllTime = stock.price
+                        print('new all time low price for %s' % film.name)
 
             film.save()
 
