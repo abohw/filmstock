@@ -154,7 +154,7 @@ class CameraFilter(django_filters.FilterSet):
 
 class followedFilm(models.Model):
     hunter = models.ForeignKey(Hunter, blank=True, on_delete=models.CASCADE, related_name='follows')
-    film = models.OneToOneField(Film, on_delete=models.CASCADE, related_name='follows')
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='follows')
     in_stock = models.BooleanField(default=True, db_index=True)
     is_subscribed = models.BooleanField(default=True, db_index=True)
 
