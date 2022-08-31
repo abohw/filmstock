@@ -38,7 +38,7 @@ class brooklynFilmCameraFilmSpider(scrapy.Spider):
 
                 yield {
                 'name': camera.css('div.product-title::text').get(),
-                'price': camera.css('span.sqs-money-native::text').get(),
+                'price': camera.css('div.product-price::text').get(),
                 'url': 'https://www.brooklynfilmcamera.com%s' % (camera.css('a::attr(href)').get()),
                 'source': 'brooklyn',
                 'store': '',
