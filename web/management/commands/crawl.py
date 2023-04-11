@@ -14,7 +14,7 @@ class Command(BaseCommand):
           process.crawl('acfilm')
           process.crawl('fpp')
           process.crawl('retrospekt')
-          process.crawl('brooklyn-film')
+         #process.crawl('brooklyn-film')
          #process.crawl('precision-film')
          #process.crawl('bhfilm')
           process.crawl('freestyle')
@@ -23,7 +23,7 @@ class Command(BaseCommand):
           process.crawl('robertsfilm')
 
         # camera crawlers
-          process.crawl('brooklyn')
+         #process.crawl('brooklyn')
           process.crawl('austin_camera')
           process.crawl('precision')
           process.crawl('keh')
